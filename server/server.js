@@ -34,6 +34,7 @@ export const server = async () => {
         name: String
         description: String
         img: String
+        coverImage: String
         developerIds: [String]
         developers: [User]
       }
@@ -46,7 +47,7 @@ export const server = async () => {
         games: [Game]
       }
       type Mutation {
-        createGame(name: String, description: String, img: String, developerIds: [String]): Game
+        createGame(name: String, description: String, img: String, coverImage: String, developerIds: [String]): Game
         createUser(email: String, username: String, password: String, gameIds: [String]): User
       }
       schema {
