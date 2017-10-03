@@ -4,11 +4,14 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
 import { makeExecutableSchema } from 'graphql-tools';
+import jwt from 'express-jwt';
+import jsonWebToken from 'jsonwebtoken';
 import cors from 'cors';
 
 const URL = 'http://localhost';
 const PORT = 3001;
 const MONGO_URL = `mongodb://${process.env.DB_USER}:${process.env.DB_PWD}@ds151963.mlab.com:51963/alphastage-dev`;
+const JWT_SECRET = process.env.JWT_SECRET;
 
 const prepare = (o) => {
   o._id = o._id.toString();
@@ -59,6 +62,7 @@ export const server = async () => {
     const resolvers = {
       Query: {
         game: async (root, { _id }) => {
+          console.log(root);
           return prepare(await Games.findOne(ObjectId(_id)));
         },
         games: async () => {
@@ -100,13 +104,55 @@ export const server = async () => {
 
     const app = express();
 
+    app.use(jwt({
+      secret: JWT_SECRET,
+      getToken: function fromHeaderOrQuerystring({ headers, query }) {
+        if (headers.authorization && headers.authorization.split(' ')[0] === 'Bearer') {
+          return headers.authorization.split(' ')[1];
+        } else if (query && query.token) {
+          return query.token;
+        }
+        return null;
+      }
+    }).unless({ path: ['/signup'] }));
+
     app.use(cors());
+    app.use(bodyParser.json({ limit: '20mb' }));
 
     app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
 
     app.use('/graphiql', graphiqlExpress({
       endpointURL: '/graphql'
-    }))
+    }));
+
+    const signUp = async (req, res) => {
+      const { user } = req.body;
+
+      const users = await Users.find(
+        { $or:[ { email: user.email }, { username: user.username } ] },
+        { username: 1, email: 1 }
+      ).toArray();
+
+      if(users.length > 0) {
+        const error = users[0].email === user.email || users.length === 2
+        ? 'Email already in use.'
+        : 'Username is taken.';
+
+        res.send({ error });
+      } else {
+        const inserted = await Users.insert(user);
+        if(inserted.result.ok === 1) {
+          const newUser = inserted.ops[0];
+          const token = jsonWebToken.sign({ _id: newUser._id, username: newUser.username, email: newUser.email }, JWT_SECRET);
+
+          res.send({ token });
+        } else {
+          res.send({ error: 'There was an error communicating with the DB, please try again or contact support we would love to help.' });
+        }
+      }
+    }
+
+    app.post('/signup', signUp);
 
     app.listen(PORT, () => {
       console.log(`Visit ${URL}:${PORT}`);
