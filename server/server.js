@@ -6,6 +6,7 @@ import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
 import { makeExecutableSchema } from 'graphql-tools';
 import jwt from 'express-jwt';
 import jsonWebToken from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
 import cors from 'cors';
 
 const URL = 'http://localhost';
@@ -114,7 +115,7 @@ export const server = async () => {
         }
         return null;
       }
-    }).unless({ path: ['/signup'] }));
+    }).unless({ path: ['/signup', '/login'] }));
 
     app.use(cors());
     app.use(bodyParser.json({ limit: '20mb' }));
@@ -124,6 +125,17 @@ export const server = async () => {
     app.use('/graphiql', graphiqlExpress({
       endpointURL: '/graphql'
     }));
+
+    const encryptPassword = (user) => {
+      const salt = bcrypt.genSaltSync(10);
+      user.password = bcrypt.hashSync(user.password, salt);
+    }
+
+    const comparePassword = (password, userPassword, done) => {
+      bcrypt.compare(password, userPassword, (err, isMatch) => {
+        done(err, isMatch);
+      });
+    }
 
     const signUp = async (req, res) => {
       const { user } = req.body;
@@ -140,6 +152,9 @@ export const server = async () => {
 
         res.send({ error });
       } else {
+        console.log(user.password);
+        encryptPassword(user);
+        console.log(user.password);
         const inserted = await Users.insert(user);
         if(inserted.result.ok === 1) {
           const newUser = inserted.ops[0];
@@ -152,7 +167,24 @@ export const server = async () => {
       }
     }
 
+    const login = async (req, res) => {
+      const { email, password } = req.body;
+      const user = await Users.findOne({ email: email });
+
+      if (!user) {
+        res.send({ message: "Email not found." })
+      } else {
+        comparePassword(password, user.password, (err, isMatch) => {
+          if (!isMatch) return res.send({ message: 'Incorrect password, please try again.' });
+
+          const token = jsonWebToken.sign({ _id: user._id, username: user.username, email: user.email }, JWT_SECRET);
+          res.send({ token});
+        });
+      }
+    }
+
     app.post('/signup', signUp);
+    app.post('/login', login);
 
     app.listen(PORT, () => {
       console.log(`Visit ${URL}:${PORT}`);
