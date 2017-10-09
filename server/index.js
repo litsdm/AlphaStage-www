@@ -1,5 +1,11 @@
-import 'babel-core/register'
-import 'babel-polyfill'
-import { server } from './server'
+import 'babel-core/register';
+import 'babel-polyfill';
+import db from './db';
 
-server()
+db.connectToServer(err => {
+  if (!err) {
+    require('./server').server();
+  } else {
+    console.log(err);
+  }
+});
