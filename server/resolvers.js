@@ -46,6 +46,9 @@ const resolvers = {
       const res = await Users.insert(args);
       return prepare(await Users.findOne({ _id: res.insertedIds[0] }));
     },
+    setProfilePicture: async(root, args) => {
+      const res = await Users.findAndModify({ _id: args.userId }, { $set: { profilePic: args.url } });
+    }
   },
 }
 

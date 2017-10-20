@@ -25,6 +25,7 @@ const typeDefs = [`
   type Mutation {
     createGame(name: String, description: String, img: String, coverImage: String, developerIds: [String]): Game
     createUser(email: String, username: String, password: String, gameIds: [String]): User
+    setProfilePicture(userId: String, url: String): User
   }
   schema {
     query: Query
