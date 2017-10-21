@@ -18,6 +18,7 @@ const typeDefs = [`
     _id: String
     email: String
     username: String
+    profilePic: String
     password: String
     gameIds: [String]
     games: [Game]
