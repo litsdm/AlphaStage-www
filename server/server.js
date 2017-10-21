@@ -6,6 +6,7 @@ import jwt from 'express-jwt';
 import jsonWebToken from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import cors from 'cors';
+import { ObjectId } from 'mongodb';
 
 import db from './db';
 import schema from './schema';
@@ -20,7 +21,7 @@ export const server = async () => {
 
     const app = express();
 
-    /*app.use(jwt({
+    app.use(jwt({
       secret: JWT_SECRET,
       getToken: function fromHeaderOrQuerystring({ headers, query }) {
         if (headers.authorization && headers.authorization.split(' ')[0] === 'Bearer') {
@@ -30,7 +31,7 @@ export const server = async () => {
         }
         return null;
       }
-    }).unless({ path: ['/signup', '/login'] }));*/
+    }).unless({ path: ['/signup', '/login'] }));
 
     app.use(cors());
     app.use(bodyParser.json({ limit: '20mb' }));
@@ -71,8 +72,7 @@ export const server = async () => {
         const inserted = await Users.insert(user);
         if(inserted.result.ok === 1) {
           const newUser = inserted.ops[0];
-          const { _id, username, email } = newUser;
-          const token = jsonWebToken.sign({ _id, username, email }, JWT_SECRET);
+          const token = tokenFromUser(newUser);
 
           res.send({ token });
         } else {
@@ -91,16 +91,31 @@ export const server = async () => {
         comparePassword(password, user.password, (err, isMatch) => {
           if (!isMatch) return res.send({ message: 'Incorrect password, please try again.' });
 
-          const { _id, username, email, profilePic } = user;
-
-          const token = jsonWebToken.sign({ _id, username, email, profilePic }, JWT_SECRET);
+          const token = tokenFromUser(user);
           res.send({ token});
         });
       }
     }
 
+    const renewToken = async(req, res) => {
+      const id = ObjectId.isValid(req.body.userId) ? new ObjectId(req.body.userId) : null;
+
+      const user = await Users.findOne({ _id: id});
+      const token = tokenFromUser(user);
+
+      res.send({ token});
+    }
+
+    const tokenFromUser = (user) => {
+      const { _id, username, email, profilePic } = user;
+
+      const token = jsonWebToken.sign({ _id, username, email, profilePic }, JWT_SECRET);
+      return token;
+    }
+
     app.post('/signup', signUp);
     app.post('/login', login);
+    app.post('/renewToken', renewToken);
 
     app.listen(PORT, () => {
       console.log(`Visit ${URL}:${PORT}`);
