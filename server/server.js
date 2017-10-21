@@ -71,7 +71,8 @@ export const server = async () => {
         const inserted = await Users.insert(user);
         if(inserted.result.ok === 1) {
           const newUser = inserted.ops[0];
-          const token = jsonWebToken.sign({ _id: newUser._id, username: newUser.username, email: newUser.email }, JWT_SECRET);
+          const { _id, username, email } = newUser;
+          const token = jsonWebToken.sign({ _id, username, email }, JWT_SECRET);
 
           res.send({ token });
         } else {
@@ -90,7 +91,9 @@ export const server = async () => {
         comparePassword(password, user.password, (err, isMatch) => {
           if (!isMatch) return res.send({ message: 'Incorrect password, please try again.' });
 
-          const token = jsonWebToken.sign({ _id: user._id, username: user.username, email: user.email }, JWT_SECRET);
+          const { _id, username, email, profilePic } = user;
+
+          const token = jsonWebToken.sign({ _id, username, email, profilePic }, JWT_SECRET);
           res.send({ token});
         });
       }
