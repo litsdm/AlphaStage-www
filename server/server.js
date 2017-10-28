@@ -8,8 +8,8 @@ import bcrypt from 'bcryptjs';
 import cors from 'cors';
 import { ObjectId } from 'mongodb';
 
-import db from './db';
-import schema from './schema';
+import db from './src/db';
+import schema from './src/schema';
 
 const URL = 'http://localhost';
 const PORT = 3001;
