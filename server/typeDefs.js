@@ -11,8 +11,16 @@ const typeDefs = [`
     description: String
     developerIds: [String]
     developers: [User]
+    genre: String
     img: String
+    macBuild: String
     name: String
+    releaseStatus: String
+    screenshots: [String]
+    tags: [String]
+    thumbnail: String
+    trailer: String
+    windowsBuild: String
   }
   type User {
     _id: String
@@ -24,7 +32,7 @@ const typeDefs = [`
     username: String
   }
   type Mutation {
-    createGame(name: String, description: String, img: String, coverImage: String, developerIds: [String]): Game
+    createGame(game: Game): Game
     createUser(email: String, username: String, password: String, gameIds: [String]): User
     setProfilePicture(userId: String, url: String): User
   }
