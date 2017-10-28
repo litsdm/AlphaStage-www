@@ -7,21 +7,21 @@ const typeDefs = [`
   }
   type Game {
     _id: String
-    name: String
-    description: String
-    img: String
     coverImage: String
+    description: String
     developerIds: [String]
     developers: [User]
+    img: String
+    name: String
   }
   type User {
     _id: String
     email: String
-    username: String
-    profilePic: String
-    password: String
     gameIds: [String]
     games: [Game]
+    password: String
+    profilePic: String
+    username: String
   }
   type Mutation {
     createGame(name: String, description: String, img: String, coverImage: String, developerIds: [String]): Game

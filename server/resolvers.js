@@ -14,7 +14,6 @@ const prepare = (o) => {
 const resolvers = {
   Query: {
     game: async (root, { _id }) => {
-      console.log(root);
       return prepare(await Games.findOne(ObjectId(_id)));
     },
     games: async () => {
