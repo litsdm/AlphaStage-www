@@ -12,7 +12,7 @@ import db from './src/db';
 import schema from './src/schema';
 
 const URL = 'http://localhost';
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 const JWT_SECRET = process.env.JWT_SECRET;
 
 export const server = async () => {
