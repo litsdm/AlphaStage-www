@@ -7,6 +7,7 @@ import jsonWebToken from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import cors from 'cors';
 import { ObjectId } from 'mongodb';
+import aws from 'aws-sdk';
 
 import db from './src/db';
 import schema from './src/schema';
@@ -14,12 +15,15 @@ import schema from './src/schema';
 const URL = 'http://localhost';
 const PORT = process.env.PORT || 3001;
 const JWT_SECRET = process.env.JWT_SECRET;
+const S3_BUCKET = process.env.S3_BUCKET;
 
 export const server = async () => {
   try {
     const Users = db.get().collection('users');
 
     const app = express();
+    
+    aws.config.region = 'us-west-1';
 
     app.use(jwt({
       secret: JWT_SECRET,
@@ -113,9 +117,36 @@ export const server = async () => {
       return token;
     }
 
+    const signS3 = (req, res) => {
+      const s3 = new aws.S3();
+      const fileName = req.query['file-name'];
+      const fileType = req.query['file-type'];
+      const s3Params = {
+        Bucket: S3_BUCKET,
+        Key: fileName,
+        Expires: 60,
+        ContentType: fileType,
+        ACL: 'public-read'
+      };
+
+      s3.getSignedUrl('putObject', s3Params, (err, data) => {
+        if(err){
+          console.log(err);
+          return res.end();
+        }
+        const returnData = {
+          signedRequest: data,
+          url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`
+        };
+        res.write(JSON.stringify(returnData));
+        res.end();
+      });
+    }
+
     app.post('/signup', signUp);
     app.post('/login', login);
     app.post('/renewToken', renewToken);
+    app.get('/sign-s3', signS3);
 
     app.listen(PORT, () => {
       console.log(`Visit ${URL}:${PORT}`);
