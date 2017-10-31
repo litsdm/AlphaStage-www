@@ -1,4 +1,8 @@
+import Json from 'graphql-type-json';
+
 const typeDefs = [`
+  scalar JSON
+
   type Query {
     game(_id: String): Game
     games: [Game]
@@ -8,33 +12,35 @@ const typeDefs = [`
 
   type Game {
     _id: String
+    buildsId: String
     coverImage: String
-    description: String
+    descriptionState: JSON
     developerIds: [String]
     developers: [User]
     genre: String
-    img: String
     macBuild: String
-    name: String
     releaseStatus: String
     screenshots: [String]
+    shortDescription: String
     tags: [String]
+    title: String
     thumbnail: String
     trailer: String
     windowsBuild: String
   }
 
   input GameInput {
+    buildsId: String
     coverImage: String
-    description: String
+    descriptionState: JSON
     developerIds: [String]
     genre: String
-    img: String
     macBuild: String
-    name: String
     releaseStatus: String
     screenshots: [String]
+    shortDescription: String
     tags: [String]
+    title: String
     thumbnail: String
     trailer: String
     windowsBuild: String

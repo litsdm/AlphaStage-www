@@ -1,4 +1,5 @@
 import { ObjectId } from 'mongodb';
+import GraphQLJSON from 'graphql-type-json';
 
 import dataBase from './db';
 const db = dataBase.get();
@@ -12,6 +13,7 @@ const prepare = (o) => {
 }
 
 const resolvers = {
+  JSON: GraphQLJSON,
   Query: {
     game: async (root, { _id }) => {
       return prepare(await Games.findOne(ObjectId(_id)));
@@ -38,7 +40,7 @@ const resolvers = {
   },
   Mutation: {
     createGame: async (root, args, context, info) => {
-      const res = await Games.insert(args);
+      const res = await Games.insert(args.game);
       return prepare(await Games.findOne({ _id: res.insertedIds[0] }));
     },
     createUser: async (root, args) => {
