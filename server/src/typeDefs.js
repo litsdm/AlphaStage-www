@@ -18,14 +18,18 @@ const typeDefs = [`
     developerIds: [String]
     developers: [User]
     genre: String
+    languages: [String]
     macBuild: String
+    publisher: String
     releaseStatus: String
     screenshots: [String]
     shortDescription: String
+    spaceRequired: String
     tags: [String]
     title: String
     thumbnail: String
     trailer: String
+    website: String
     windowsBuild: String
   }
 
