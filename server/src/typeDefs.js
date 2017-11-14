@@ -39,14 +39,18 @@ const typeDefs = [`
     descriptionState: JSON
     developerIds: [String]
     genre: String
+    languages: [String]
     macBuild: String
+    publisher: String
     releaseStatus: String
     screenshots: [String]
     shortDescription: String
+    spaceRequired: String
     tags: [String]
     title: String
     thumbnail: String
     trailer: String
+    website: String
     windowsBuild: String
   }
 
