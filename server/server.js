@@ -22,7 +22,7 @@ export const server = async () => {
     const Users = db.get().collection('users');
 
     const app = express();
-    
+
     aws.config.region = 'us-west-1';
 
     app.use(jwt({
@@ -143,10 +143,26 @@ export const server = async () => {
       });
     }
 
+    const deleteS3 = (req, res) => {
+      const s3 = new aws.S3();
+      const { filename } = req.body;
+      const s3Params = {
+        Bucket: S3_BUCKET,
+        Key: filename
+      }
+
+      s3.deleteObject(s3Params, (err) => {
+        if (err) console.log(err);
+
+        res.end();
+      });
+    }
+
     app.post('/signup', signUp);
     app.post('/login', login);
     app.post('/renewToken', renewToken);
     app.get('/sign-s3', signS3);
+    app.post('/delete-s3', deleteS3);
 
     app.listen(PORT, () => {
       console.log(`Visit ${URL}:${PORT}`);
