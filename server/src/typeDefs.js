@@ -66,7 +66,7 @@ const typeDefs = [`
 
   type Mutation {
     createGame(game: GameInput): Game
-    createUser(email: String, username: String, password: String, gameIds: [String]): User
+    createUser(email: String, username: String, password: String): User
     setProfilePicture(userId: String, url: String): User
   }
 

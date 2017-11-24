@@ -34,8 +34,8 @@ const resolvers = {
     }
   },
   User: {
-    games: async ({ userId }) => {
-      return (await Games.find({ developerIds: userId }).toArray()).map(prepare);
+    games: async ({ _id }) => {
+      return (await Games.find({ developerIds: _id }).toArray()).map(prepare);
     }
   },
   Mutation: {
