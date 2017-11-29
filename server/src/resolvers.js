@@ -43,6 +43,12 @@ const resolvers = {
       const res = await Games.insert(args.game);
       return prepare(await Games.findOne({ _id: res.insertedIds[0] }));
     },
+    editGame: async (root, { game }, context, info) => {
+      const _id = ObjectId.isValid(game._id) ? new ObjectId(game._id) : null;
+      game._id = _id;
+      const res = await Games.update({ _id }, { $set: game });
+      return prepare(await Games.findOne({ _id }));
+    },
     createUser: async (root, args) => {
       const res = await Users.insert(args);
       return prepare(await Users.findOne({ _id: res.insertedIds[0] }));

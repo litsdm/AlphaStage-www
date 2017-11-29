@@ -34,6 +34,7 @@ const typeDefs = [`
   }
 
   input GameInput {
+    _id: String
     buildsId: String
     coverImage: String
     descriptionState: JSON
@@ -47,6 +48,7 @@ const typeDefs = [`
     shortDescription: String
     spaceRequired: String
     tags: [String]
+    test: String
     title: String
     thumbnail: String
     trailer: String
@@ -66,6 +68,7 @@ const typeDefs = [`
 
   type Mutation {
     createGame(game: GameInput): Game
+    editGame(game: GameInput): Game
     createUser(email: String, username: String, password: String): User
     setProfilePicture(userId: String, url: String): User
   }
