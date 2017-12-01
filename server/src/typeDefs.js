@@ -48,7 +48,6 @@ const typeDefs = [`
     shortDescription: String
     spaceRequired: String
     tags: [String]
-    test: String
     title: String
     thumbnail: String
     trailer: String
