@@ -17,9 +17,12 @@ const typeDefs = [`
     descriptionState: JSON
     developerIds: [String]
     developers: [User]
+    downloads: Int
     genre: String
     languages: [String]
     macBuild: String
+    pageViews: Int
+    plays: Int
     publisher: String
     releaseStatus: String
     screenshots: [String]
@@ -29,6 +32,7 @@ const typeDefs = [`
     title: String
     thumbnail: String
     trailer: String
+    uninstalls: Int
     website: String
     windowsBuild: String
   }
@@ -70,6 +74,7 @@ const typeDefs = [`
     editGame(game: GameInput): Game
     createUser(email: String, username: String, password: String): User
     setProfilePicture(userId: String, url: String): User
+    addToMetric(gameId: String, metric: String): Game
   }
 
   schema {

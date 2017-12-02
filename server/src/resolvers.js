@@ -46,7 +46,7 @@ const resolvers = {
     editGame: async (root, { game }, context, info) => {
       const _id = ObjectId.isValid(game._id) ? new ObjectId(game._id) : null;
       game._id = _id;
-      const res = await Games.update({ _id }, { $set: game });
+      await Games.update({ _id }, { $set: game });
       return prepare(await Games.findOne({ _id }));
     },
     createUser: async (root, args) => {
@@ -57,6 +57,12 @@ const resolvers = {
       const id = ObjectId.isValid(args.userId) ? new ObjectId(args.userId) : null;
       const res = await Users.update({ _id: id }, { $set: { profilePic: args.url } });
       return prepare(await Users.findOne({ _id: id }));
+    },
+    addToMetric: async(root, { gameId, metric }) => {
+      const _id = ObjectId.isValid(gameId) ? new ObjectId(gameId) : null;
+      const updateMetric = {}; updateMetric[metric] = 1;
+      await Games.update({ _id }, { $inc: updateMetric });
+      return prepare(await Games.findOne({ _id }));
     }
   },
 }
