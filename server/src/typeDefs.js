@@ -19,6 +19,7 @@ const typeDefs = [`
     developers: [User]
     downloads: Int
     genre: String
+    isPrivate: Boolean
     languages: [String]
     macBuild: String
     pageViews: Int
@@ -75,6 +76,7 @@ const typeDefs = [`
     createUser(email: String, username: String, password: String): User
     setProfilePicture(userId: String, url: String): User
     addToMetric(gameId: String, metric: String): Game
+    updateGeneralSettings(gameId: String, isPrivate: Boolean, releaseStatus: String): Game
   }
 
   schema {

@@ -63,6 +63,11 @@ const resolvers = {
       const updateMetric = {}; updateMetric[metric] = 1;
       await Games.update({ _id }, { $inc: updateMetric });
       return prepare(await Games.findOne({ _id }));
+    },
+    updateGeneralSettings: async(root, { gameId, isPrivate, releaseStatus }) => {
+      const _id = ObjectId.isValid(gameId) ? new ObjectId(gameId) : null;
+      await Games.update({ _id }, { $set: { isPrivate, releaseStatus } });
+      return prepare(await Games.findOne({ _id }));
     }
   },
 }
