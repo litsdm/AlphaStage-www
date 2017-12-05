@@ -77,6 +77,7 @@ const typeDefs = [`
     setProfilePicture(userId: String, url: String): User
     addToMetric(gameId: String, metric: String): Game
     updateGeneralSettings(gameId: String, isPrivate: Boolean, releaseStatus: String): Game
+    removeDeveloperFromGame(id: String, userId: String): Game
   }
 
   schema {

@@ -68,6 +68,11 @@ const resolvers = {
       const _id = ObjectId.isValid(gameId) ? new ObjectId(gameId) : null;
       await Games.update({ _id }, { $set: { isPrivate, releaseStatus } });
       return prepare(await Games.findOne({ _id }));
+    },
+    removeDeveloperFromGame: async(root, { id, userId }) => {
+      const _id = ObjectId.isValid(id) ? new ObjectId(id) : null;
+      await Games.update({ _id }, { $pull: { developerIds: userId } });
+      return prepare(await Games.findOne({ _id }));
     }
   },
 }
