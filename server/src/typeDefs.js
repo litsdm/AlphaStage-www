@@ -19,9 +19,11 @@ const typeDefs = [`
     developers: [User]
     downloads: Int
     genre: String
+    invisible: Boolean
     isPrivate: Boolean
     languages: [String]
     macBuild: String
+    ownerId: String
     pageViews: Int
     plays: Int
     publisher: String
@@ -45,8 +47,10 @@ const typeDefs = [`
     descriptionState: JSON
     developerIds: [String]
     genre: String
+    invisible: Boolean
     languages: [String]
     macBuild: String
+    ownerId: String
     publisher: String
     releaseStatus: String
     screenshots: [String]
