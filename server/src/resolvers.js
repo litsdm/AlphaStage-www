@@ -18,8 +18,9 @@ const resolvers = {
     game: async (root, { _id }) => {
       return prepare(await Games.findOne(ObjectId(_id)));
     },
-    games: async () => {
-      return (await Games.find({}).toArray()).map(prepare);
+    games: async (root, { checkInvisible }) => {
+      const query = checkInvisible ? { invisible: false } : {}
+      return (await Games.find(query).toArray()).map(prepare);
     },
     user: async (root, { _id }) => {
       return prepare(await Users.findOne(ObjectId(_id)));

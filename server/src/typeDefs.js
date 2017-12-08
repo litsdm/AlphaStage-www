@@ -5,7 +5,7 @@ const typeDefs = [`
 
   type Query {
     game(_id: String): Game
-    games: [Game]
+    games(checkInvisible: Boolean): [Game]
     user(_id: String): User
     users: [User]
   }
