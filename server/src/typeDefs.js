@@ -82,6 +82,7 @@ const typeDefs = [`
     addToMetric(gameId: String, metric: String): Game
     updateGeneralSettings(gameId: String, isPrivate: Boolean, releaseStatus: String): Game
     removeDeveloperFromGame(id: String, userId: String): Game
+    deleteGame(id: String): Game
   }
 
   schema {
