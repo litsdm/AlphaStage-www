@@ -6,6 +6,7 @@ const typeDefs = [`
   type Query {
     game(_id: String): Game
     games(checkInvisible: Boolean): [Game]
+    gamesByTags(tags: [String]) : [Game]
     user(_id: String): User
     users: [User]
   }

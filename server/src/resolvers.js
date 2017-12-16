@@ -24,6 +24,9 @@ const resolvers = {
       const query = checkInvisible ? { invisible: false } : {}
       return (await Games.find(query).toArray()).map(prepare);
     },
+    gamesByTags: async(root, { tags }) => {
+      return (await Games.find({ tags: { $all: tags } }).toArray()).map(prepare);
+    },
     user: async (root, { _id }) => {
       return prepare(await Users.findOne(ObjectId(_id)));
     },
