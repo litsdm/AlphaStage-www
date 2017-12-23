@@ -1,4 +1,4 @@
 "rules": {
-  "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-  "indent": ["error", 2]
+  "no-param-reassign": "off",
+  "import/prefer-default-export": "off"
 }

@@ -1,4 +1,4 @@
-import Json from 'graphql-type-json';
+import Json from 'graphql-type-json'; // eslint-disable-line
 
 const typeDefs = [`
   scalar JSON

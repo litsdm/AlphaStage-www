@@ -1,4 +1,3 @@
-require('dotenv').config();
 import express from 'express';
 import bodyParser from 'body-parser';
 import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
@@ -12,10 +11,12 @@ import aws from 'aws-sdk';
 import db from './src/db';
 import schema from './src/schema';
 
+require('dotenv').config();
+
 const URL = 'http://localhost';
-const PORT = process.env.PORT || 3001;
-const JWT_SECRET = process.env.JWT_SECRET;
-const S3_BUCKET = process.env.S3_BUCKET;
+const PORT = process.env.PORT || 3001;
+const { JWT_SECRET } = process.env;
+const { S3_BUCKET } = process.env;
 
 export const server = async () => {
   try {
@@ -49,32 +50,32 @@ export const server = async () => {
     const encryptPassword = (user) => {
       const salt = bcrypt.genSaltSync(10);
       user.password = bcrypt.hashSync(user.password, salt);
-    }
+    };
 
     const comparePassword = (password, userPassword, done) => {
       bcrypt.compare(password, userPassword, (err, isMatch) => {
         done(err, isMatch);
       });
-    }
+    };
 
     const signUp = async (req, res) => {
       const { user } = req.body;
 
       const users = await Users.find(
-        { $or:[ { email: user.email }, { username: user.username } ] },
+        { $or: [{ email: user.email }, { username: user.username }] },
         { username: 1, email: 1 }
       ).toArray();
 
-      if(users.length > 0) {
-        const error = users[0].email === user.email || users.length === 2
-        ? 'Email already in use.'
-        : 'Username is taken.';
+      if (users.length > 0) {
+        const error = users[0].email === user.email || users.length === 2
+          ? 'Email already in use.'
+          : 'Username is taken.';
 
         res.send({ error });
       } else {
         encryptPassword(user);
         const inserted = await Users.insert(user);
-        if(inserted.result.ok === 1) {
+        if (inserted.result.ok === 1) {
           const newUser = inserted.ops[0];
           const token = tokenFromUser(newUser);
 
@@ -83,39 +84,43 @@ export const server = async () => {
           res.send({ error: 'There was an error communicating with the DB, please try again or contact support we would love to help.' });
         }
       }
-    }
+    };
 
     const login = async (req, res) => {
       const { email, password } = req.body;
-      const user = await Users.findOne({ email: email });
+      const user = await Users.findOne({ email });
 
       if (!user) {
-        res.send({ message: "Email not found." })
+        res.send({ message: 'Email not found.' });
       } else {
         comparePassword(password, user.password, (err, isMatch) => {
           if (!isMatch) return res.send({ message: 'Incorrect password, please try again.' });
 
           const token = tokenFromUser(user);
-          res.send({ token});
+          res.send({ token });
         });
       }
-    }
+    };
 
-    const renewToken = async(req, res) => {
+    const renewToken = async (req, res) => {
       const id = ObjectId.isValid(req.body.userId) ? new ObjectId(req.body.userId) : null;
 
-      const user = await Users.findOne({ _id: id});
+      const user = await Users.findOne({ _id: id });
       const token = tokenFromUser(user);
 
-      res.send({ token});
-    }
+      res.send({ token });
+    };
 
     const tokenFromUser = (user) => {
-      const { _id, username, email, profilePic } = user;
+      const {
+        _id, username, email, profilePic
+      } = user;
 
-      const token = jsonWebToken.sign({ _id, username, email, profilePic }, JWT_SECRET);
+      const token = jsonWebToken.sign({
+        _id, username, email, profilePic
+      }, JWT_SECRET);
       return token;
-    }
+    };
 
     const signS3 = (req, res) => {
       const s3 = new aws.S3();
@@ -130,7 +135,7 @@ export const server = async () => {
       };
 
       s3.getSignedUrl('putObject', s3Params, (err, data) => {
-        if(err){
+        if (err) {
           console.log(err);
           return res.end();
         }
@@ -141,7 +146,7 @@ export const server = async () => {
         res.write(JSON.stringify(returnData));
         res.end();
       });
-    }
+    };
 
     const deleteS3 = (req, res) => {
       const s3 = new aws.S3();
@@ -149,14 +154,14 @@ export const server = async () => {
       const s3Params = {
         Bucket: S3_BUCKET,
         Key: filename
-      }
+      };
 
       s3.deleteObject(s3Params, (err) => {
         if (err) console.log(err);
 
         res.end();
       });
-    }
+    };
 
     app.post('/signup', signUp);
     app.post('/login', login);
@@ -166,9 +171,8 @@ export const server = async () => {
 
     app.listen(PORT, () => {
       console.log(`Visit ${URL}:${PORT}`);
-    })
-
+    });
   } catch (e) {
     console.log(e);
   }
-}
+};
