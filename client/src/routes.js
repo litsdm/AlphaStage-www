@@ -4,12 +4,12 @@ import { Switch, Route } from 'react-router';
 import PropTypes from 'prop-types';
 
 import App from './containers/App';
-import LandingPage from './containers/LandingPage';
+import Landing from './containers/Landing';
 
 const Routes = ({ history }) => (
   <App history={history}>
     <Switch>
-      <Route path="/" component={LandingPage} />
+      <Route path="/" component={Landing} />
     </Switch>
   </App>
 );
