@@ -1,0 +1,32 @@
+.Header {
+  background-color: #333;
+  color: white;
+  height: 840px;
+  width: 100%;
+}
+
+.Brand {
+  align-items: center;
+  display: flex;
+  padding: 12px 24px;
+
+  img {
+    height: 25px;
+    margin-right: 6px;
+    width: 25px;
+  }
+
+  p {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+  }
+}
+
+.GameSub {
+  margin-left: 68px;
+  margin-top: -12px;
+  /* font-weight: 100; */
+  font-size: 16px;
+  font-family: 'Monoton', cursive;
+}
