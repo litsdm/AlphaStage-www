@@ -1,7 +1,9 @@
 .Header {
-  background-color: #333;
+  background-color: rgb(43, 44, 49);
+  background: radial-gradient(circle, rgb(54, 57, 62), rgb(47, 49, 54), rgb(43, 44, 49));
   color: white;
-  height: 840px;
+  height: 760px;
+  position: relative;
   width: 100%;
 }
 
@@ -16,17 +18,71 @@
     width: 25px;
   }
 
-  p {
+  h1 {
     font-family: 'Quicksand', sans-serif;
     font-size: 18px;
     font-weight: bold;
+    margin: 0;
   }
 }
 
 .GameSub {
   margin-left: 68px;
   margin-top: -12px;
-  /* font-weight: 100; */
   font-size: 16px;
   font-family: 'Monoton', cursive;
+}
+
+.Content {
+  left: 50%;
+  position: absolute;
+  text-align: center;
+  top: 30%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
+
+.TopText {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 44px;
+  margin-bottom: 12px;
+}
+
+.Description {
+  opacity: 0.6;
+}
+
+.NotifyContainer {
+  margin-top: 42px;
+
+  input,
+  button {
+    border: none;
+    color: white;
+    font-size: 16px;
+    line-height: 1.5;
+    padding: 0.5em 1em;
+    outline: none;
+  }
+
+  input {
+    background-color: rgba(255, 255,255, 0.2);
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    padding: 0.5em 1em;
+    text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+    width: 400px;
+  }
+
+  button {
+    background: linear-gradient(#20c2f3, #2091f3);
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+      background: linear-gradient(#20c9f3, #2098f3);
+    }
+  }
 }

@@ -8,9 +8,22 @@ const Header = () => (
     <div className={styles.Menu}>
       <div className={styles.Brand}>
         <img src={icon} alt="Alpha Stage logo" />
-        <p>Alpha Stage</p>
+        <h1>Alpha Stage</h1>
       </div>
       <p className={styles.GameSub}>Games</p>
+    </div>
+    <div className={styles.Content}>
+      <p className={styles.TopText}>Test your games with your target Gamers.</p>
+      <p className={styles.Description}>
+        User testing platform created specifically for video game developers and gamers alike.
+      </p>
+      <p className={styles.Description}>
+        Get feedback that actually matters out of your game releases.
+      </p>
+      <div className={styles.NotifyContainer}>
+        <input placeholder="Enter your email" />
+        <button>Notify me</button>
+      </div>
     </div>
   </div>
 );
