@@ -1,6 +1,8 @@
 .Header {
   background-color: rgb(43, 44, 49);
   background: radial-gradient(circle, rgb(54, 57, 62), rgb(47, 49, 54), rgb(43, 44, 49));
+  border-bottom-left-radius: 60% 1%;
+  border-bottom-right-radius: 60% 1%;
   color: white;
   height: 760px;
   position: relative;
@@ -85,4 +87,12 @@
       background: linear-gradient(#20c9f3, #2098f3);
     }
   }
+}
+
+.Screenshot {
+  left: 50%;
+  position: absolute;
+  top: 45%;
+  transform: translate(-50%);
+  width: 750px;
 }

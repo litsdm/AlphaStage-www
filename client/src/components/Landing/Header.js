@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './Header.scss';
 
 import icon from '../../resources/icon.png';
+import screen from '../../resources/alpha-screen.png';
 
 const Header = () => (
   <div className={styles.Header}>
@@ -25,6 +26,7 @@ const Header = () => (
         <button>Notify me</button>
       </div>
     </div>
+    <img className={styles.Screenshot} src={screen} alt="Desktop app screenshot" />
   </div>
 );
 
