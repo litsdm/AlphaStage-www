@@ -96,3 +96,54 @@
   transform: translate(-50%);
   width: 750px;
 }
+
+.AppContainer {
+  margin-top: 42px;
+}
+
+.DownloadButton,
+.SecondaryButton {
+  background: linear-gradient(#20c2f3, #2091f3);
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1.5;
+  margin-right: 24px;
+  padding: 0.5em 1em;
+  outline: none;
+
+  &:hover {
+    background: linear-gradient(#20c9f3, #2098f3);
+  }
+}
+
+.SecondaryButton {
+  background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(75, 75, 75, 0.1));
+  border: 1px solid #ccc;
+
+  &:hover {
+    background: linear-gradient(#fff, #ddd);
+    color: rgb(54, 57, 62);
+  }
+}
+
+.Available {
+  margin-top: 42px;
+
+  p {
+    color: #aaa;
+    font-size: 12px;
+  }
+
+  span {
+    display: flex;
+    justify-content: center;
+    margin-top: 6px;
+  }
+}
+
+.Platform {
+  margin-right: 24px;
+}
