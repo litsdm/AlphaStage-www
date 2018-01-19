@@ -10,11 +10,11 @@ const Header = () => {
     const data = {};
 
     if (platform.startsWith('Mac')) {
-      data.icon = 'fa fa-apple';
-      data.text = 'Download for Mac';
+      data.text = 'Download for MacOS';
+      data.url = '';
     } else if (platform.startsWith('Win') && platform !== 'WinCE') {
-      data.icon = 'fa fa-windows';
       data.text = 'Download for Windows';
+      data.url = '';
     } else {
       return null;
     }
@@ -46,7 +46,7 @@ const Header = () => {
             buttonData
               ? (
                 <button className={styles.DownloadButton}>
-                  <i className={buttonData.icon} /> {buttonData.text}
+                  <i className="fa fa-download" /> {buttonData.text}
                 </button>
               )
               : null
