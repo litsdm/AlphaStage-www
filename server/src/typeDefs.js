@@ -6,7 +6,8 @@ const typeDefs = [`
   type Query {
     game(_id: String): Game
     games(checkInvisible: Boolean): [Game]
-    gamesByTags(tags: [String]) : [Game]
+    gamesByTags(tags: [String]): [Game]
+    potentialUsers(): [PotentialUser]
     user(_id: String): User
     users: [User]
   }
@@ -75,6 +76,11 @@ const typeDefs = [`
     username: String
   }
 
+  type PotentialUser {
+    _id: String
+    email: String
+  }
+
   type Mutation {
     createGame(game: GameInput): Game
     editGame(game: GameInput): Game
@@ -84,6 +90,7 @@ const typeDefs = [`
     updateGeneralSettings(gameId: String, isPrivate: Boolean, releaseStatus: String): Game
     removeDeveloperFromGame(id: String, userId: String): Game
     deleteGame(id: String): Game
+    addPotentialUser(email: String): PotentialUser
   }
 
   schema {

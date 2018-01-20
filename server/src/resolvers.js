@@ -6,6 +6,7 @@ import dataBase from './db';
 const db = dataBase.get();
 
 const Games = db.collection('games');
+const PotentialUsers = db.collection('potentialUsers');
 const Users = db.collection('users');
 
 const prepare = (o) => {
@@ -25,6 +26,7 @@ const resolvers = {
     },
     gamesByTags: async (root, { tags }) =>
       (await Games.find({ tags: { $all: tags } }).toArray()).map(prepare),
+    potentialUsers: async () => (await PotentialUsers.find().toArray()).map(prepare),
     user: async (root, { _id }) => prepare(await Users.findOne(ObjectId(_id))),
     users: async () =>
       (await Users.find({}).toArray()).map(prepare),
@@ -77,6 +79,10 @@ const resolvers = {
       const _id = getObjectId(id);
       await Games.update({ _id }, { $set: { developerIds: [], invisible: true } });
       return prepare(await Games.findOne({ _id }));
+    },
+    addPotentialUser: async (root, args) => {
+      const res = await PotentialUsers.insert(args);
+      return prepare(await PotentialUsers.findOne({ _id: res.insertedIds[0] }));
     }
   },
 };
