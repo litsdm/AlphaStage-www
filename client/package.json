@@ -39,7 +39,7 @@
     "sass-loader": "^6.0.6"
   },
   "scripts": {
-    "start": "PORT=3005 node scripts/customized-config start",
+    "start": "node scripts/customized-config start",
     "build": "node scripts/customized-config build",
     "test": "node scripts/customized-config test --env=jsdom",
     "eject": "react-scripts eject"
