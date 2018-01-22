@@ -21,7 +21,7 @@ switch(process.argv[2]) {
     break;
   // The "build" script is run to produce a production bundle
   case 'build':
-    rewireModule('react-scripts/scripts/build.js', loadCustomizer('../config-overrides.prod'));
+    rewireModule('react-scripts/scripts/build.js', loadCustomizer('../config-overrides.dev'));
     break;
   // The "test" script runs all the tests with Jest
   case 'test':

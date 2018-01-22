@@ -34,10 +34,9 @@
   "scripts": {
     "build": "concurrently \"cd client && yarn build\" \"cd server && yarn build\"",
     "clean": "concurrently \"rimraf node_modules yarn.lock\" \"cd client && rimraf node_modules build yarn.lock\" \"cd server && rimraf node_modules build yarn.lock\"",
-    "heroku-postbuild": "yarn build",
     "install": "(cd client && yarn) && (cd server && yarn)",
     "start": "concurrently \"cd client && yarn start\" \"cd server && yarn start\"",
     "start:prod": "concurrently \"cd client && yarn start\" \"cd server && yarn start:prod\"",
-    "heroku-postbuild": "concurrently \"cd client/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build\" \"cd server/ && npm install && npm run build\""
+    "heroku-postbuild": "concurrently \"cd client/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build\" \"cd server/ && yarn && yarn build\""
   }
 }
