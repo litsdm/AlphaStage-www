@@ -1,12 +1,13 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
-import jwt from 'express-jwt';
+// import jwt from 'express-jwt';
 import jsonWebToken from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import cors from 'cors';
 import { ObjectId } from 'mongodb';
 import aws from 'aws-sdk';
+import path from 'path';
 
 import db from './src/db';
 import schema from './src/schema';
@@ -21,6 +22,7 @@ const { S3_BUCKET } = process.env;
 export const server = async () => {
   try {
     const Users = db.get().collection('users');
+    const staticFiles = express.static(path.join(__dirname, '../../client/build'));
 
     const app = express();
 
@@ -40,6 +42,7 @@ export const server = async () => {
 
     app.use(cors());
     app.use(bodyParser.json({ limit: '20mb' }));
+    app.use(staticFiles);
 
     app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
 
