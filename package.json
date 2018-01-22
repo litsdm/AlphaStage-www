@@ -27,6 +27,10 @@
     "concurrently": "^3.1.0",
     "rimraf": "^2.5.4"
   },
+  "cacheDirectories": [
+    "node_modules",
+    "react-ui/node_modules"
+  ],
   "scripts": {
     "build": "concurrently \"cd client && yarn build\" \"cd server && yarn build\"",
     "clean": "concurrently \"rimraf node_modules yarn.lock\" \"cd client && rimraf node_modules build yarn.lock\" \"cd server && rimraf node_modules build yarn.lock\"",
