@@ -26,7 +26,7 @@ export const server = async () => {
 
     aws.config.region = 'us-west-1';
 
-    app.use(jwt({
+    /* app.use(jwt({
       secret: JWT_SECRET,
       getToken: function fromHeaderOrQuerystring({ headers, query }) {
         if (headers.authorization && headers.authorization.split(' ')[0] === 'Bearer') {
@@ -36,7 +36,7 @@ export const server = async () => {
         }
         return null;
       }
-    }).unless({ path: ['/signup', '/login', '/', '/landing'] }));
+    }).unless({ path: ['/signup', '/login', '/', '/landing'] })); */
 
     app.use(cors());
     app.use(bodyParser.json({ limit: '20mb' }));
