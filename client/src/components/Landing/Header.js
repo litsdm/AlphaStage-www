@@ -22,7 +22,32 @@ const Header = () => {
     return data;
   };
 
+  const renderDownload = () => (
+    <div className={styles.AppContainer}>
+      {
+        buttonData
+          ? (
+            <button className={styles.DownloadButton}>
+              <i className="fa fa-download" /> {buttonData.text}
+            </button>
+          )
+          : null
+      }
+      <button className={styles.SecondaryButton}>
+        Open Web App
+      </button>
+    </div>
+  );
+
+  const renderNotify = () => (
+    <div className={styles.NotifyContainer}>
+      <input placeholder="Enter your email" />
+      <button>Notify me</button>
+    </div>
+  );
+
   const buttonData = getDownloadButtonData();
+  const isAvailable = false;
 
   return (
     <div className={styles.Header}>
@@ -41,22 +66,13 @@ const Header = () => {
         <p className={styles.Description}>
           Get feedback that actually matters out of your game releases.
         </p>
-        <div className={styles.AppContainer}>
-          {
-            buttonData
-              ? (
-                <button className={styles.DownloadButton}>
-                  <i className="fa fa-download" /> {buttonData.text}
-                </button>
-              )
-              : null
-          }
-          <button className={styles.SecondaryButton}>
-            Open Web App
-          </button>
-        </div>
+        {
+          isAvailable
+            ? renderDownload()
+            : renderNotify()
+        }
         <div className={styles.Available}>
-          <p>Available on:</p>
+          <p>{isAvailable ? 'Available on:' : 'Coming soon for:'}</p>
           <span>
             <div className={styles.Platform}>
               <i className="fa fa-windows" />
