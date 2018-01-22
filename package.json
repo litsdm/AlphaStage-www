@@ -34,6 +34,6 @@
     "install": "(cd client && yarn) && (cd server && yarn)",
     "start": "concurrently \"cd client && yarn start\" \"cd server && yarn start\"",
     "start:prod": "concurrently \"cd client && yarn start\" \"cd server && yarn start:prod\"",
-    "heroku-postbuild": "cd client/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+    "heroku-postbuild": "concurrently \"cd client/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build\" \"cd server/ && npm install && npm run build\""
   }
 }
