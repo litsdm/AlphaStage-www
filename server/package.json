@@ -29,6 +29,6 @@
   "scripts": {
     "start": "nodemon -r babel-register index.js",
     "build": "babel . --ignore node_modules,build --out-dir build",
-    "start:prod": "PORT=3005 node build/index.js"
+    "start:prod": "node build/index.js"
   }
 }
