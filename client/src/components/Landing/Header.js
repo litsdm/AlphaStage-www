@@ -51,12 +51,22 @@ const Header = () => {
 
   return (
     <div className={styles.Header}>
-      <div className={styles.Menu}>
-        <div className={styles.Brand}>
-          <img src={icon} alt="Alpha Stage logo" />
-          <h1>Alpha Stage</h1>
+      <div className={styles.TopBar}>
+        <div className={styles.BrandContainer}>
+          <div className={styles.Brand}>
+            <img src={icon} alt="Alpha Stage logo" />
+            <h1>Alpha Stage</h1>
+          </div>
+          <p className={styles.GameSub}>Games</p>
         </div>
-        <p className={styles.GameSub}>Games</p>
+        <div className={styles.Nav}>
+          <div className={styles.Left} />
+          <div className={styles.Right}>
+            <a href="https://github.com/cdiezmoran/AlphaStage-2.0">
+              <i className="fa fa-github" />
+            </a>
+          </div>
+        </div>
       </div>
       <div className={styles.Content}>
         <p className={styles.TopText}>Test your games with your target Gamers.</p>

@@ -9,6 +9,15 @@
   width: 100%;
 }
 
+.TopBar {
+  align-items: center;
+  display: flex;
+}
+
+.BrandContainer {
+  min-width: 185px;
+}
+
 .Brand {
   align-items: center;
   display: flex;
@@ -33,6 +42,41 @@
   margin-top: -12px;
   font-size: 16px;
   font-family: 'Monoton', cursive;
+}
+
+.Nav {
+  align-items: center;
+  display: flex;
+  width: 100%;
+
+  .Left {
+    display: flex;
+    flex-basis: 50%;
+
+    a {
+      color: #ccc;
+
+      &:hover {
+        color: #fff;
+      }
+    }
+  }
+
+  .Right {
+    display: flex;
+    flex-basis: 50%;
+    justify-content: flex-end;
+    padding: 0 24px;
+
+    a {
+      color: #ccc;
+      font-size: 2rem;
+
+      &:hover {
+        color: #fff;
+      }
+    }
+  }
 }
 
 .Content {
