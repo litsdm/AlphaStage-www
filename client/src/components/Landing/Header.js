@@ -7,6 +7,7 @@ import controller from '../../resources/controller.png';
 import mouse from '../../resources/mouse.png';
 import jewel from '../../resources/jewel.png';
 import cards from '../../resources/cards.png';
+import triangle from '../../resources/triangle.svg';
 
 const Header = () => {
   const getDownloadButtonData = () => {
@@ -59,6 +60,18 @@ const Header = () => {
       <img src={mouse} className={`${styles.Mouse} ${styles.animated} ${styles.bounce}`} alt="mouse icon" />
       <img src={jewel} className={`${styles.Jewel} ${styles.animated} ${styles.bounce}`} alt="jewel icon" />
       <img src={cards} className={styles.Cards} alt="cards icon" />
+      <img src={triangle} className={`${styles.Triangle} ${styles.a}`} alt="triangle icon" />
+      <img src={triangle} className={`${styles.Triangle} ${styles.b}`} alt="triangle icon" />
+      <img src={triangle} className={`${styles.Triangle} ${styles.c}`} alt="triangle icon" />
+      <i className={`fa fa-times ${styles.Times} ${styles.a}`} />
+      <i className={`fa fa-times ${styles.Times} ${styles.b}`} />
+      <i className={`fa fa-times ${styles.Times} ${styles.c}`} />
+      <i className={`fa fa-square-o ${styles.Square} ${styles.a}`} />
+      <i className={`fa fa-square-o ${styles.Square} ${styles.b}`} />
+      <i className={`fa fa-square-o ${styles.Square} ${styles.c}`} />
+      <i className={`fa fa-circle-o ${styles.Circle} ${styles.a}`} />
+      <i className={`fa fa-circle-o ${styles.Circle} ${styles.b}`} />
+      <i className={`fa fa-circle-o ${styles.Circle} ${styles.c}`} />
       <div className={styles.TopBar}>
         <div className={styles.BrandContainer}>
           <div className={styles.Brand}>
