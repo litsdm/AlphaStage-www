@@ -7,7 +7,7 @@ const typeDefs = [`
     game(_id: String): Game
     games(checkInvisible: Boolean): [Game]
     gamesByTags(tags: [String]): [Game]
-    potentialUsers(): [PotentialUser]
+    potentialUsers: [PotentialUser]
     user(_id: String): User
     users: [User]
   }

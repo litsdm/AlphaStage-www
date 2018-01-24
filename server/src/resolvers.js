@@ -81,6 +81,9 @@ const resolvers = {
       return prepare(await Games.findOne({ _id }));
     },
     addPotentialUser: async (root, args) => {
+      const existingUser = await PotentialUsers.findOne({ email: args.email });
+      if (existingUser) return prepare(existingUser);
+
       const res = await PotentialUsers.insert(args);
       return prepare(await PotentialUsers.findOne({ _id: res.insertedIds[0] }));
     }
