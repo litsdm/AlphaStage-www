@@ -335,3 +335,44 @@
     right: calc(50% - 570px);
   }
 }
+
+.SmallIcon {
+  color: #444;
+  font-size: 1.25rem !important;
+  position: absolute;
+
+  &.key {
+    bottom: 435px;
+    right: calc(50% - 200px);
+  }
+
+  &.crosshairs {
+    bottom: 165px;
+    left: calc(50% - 380px);
+  }
+
+  &.bomb {
+    bottom: 255px;
+    right: calc(50% - 380px);
+  }
+
+  &.flask {
+    bottom: 225px;
+    left: calc(50% - 610px);
+  }
+
+  &.trophy {
+    bottom: 190px;
+    right: calc(50% - 585px);
+  }
+
+  &.power {
+    bottom: 60px;
+    right: calc(50% - 360px);
+  }
+
+  &.puzzle {
+    bottom: 50px;
+    left: calc(50% - 475px);
+  }
+}

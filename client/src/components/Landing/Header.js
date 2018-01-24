@@ -72,6 +72,13 @@ const Header = () => {
       <i className={`fa fa-circle-o ${styles.Circle} ${styles.a}`} />
       <i className={`fa fa-circle-o ${styles.Circle} ${styles.b}`} />
       <i className={`fa fa-circle-o ${styles.Circle} ${styles.c}`} />
+      <i className={`fa fa-key ${styles.SmallIcon} ${styles.key}`} />
+      <i className={`fa fa-crosshairs ${styles.SmallIcon} ${styles.crosshairs}`} />
+      <i className={`fa fa-bomb ${styles.SmallIcon} ${styles.bomb}`} />
+      <i className={`fa fa-flask ${styles.SmallIcon} ${styles.flask}`} />
+      <i className={`fa fa-trophy ${styles.SmallIcon} ${styles.trophy}`} />
+      <i className={`fa fa-power-off ${styles.SmallIcon} ${styles.power}`} />
+      <i className={`fa fa-puzzle-piece ${styles.SmallIcon} ${styles.puzzle}`} />
       <div className={styles.TopBar}>
         <div className={styles.BrandContainer}>
           <div className={styles.Brand}>
