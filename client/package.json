@@ -36,7 +36,8 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
     "rewire": "^3.0.2",
-    "sass-loader": "^6.0.6"
+    "sass-loader": "^6.0.6",
+    "toastr": "^2.1.2"
   },
   "scripts": {
     "start": "node scripts/customized-config start",

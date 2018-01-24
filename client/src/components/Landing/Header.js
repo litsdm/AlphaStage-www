@@ -1,4 +1,6 @@
 import React from 'react';
+import toastr from 'toastr';
+import PropTypes from 'prop-types';
 import styles from './Header.scss';
 
 import icon from '../../resources/icon.png';
@@ -9,7 +11,19 @@ import jewel from '../../resources/jewel.png';
 import cards from '../../resources/cards.png';
 import triangle from '../../resources/triangle.svg';
 
-const Header = () => {
+const Header = ({ submitUser }) => {
+  const handleNotifyClick = () => {
+    const email = document.getElementById('notifyInput').value;
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const isEmailValid = re.test(email.toLowerCase());
+
+    if (isEmailValid) {
+      submitUser(email);
+      toastr.success('Thank you! We will notify you when Alpha Stage is about to launch!');
+      document.getElementById('notifyInput').value = '';
+    } else toastr.error('Invalid Email');
+  };
+
   const getDownloadButtonData = () => {
     const { platform } = window.navigator;
     const data = {};
@@ -46,8 +60,8 @@ const Header = () => {
 
   const renderNotify = () => (
     <div className={styles.NotifyContainer}>
-      <input placeholder="Enter your email" />
-      <button>Notify me</button>
+      <input id="notifyInput" placeholder="Enter your email" />
+      <button onClick={handleNotifyClick}>Notify me</button>
     </div>
   );
 
@@ -130,6 +144,10 @@ const Header = () => {
       <img className={styles.Screenshot} src={screen} alt="Desktop app screenshot" />
     </div>
   );
+};
+
+Header.propTypes = {
+  submitUser: PropTypes.func.isRequired
 };
 
 export default Header;

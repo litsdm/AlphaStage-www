@@ -4,6 +4,7 @@
 @import url('https://fonts.googleapis.com/css?family=Audiowide');
 
 @import "~font-awesome/css/font-awesome.css";
+@import "~toastr/build/toastr.css";
 
 body {
   font-family: 'Open Sans', sans-serif;
@@ -37,4 +38,12 @@ a {
 
 ::placeholder { /* Most modern browsers support this now. */
    color:    #aaa;
+}
+
+#toast-container > div {
+  -webkit-box-shadow: 0 0 12px #000000 !important;
+  box-shadow: 0 0 12px #000000 !important;
+  cursor: pointer;
+  filter: alpha(opacity=100);
+  opacity: 1;
 }

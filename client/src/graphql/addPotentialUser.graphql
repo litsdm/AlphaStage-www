@@ -1,0 +1,6 @@
+mutation AddPotentialUser($email: String) {
+  addPotentialUser(email: $email) {
+    _id,
+    email
+  }
+}
