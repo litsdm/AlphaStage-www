@@ -3,6 +3,10 @@ import styles from './Header.scss';
 
 import icon from '../../resources/icon.png';
 import screen from '../../resources/alpha-screen.png';
+import controller from '../../resources/controller.png';
+import mouse from '../../resources/mouse.png';
+import jewel from '../../resources/jewel.png';
+import cards from '../../resources/cards.png';
 
 const Header = () => {
   const getDownloadButtonData = () => {
@@ -51,6 +55,10 @@ const Header = () => {
 
   return (
     <div className={styles.Header}>
+      <img src={controller} className={`${styles.Controller} ${styles.animated} ${styles.bounce}`} alt="controller icon" />
+      <img src={mouse} className={`${styles.Mouse} ${styles.animated} ${styles.bounce}`} alt="mouse icon" />
+      <img src={jewel} className={`${styles.Jewel} ${styles.animated} ${styles.bounce}`} alt="jewel icon" />
+      <img src={cards} className={styles.Cards} alt="cards icon" />
       <div className={styles.TopBar}>
         <div className={styles.BrandContainer}>
           <div className={styles.Brand}>
