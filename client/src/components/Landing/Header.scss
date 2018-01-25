@@ -376,3 +376,418 @@
     left: calc(50% - 475px);
   }
 }
+
+@media only screen and (max-width: 820px) {
+  .TopText {
+    font-size: 30px;
+    line-height: 1;
+  }
+  .Description {
+      font-size: 12px;
+  }
+}
+
+@media only screen and (max-width: 705px) {
+  .Screenshot {
+    top: 52%;
+    width: 650px;
+  }
+
+  .Content {
+    top: 38%;
+  }
+
+  .Jewel {
+    bottom: 305px;
+  }
+
+  .Cards {
+    bottom: 287px;
+    left: calc(50% - 265px);
+  }
+
+  .Circle{
+    &.a {
+      bottom: 340px;
+      left: calc(50% - 165px);
+    }
+
+    &.c {
+      bottom: 165px;
+      right: calc(50% - 315px);
+    }
+  }
+
+  .Times.b {
+    bottom: 310px;
+    right: calc(50% - 120px);
+  }
+
+  .Square.b {
+    bottom: 370px;
+    right: calc(50% - 315px);
+  }
+
+  .Triangle {
+    &.a {
+      bottom: 375px;
+      left: calc(50% - 310px);
+    }
+
+    &.b {
+      left: calc(50% - 265px);
+    }
+  }
+
+  .SmallIcon {
+    &.key {
+      bottom: 370px;
+      right: calc(50% - 200px);
+    }
+
+    &.power {
+      bottom: 30px;
+      right: calc(50% - 270px);
+    }
+
+    &.bomb {
+      bottom: 220px;
+      left: calc(50% - 315px);
+    }
+  }
+
+  .Mouse {
+    bottom: 130px;
+    left: calc(50% - 310px);
+  }
+
+  .Controller {
+    bottom: 65px;
+    right: calc(50% - 310px);
+  }
+}
+
+@media only screen and (max-width: 615px) {
+  .Header {
+    height: 640px;
+  }
+
+  .Screenshot {
+    top: 52%;
+    width: 550px;
+  }
+
+  .Content {
+    top: 35%;
+  }
+
+  .TopText {
+    font-size: 26px;
+  }
+
+  .NotifyContainer {
+    input {
+      width: 250px;
+    }
+  }
+
+  .Controller,
+  .Mouse,
+  .Jewel,
+  .Cards {
+    width: 45px;
+  }
+
+  .Times,
+  .Circle,
+  .Square {
+    font-size: 2rem !important;
+  }
+
+  .Mouse {
+    bottom: 100px;
+    left: calc(50% - 270px);
+  }
+
+  .Controller {
+    bottom: 50px;
+    right: calc(50% - 260px);
+  }
+
+  .Jewel {
+    bottom: 260px;
+    right: calc(50% - 185px);
+  }
+
+  .Cards {
+    bottom: 241px;
+    left: calc(50% - 224px)
+  }
+}
+
+@media only screen and (max-width: 515px) {
+  .TopText {
+    font-size: 22px;
+  }
+
+  .Description {
+    font-size: 11px;
+  }
+
+  .Header {
+    height: 580px;
+  }
+
+  .Screenshot {
+    top: 56%;
+    width: 450px;
+  }
+
+  .Controller,
+  .Mouse,
+  .Jewel,
+  .Cards {
+    width: 40px;
+  }
+
+  .Mouse {
+    bottom: 80px;
+    left: calc(50% - 225px);
+  }
+
+  .Controller {
+    bottom: 40px;
+    right: calc(50% - 215px);
+  }
+
+  .Jewel {
+    bottom: 215px;
+    right: calc(50% - 155px);
+  }
+
+  .Cards {
+    bottom: 200px;
+    left: calc(50% - 185px)
+  }
+
+  .Circle {
+    &.a {
+      bottom: 245px;
+      left: calc(50% - 135px);
+    }
+  }
+
+  .Times {
+    &.b {
+      bottom: 300px;
+      right: calc(50% - 210px);
+    }
+  }
+
+  .Square {
+    &.b {
+      bottom: 130px;
+      right: calc(50% - 225px);
+    }
+  }
+
+  .Triangle {
+    &.b {
+      left: calc(50% - 190px);
+    }
+  }
+
+  .SmallIcon {
+    &.key {
+      bottom: 270px;
+      right: calc(50% - 115px);
+    }
+
+    &.power {
+      bottom: 18px;
+      right: calc(50% - 200px);
+    }
+
+    &.bomb {
+      bottom: 280px;
+      left: calc(50% - 210px);
+    }
+  }
+}
+
+@media only screen and (max-width: 420px) {
+  .Screenshot {
+    top: 61%;
+    width: 400px;
+  }
+
+  .Content {
+    top: 38%;
+  }
+
+  .TopText {
+    font-size: 18px;
+  }
+
+  .Description {
+    font-size: 9px;
+  }
+
+  .NotifyContainer {
+    input {
+      font-size: 12px;
+      width: 200px;
+    }
+
+    button {
+      font-size: 12px;
+    }
+  }
+
+  .Controller,
+  .Mouse,
+  .Jewel,
+  .Cards {
+    width: 35px;
+  }
+
+  .Times,
+  .Circle,
+  .Square {
+    font-size: 1.5rem !important;
+  }
+
+  .Triangle {
+    width: 24px;
+  }
+
+  .Mouse {
+    bottom: 80px;
+    left: calc(50% - 190px);
+  }
+
+  .Controller {
+    bottom: 50px;
+    right: calc(50% - 185px);
+  }
+
+  .Jewel {
+    bottom: 190px;
+    right: calc(50% - 140px);
+  }
+
+  .Cards {
+    bottom: 178px;
+    left: calc(50% - 164px);
+  }
+
+  .Triangle {
+    &.b {
+      left: calc(50% - 165px);
+    }
+  }
+
+  .Times {
+    &.b {
+      right: calc(50% - 180px);
+    }
+  }
+
+  .Square {
+    &.b {
+      right: calc(50% - 190px);
+    }
+  }
+
+  .SmallIcon {
+    font-size: 1rem;
+
+    &.bomb {
+      bottom: 205px;
+      left: calc(50% - 15px);
+    }
+  }
+}
+
+@media only screen and (max-width: 420px) {
+  .Screenshot {
+    top: 68%;
+    width: 325px;
+  }
+
+  .TopText,
+  .Description {
+    padding: 0 12px;
+  }
+
+  .NotifyContainer {
+    input {
+      width: 150px;
+    }
+  }
+
+  .Controller,
+  .Mouse,
+  .Jewel,
+  .Cards {
+    width: 25px;
+  }
+
+  .Times,
+  .Circle,
+  .Square {
+    font-size: 1rem !important;
+  }
+
+  .Triangle {
+    width: 16px;
+  }
+
+  .Controller {
+    bottom: 45px;
+    right: calc(50% - 147px);
+  }
+
+  .Jewel {
+    bottom: 160px;
+    right: calc(50% - 105px);
+  }
+
+  .Cards {
+    bottom: 148px;
+    left: calc(50% - 131px);
+  }
+
+  .Square {
+    &.b {
+      bottom: 210px;
+      right: calc(50% - 140px);
+    }
+  }
+
+  .Triangle {
+    &.a {
+      bottom: 285px;
+      left: calc(50% - 90px);
+    }
+    
+    &.b {
+      left: calc(50% - 133px);
+    }
+  }
+
+  .Times {
+    &.b {
+      bottom: 200px;
+      left: calc(50% - 75px);
+    }
+  }
+
+  .SmallIcon {
+    font-size: 1rem !important;
+
+    &.bomb {
+      bottom: 180px;
+    }
+  }
+}
