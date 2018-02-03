@@ -7,6 +7,7 @@ const db = dataBase.get();
 
 const Games = db.collection('games');
 const PotentialUsers = db.collection('potentialUsers');
+const TestingSessions = db.collection('testingSessions');
 const Users = db.collection('users');
 
 const prepare = (o) => {
@@ -33,7 +34,9 @@ const resolvers = {
   },
   Game: {
     developers: async ({ gameId }) =>
-      (await Users.find({ gameIds: gameId }).toArray()).map(prepare)
+      (await Users.find({ gameIds: gameId }).toArray()).map(prepare),
+    testingSessions: async ({ game }) =>
+      (await TestingSessions.find({ game }).toArray()).map(prepare)
   },
   User: {
     games: async ({ _id }) =>

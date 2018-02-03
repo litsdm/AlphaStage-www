@@ -34,6 +34,7 @@ const typeDefs = [`
     shortDescription: String
     spaceRequired: String
     tags: [String]
+    testingSessions: [TestingSession]
     title: String
     thumbnail: String
     trailer: String
@@ -64,6 +65,18 @@ const typeDefs = [`
     trailer: String
     website: String
     windowsBuild: String
+  }
+
+  type TestingSession {
+    _id: String
+    endDate: String
+    game: String
+    maxTesters: Int
+    rewardType: String
+    reward: String
+    startDate: String
+    testers: [User]
+
   }
 
   type User {
