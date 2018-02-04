@@ -89,6 +89,10 @@ const resolvers = {
 
       const res = await PotentialUsers.insert(args);
       return prepare(await PotentialUsers.findOne({ _id: res.insertedIds[0] }));
+    },
+    createTestingSession: async (root, { session }) => {
+      const res = await TestingSessions.insert(session);
+      return prepare(await TestingSessions.findOne({ _id: res.insertedIds[0] }));
     }
   },
 };

@@ -76,7 +76,15 @@ const typeDefs = [`
     reward: String
     startDate: String
     testers: [User]
+  }
 
+  input TSInput {
+    endDate: String
+    game: String
+    maxTesters: Int
+    rewardType: String
+    reward: String
+    startDate: String
   }
 
   type User {
@@ -104,6 +112,7 @@ const typeDefs = [`
     removeDeveloperFromGame(id: String, userId: String): Game
     deleteGame(id: String): Game
     addPotentialUser(email: String): PotentialUser
+    createTestingSession(session: TSInput): TestingSession
   }
 
   schema {
