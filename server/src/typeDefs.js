@@ -76,6 +76,7 @@ const typeDefs = [`
     reward: String
     startDate: String
     testers: [User]
+    testerIds: [String]
   }
 
   input TSInput {
