@@ -7,8 +7,8 @@ const TestingSessions = db.collection('testingSessions');
 const Users = db.collection('users');
 
 export const TestingSession = {
-  testers: async ({ userIds }) =>
-    (await Users.find({ _id: { $all: userIds } }).toArray()).map(prepare),
+  testers: async ({ testerIds }) =>
+    (await Users.find({ _id: { $all: testerIds } }).toArray()).map(prepare),
 };
 
 const games = {
