@@ -2,6 +2,7 @@ const testingSessions = {
   types: `
     type TestingSession {
       _id: String
+      createdAt: String
       endDate: String
       game: String
       maxTesters: Int

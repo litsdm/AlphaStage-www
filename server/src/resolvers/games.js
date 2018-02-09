@@ -12,7 +12,7 @@ export const Game = {
   developers: async ({ gameId }) =>
     (await Users.find({ gameIds: gameId }).toArray()).map(prepare),
   testingSessions: async ({ _id }) =>
-    (await TestingSessions.find({ game: _id }).toArray()).map(prepare)
+    (await TestingSessions.find({ game: _id }).sort({ createdAt: -1 }).toArray()).map(prepare)
 };
 
 const games = {

@@ -14,6 +14,7 @@ export const TestingSession = {
 const games = {
   Mutation: {
     createTestingSession: async (root, { session }) => {
+      session.createdAt = (new Date()).toString();
       const res = await TestingSessions.insert(session);
       return prepare(await TestingSessions.findOne({ _id: res.insertedIds[0] }));
     }
