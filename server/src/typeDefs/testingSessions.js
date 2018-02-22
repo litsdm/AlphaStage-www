@@ -6,6 +6,7 @@ const testingSessions = {
       endDate: String
       game: String
       maxTesters: Int
+      objectives: [String]
       rewardType: String
       reward: String
       startDate: String
@@ -17,6 +18,7 @@ const testingSessions = {
       endDate: String
       game: String
       maxTesters: Int
+      objectives: [String]
       rewardType: String
       reward: String
       startDate: String
