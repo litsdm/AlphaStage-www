@@ -11,7 +11,7 @@ export const TestingSession = {
     (await Users.find({ _id: { $all: testerIds || [] } }).toArray()).map(prepare),
 };
 
-const games = {
+const testingSessions = {
   Mutation: {
     createTestingSession: async (root, { session }) => {
       session.createdAt = (new Date()).toString();
@@ -21,4 +21,4 @@ const games = {
   }
 };
 
-export default games;
+export default testingSessions;

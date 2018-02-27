@@ -13,7 +13,7 @@ export const User = {
     (await Games.find({ developerIds: _id }).toArray()).map(prepare)
 };
 
-const games = {
+const users = {
   Query: {
     potentialUsers: async () => (await PotentialUsers.find().toArray()).map(prepare),
     user: async (root, { _id }) => prepare(await Users.findOne(ObjectId(_id))),
@@ -40,4 +40,4 @@ const games = {
   }
 };
 
-export default games;
+export default users;
