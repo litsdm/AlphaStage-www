@@ -4,6 +4,7 @@ import GraphQLJSON from 'graphql-type-json';
 import games, { Game } from './games';
 import users, { User } from './users';
 import testingSessions, { TestingSession } from './testingSessions';
+import tests from './tests';
 
 export const prepare = (o) => {
   o._id = o._id.toString();
@@ -21,6 +22,7 @@ const resolvers = {
   Mutation: {
     ...games.Mutation,
     ...testingSessions.Mutation,
+    ...tests.Mutation,
     ...users.Mutation
   },
   Game,
