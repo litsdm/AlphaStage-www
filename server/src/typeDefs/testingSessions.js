@@ -12,6 +12,7 @@ const testingSessions = {
       startDate: String
       testers: [User]
       testerIds: [String]
+      tests: [Test]
     }
 
     input TSInput {
