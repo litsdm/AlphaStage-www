@@ -11,7 +11,7 @@ export const TestingSession = {
   testers: async (session) => {
     const testerIds = session.testerIds || [];
     const ids = testerIds.map(id => getObjectId(id));
-    return (await Users.find({ _id: { $all: ids || [] } }).toArray()).map(prepare);
+    return (await Users.find({ _id: { $in: ids || [] } }).toArray()).map(prepare);
   },
   tests: async ({ id }) =>
     (await Tests.find({ testingSessionId: id }).toArray()).map(prepare),
