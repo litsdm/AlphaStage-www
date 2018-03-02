@@ -2,23 +2,23 @@ const tests = {
   types: `
     type Test {
       _id: String
-      cloudfrontUrl: String
       comments: [JSON]
       objectives: [JSON]
       s3Url: String
       testingSessionId: String
+      testerId: String
     }
 
-    input testInput {
-      cloudfrontUrl: String
+    input TestInput {
       comments: [JSON]
       objectives: [JSON]
       s3Url: String
       testingSessionId: String
+      testerId: String
     }
   `,
   mutation: `
-    createTest(test: testInput): Test
+    createTest(test: TestInput): Test
   `
 };
 
