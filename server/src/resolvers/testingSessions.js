@@ -1,5 +1,5 @@
 import dataBase from '../db';
-import { prepare } from './index';
+import { prepare, getObjectId } from './index';
 
 const db = dataBase.get();
 
@@ -8,8 +8,11 @@ const Users = db.collection('users');
 const Tests = db.collection('tests');
 
 export const TestingSession = {
-  testers: async ({ testerIds }) =>
-    (await Users.find({ _id: { $all: testerIds || [] } }).toArray()).map(prepare),
+  testers: async (session) => {
+    const testerIds = session.testerIds || [];
+    const ids = testerIds.map(id => getObjectId(id));
+    return (await Users.find({ _id: { $all: ids || [] } }).toArray()).map(prepare);
+  },
   tests: async ({ id }) =>
     (await Tests.find({ testingSessionId: id }).toArray()).map(prepare),
 };
