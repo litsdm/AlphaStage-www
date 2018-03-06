@@ -13,8 +13,8 @@ export const TestingSession = {
     const ids = testerIds.map(id => getObjectId(id));
     return (await Users.find({ _id: { $in: ids || [] } }).toArray()).map(prepare);
   },
-  tests: async ({ id }) =>
-    (await Tests.find({ testingSessionId: id }).toArray()).map(prepare),
+  tests: async ({ _id }) =>
+    (await Tests.find({ testingSessionId: _id }).toArray()).map(prepare),
 };
 
 const testingSessions = {
