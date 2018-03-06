@@ -3,6 +3,9 @@ const tests = {
     type Test {
       _id: String
       comments: [JSON]
+      completedObjectives: Int
+      createdAt: String
+      duration: Float
       objectives: [JSON]
       s3Url: String
       testingSessionId: String
@@ -11,6 +14,9 @@ const tests = {
 
     input TestInput {
       comments: [JSON]
+      completedObjectives: Int
+      createdAt: String
+      duration: Float
       objectives: [JSON]
       s3Url: String
       testingSessionId: String
