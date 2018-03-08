@@ -13,10 +13,19 @@ const tests = {
         { _id: getObjectId(test.testingSessionId) },
         { _id: 1 },
         { $push: { testerIds: test.testerId } },
-        { upsert: true }
+        { upsert: false }
       );
       const res = await Tests.insert(test);
       return prepare(await Tests.findOne({ _id: res.insertedIds[0] }));
+    },
+    markTest: async (root, { _id, mark }) => {
+      const test = await Tests.findAndModify(
+        { _id: getObjectId(_id) },
+        { _id: 1 },
+        { $set: { mark } },
+        { upsert: false, new: true }
+      );
+      return prepare(test.value);
     }
   }
 };

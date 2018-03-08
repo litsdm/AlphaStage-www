@@ -6,6 +6,7 @@ const tests = {
       completedObjectives: Int
       createdAt: String
       duration: Float
+      mark: Int
       objectives: [JSON]
       s3Url: String
       testingSessionId: String
@@ -25,6 +26,7 @@ const tests = {
   `,
   mutation: `
     createTest(test: TestInput): Test
+    markTest(_id: String, mark: Int): Test
   `
 };
 
