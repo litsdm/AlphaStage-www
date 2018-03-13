@@ -8,6 +8,8 @@ import cors from 'cors';
 import { ObjectId } from 'mongodb';
 import aws from 'aws-sdk';
 import path from 'path';
+import mailer from 'express-mailer';
+import exphbs from 'express-handlebars';
 
 import db from './src/db';
 import schema from './src/schema';
@@ -49,6 +51,21 @@ export const server = async () => {
     app.use('/graphiql', graphiqlExpress({
       endpointURL: '/graphql'
     }));
+
+    app.engine('handlebars', exphbs());
+    app.set('view engine', 'handlebars');
+
+    mailer.extend(app, {
+      from: process.env.MAILER_EMAIL,
+      host: 'smtp.gmail.com', // hostname
+      secureConnection: true, // use SSL
+      port: 465, // port for secure SMTP
+      transportMethod: 'SMTP', // default is SMTP. Accepts anything that nodemailer accepts
+      auth: {
+        user: process.env.MAILER_EMAIL,
+        pass: process.env.MAILER_PASSWORD
+      }
+    });
 
     const encryptPassword = (user) => {
       const salt = bcrypt.genSaltSync(10);
@@ -166,11 +183,34 @@ export const server = async () => {
       });
     };
 
+    const supportMail = (req, res) => {
+      const {
+        message, type, userId, email
+      } = req.body;
+
+      app.mailer.send('support', {
+        to: 'cdiezmoran@gmail.com',
+        subject: `${type} Ticket`,
+        message,
+        userId,
+        email
+      }, err => {
+        if (err) {
+          console.log(err);
+          res.sendStatus(400);
+          return;
+        }
+
+        res.sendStatus(200);
+      });
+    };
+
     app.post('/signup', signUp);
     app.post('/login', login);
     app.post('/renewToken', renewToken);
     app.get('/sign-s3', signS3);
     app.post('/delete-s3', deleteS3);
+    app.post('/support', supportMail);
 
     app.listen(PORT, () => {
       console.log(`Visit ${URL}:${PORT}`);
