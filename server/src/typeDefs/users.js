@@ -8,8 +8,11 @@ const users = {
     type User {
       _id: String
       email: String
+      experience: Int
       gameIds: [String]
       games: [Game]
+      level: Int
+      nextLevelExp: Int
       password: String
       profilePic: String
       username: String
@@ -19,8 +22,16 @@ const users = {
       _id: String
       email: String
     }
+
+    input LevelInput {
+      _id: String,
+      exp: Int,
+      level: Int,
+      currentExp: Int
+    }
   `,
   mutation: `
+    addExp(input: LevelInput): User
     addPotentialUser(email: String): PotentialUser
     createUser(email: String, username: String, password: String): User
     setProfilePicture(userId: String, url: String): User

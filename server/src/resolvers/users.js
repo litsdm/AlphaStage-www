@@ -2,6 +2,9 @@ import { ObjectId } from 'mongodb';
 import dataBase from '../db';
 import { prepare, getObjectId } from './index';
 
+const BASE_EXP = 100;
+const FACTOR = 1.32;
+
 const db = dataBase.get();
 
 const Games = db.collection('games');
@@ -22,7 +25,11 @@ const users = {
   },
   Mutation: {
     createUser: async (root, args) => {
-      const res = await Users.insert(args);
+      const nextLevelExp = BASE_EXP * (2 ** FACTOR);
+      const user = {
+        ...args, nextLevelExp, level: 1, experience: 0
+      };
+      const res = await Users.insert(user);
       return prepare(await Users.findOne({ _id: res.insertedIds[0] }));
     },
     setProfilePicture: async (root, args) => {
@@ -36,6 +43,30 @@ const users = {
 
       const res = await PotentialUsers.insert(args);
       return prepare(await PotentialUsers.findOne({ _id: res.insertedIds[0] }));
+    },
+    addExp: async (root, { input }) => {
+      const { _id, exp, level, currentExp } = input;
+      const nextLevelExp = BASE_EXP * ((level + 1) ** FACTOR);
+      const expRest = nextLevelExp - (exp + currentExp);
+      let newLevel = level;
+      let experience;
+      let newLevelExp = nextLevelExp;
+
+      if (expRest <= 0) {
+        newLevel += 1;
+        experience = Math.round(expRest * -1);
+        newLevelExp = Math.round((BASE_EXP * ((newLevel + 1) ** FACTOR)));
+      } else {
+        experience = currentExp + exp;
+      }
+
+      const user = await Users.findAndModify(
+        { _id: getObjectId(_id) },
+        { _id: 1 },
+        { $set: { level: newLevel, experience, nextLevelExp: newLevelExp } },
+        { upsert: false, new: true }
+      );
+      return prepare(user.value);
     }
   }
 };
