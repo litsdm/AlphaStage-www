@@ -46,7 +46,7 @@ const users = {
     },
     addExp: async (root, { input }) => {
       const { _id, exp, level, currentExp } = input;
-      const nextLevelExp = BASE_EXP * ((level + 1) ** FACTOR);
+      const nextLevelExp = Math.round(BASE_EXP * ((level + 1) ** FACTOR));
       const expRest = nextLevelExp - (exp + currentExp);
       let newLevel = level;
       let experience;
