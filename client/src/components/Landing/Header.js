@@ -3,7 +3,7 @@ import toastr from 'toastr';
 import PropTypes from 'prop-types';
 import styles from './Header.scss';
 
-import icon from '../../resources/icon.png';
+import logo from '../../resources/logo.png';
 import screen from '../../resources/alpha-screen.png';
 import controller from '../../resources/controller.png';
 import mouse from '../../resources/mouse.png';
@@ -96,10 +96,9 @@ const Header = ({ submitUser }) => {
       <div className={styles.TopBar}>
         <div className={styles.BrandContainer}>
           <div className={styles.Brand}>
-            <img src={icon} alt="Alpha Stage logo" />
+            <img src={logo} alt="Alpha Stage logo" />
             <h1>Alpha Stage</h1>
           </div>
-          <p className={styles.GameSub}>Games</p>
         </div>
         <div className={styles.Nav}>
           <div className={styles.Left} />
@@ -111,7 +110,7 @@ const Header = ({ submitUser }) => {
         </div>
       </div>
       <div className={styles.Content}>
-        <p className={styles.TopText}>Test your games with your target Gamers.</p>
+        <p className={styles.TopText}>Take your game to the next level.</p>
         <p className={styles.Description}>
           User testing platform created specifically for video game developers and gamers alike.
         </p>
