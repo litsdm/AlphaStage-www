@@ -15,6 +15,24 @@ export const Game = {
     (await TestingSessions.find({ game: _id }).sort({ createdAt: -1 }).toArray()).map(prepare)
 };
 
+const withDefaults = (game) => {
+  const playable = {
+    allTime: true,
+    onTestingSession: false,
+    certainDate: {
+      active: false,
+      startDate: null,
+      endDate: null
+    },
+    certainRelease: {
+      active: false,
+      status: 'Released - Game is ready.'
+    }
+  };
+
+  return { ...game, playable };
+};
+
 const games = {
   Query: {
     game: async (root, { _id }) => prepare(await Games.findOne(ObjectId(_id))),
@@ -26,8 +44,8 @@ const games = {
       (await Games.find({ tags: { $all: tags } }).toArray()).map(prepare),
   },
   Mutation: {
-    createGame: async (root, args) => {
-      const res = await Games.insert(args.game);
+    createGame: async (root, { game }) => {
+      const res = await Games.insert(withDefaults(game));
       return prepare(await Games.findOne({ _id: res.insertedIds[0] }));
     },
     editGame: async (root, { game }) => {
@@ -45,6 +63,11 @@ const games = {
     updateGeneralSettings: async (root, { gameId, isPrivate, releaseStatus }) => {
       const _id = getObjectId(gameId);
       await Games.update({ _id }, { $set: { isPrivate, releaseStatus } });
+      return prepare(await Games.findOne({ _id }));
+    },
+    setStrProperty: async (root, { gameId, propName, propValue }) => {
+      const _id = getObjectId(gameId);
+      await Games.update({ _id }, { $set: { [propName]: propValue } });
       return prepare(await Games.findOne({ _id }));
     },
     removeDeveloperFromGame: async (root, { id, userId }) => {

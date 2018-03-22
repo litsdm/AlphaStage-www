@@ -20,6 +20,7 @@ const games = {
       macBuild: String
       ownerId: String
       pageViews: Int
+      playable: String
       plays: Int
       publisher: String
       releaseStatus: String
@@ -67,6 +68,7 @@ const games = {
     editGame(game: GameInput): Game
     removeDeveloperFromGame(id: String, userId: String): Game
     updateGeneralSettings(gameId: String, isPrivate: Boolean, releaseStatus: String): Game
+    setStrProperty(gameId: String, propName: String, propValue: String): Game
   `
 };
 
