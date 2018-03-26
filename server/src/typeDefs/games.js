@@ -15,6 +15,7 @@ const games = {
       downloads: Int
       genre: String
       invisible: Boolean
+      inviteEmails: [String]
       isPrivate: Boolean
       languages: [String]
       macBuild: String
@@ -69,6 +70,7 @@ const games = {
     removeDeveloperFromGame(id: String, userId: String): Game
     updateGeneralSettings(gameId: String, isPrivate: Boolean, releaseStatus: String): Game
     setStrProperty(gameId: String, propName: String, propValue: String): Game
+    invite(id: String, email: String): Game
   `
 };
 

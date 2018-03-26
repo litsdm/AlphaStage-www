@@ -80,6 +80,15 @@ const games = {
       await Games.update({ _id }, { $set: { developerIds: [], invisible: true } });
       return prepare(await Games.findOne({ _id }));
     },
+    invite: async (root, { id, email }) => {
+      const game = await Games.findAndModify(
+        { _id: getObjectId(id) },
+        { _id: 1 },
+        { $push: { inviteEmails: email } },
+        { upsert: false, new: true }
+      );
+      return prepare(game.value);
+    }
   }
 };
 

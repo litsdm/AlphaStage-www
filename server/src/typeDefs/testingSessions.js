@@ -5,7 +5,6 @@ const testingSessions = {
       createdAt: String
       endDate: String
       game: String
-      maxTesters: Int
       name: String
       objectives: [String]
       plan: String
