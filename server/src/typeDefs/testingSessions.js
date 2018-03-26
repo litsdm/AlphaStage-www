@@ -6,9 +6,9 @@ const testingSessions = {
       endDate: String
       game: String
       maxTesters: Int
+      name: String
       objectives: [String]
-      rewardType: String
-      reward: String
+      plan: String
       startDate: String
       testers: [User]
       testerIds: [String]
@@ -18,10 +18,9 @@ const testingSessions = {
     input TSInput {
       endDate: String
       game: String
-      maxTesters: Int
+      name: String
       objectives: [String]
-      rewardType: String
-      reward: String
+      plan: String
       startDate: String
     }
   `,
