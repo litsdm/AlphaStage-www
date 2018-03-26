@@ -56,7 +56,7 @@ export const server = async () => {
     app.set('view engine', 'handlebars');
 
     mailer.extend(app, {
-      from: process.env.MAILER_EMAIL,
+      from: 'Carlos from Alpha Stage',
       host: 'smtp.gmail.com', // hostname
       secureConnection: true, // use SSL
       port: 465, // port for secure SMTP
@@ -189,11 +189,30 @@ export const server = async () => {
       } = req.body;
 
       app.mailer.send('support', {
-        to: 'cdiezmoran@gmail.com',
+        to: 'carlos@alphastage.gg',
         subject: `${type} Ticket`,
         message,
         userId,
         email
+      }, err => {
+        if (err) {
+          console.log(err);
+          res.sendStatus(400);
+          return;
+        }
+
+        res.sendStatus(200);
+      });
+    };
+
+    const inviteMail = (req, res) => {
+      const { title, email, username } = req.body;
+
+      app.mailer.send('invite', {
+        to: email,
+        subject: `${username} has invited you to play ${title} on Alpha Stage!`,
+        title,
+        username
       }, err => {
         if (err) {
           console.log(err);
@@ -211,6 +230,7 @@ export const server = async () => {
     app.get('/sign-s3', signS3);
     app.post('/delete-s3', deleteS3);
     app.post('/support', supportMail);
+    app.post('/invite', inviteMail);
 
     app.listen(PORT, () => {
       console.log(`Visit ${URL}:${PORT}`);
