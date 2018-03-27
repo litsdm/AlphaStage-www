@@ -197,14 +197,16 @@
 .Controller,
 .Mouse,
 .Jewel,
-.Cards {
+.Medal {
   position: absolute;
   width: 55px;
 }
 
-.Cards {
-  bottom: 332px;
+.Medal {
+  bottom: 310px;
   left: calc(50% - 300px);
+  transform: rotate(10deg);
+  z-index: 2;
 }
 
 .Mouse {
@@ -401,8 +403,8 @@
     bottom: 305px;
   }
 
-  .Cards {
-    bottom: 287px;
+  .Medal {
+    bottom: 265px;
     left: calc(50% - 265px);
   }
 
@@ -494,7 +496,7 @@
   .Controller,
   .Mouse,
   .Jewel,
-  .Cards {
+  .Medal {
     width: 45px;
   }
 
@@ -519,8 +521,8 @@
     right: calc(50% - 185px);
   }
 
-  .Cards {
-    bottom: 241px;
+  .Medal {
+    bottom: 220px;
     left: calc(50% - 224px)
   }
 }
@@ -546,7 +548,7 @@
   .Controller,
   .Mouse,
   .Jewel,
-  .Cards {
+  .Medal {
     width: 40px;
   }
 
@@ -565,8 +567,8 @@
     right: calc(50% - 155px);
   }
 
-  .Cards {
-    bottom: 200px;
+  .Medal {
+    bottom: 185px;
     left: calc(50% - 185px)
   }
 
@@ -647,7 +649,7 @@
   .Controller,
   .Mouse,
   .Jewel,
-  .Cards {
+  .Medal {
     width: 35px;
   }
 
@@ -676,8 +678,8 @@
     right: calc(50% - 140px);
   }
 
-  .Cards {
-    bottom: 178px;
+  .Medal {
+    bottom: 165px;
     left: calc(50% - 164px);
   }
 
@@ -729,7 +731,7 @@
   .Controller,
   .Mouse,
   .Jewel,
-  .Cards {
+  .Medal {
     width: 25px;
   }
 
@@ -753,8 +755,8 @@
     right: calc(50% - 105px);
   }
 
-  .Cards {
-    bottom: 148px;
+  .Medal {
+    bottom: 138px;
     left: calc(50% - 131px);
   }
 
@@ -770,7 +772,7 @@
       bottom: 285px;
       left: calc(50% - 90px);
     }
-    
+
     &.b {
       left: calc(50% - 133px);
     }
