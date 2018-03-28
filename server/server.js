@@ -20,6 +20,8 @@ const URL = 'http://localhost';
 const PORT = process.env.PORT || 3001;
 const { JWT_SECRET } = process.env;
 const { S3_BUCKET } = process.env;
+const BASE_EXP = 100;
+const FACTOR = 1.32;
 
 export const server = async () => {
   try {
@@ -94,7 +96,11 @@ export const server = async () => {
         res.send({ error });
       } else {
         encryptPassword(user);
-        const inserted = await Users.insert(user);
+        const nextLevelExp = BASE_EXP * (2 ** FACTOR);
+        const userInsert = {
+          ...user, nextLevelExp, level: 1, experience: 0
+        };
+        const inserted = await Users.insert(userInsert);
         if (inserted.result.ok === 1) {
           const newUser = inserted.ops[0];
           const token = tokenFromUser(newUser);
