@@ -30,10 +30,10 @@ const Header = ({ submitUser }) => {
 
     if (platform.startsWith('Mac')) {
       data.text = 'Download for MacOS';
-      data.url = '';
+      data.url = 'https://github.com/cdiezmoran/AlphaStage-2.0/releases/download/v0.1.0/alpha-stage-0.1.0.dmg';
     } else if (platform.startsWith('Win') && platform !== 'WinCE') {
       data.text = 'Download for Windows';
-      data.url = '';
+      data.url = 'https://github.com/cdiezmoran/AlphaStage-2.0/releases/download/v0.1.0/alpha-stage-setup-0.1.0.exe';
     } else {
       return null;
     }
@@ -46,15 +46,18 @@ const Header = ({ submitUser }) => {
       {
         buttonData
           ? (
-            <button className={styles.DownloadButton}>
+            <a href={buttonData.url} className={styles.DownloadButton} download>
               <i className="fa fa-download" /> {buttonData.text}
-            </button>
+            </a>
           )
           : null
       }
-      <button className={styles.SecondaryButton}>
-        Open Web App
-      </button>
+      {/*
+        <button className={styles.SecondaryButton}>
+          Open Web App
+        </button>
+      */}
+      <p>Coming soon for web</p>
     </div>
   );
 
@@ -103,8 +106,8 @@ const Header = ({ submitUser }) => {
         <div className={styles.Nav}>
           <div className={styles.Left} />
           <div className={styles.Right}>
-            <a href="https://github.com/cdiezmoran/AlphaStage-2.0">
-              <i className="fa fa-github" />
+            <a className={styles.Join} href={buttonData.url} download>
+              Join the Beta now!
             </a>
           </div>
         </div>
@@ -132,10 +135,6 @@ const Header = ({ submitUser }) => {
             <div className={styles.Platform}>
               <i className="fa fa-apple" />
               <p>MacOS</p>
-            </div>
-            <div className={styles.Platform}>
-              <i className="fa fa-globe" />
-              <p>Web</p>
             </div>
           </span>
         </div>

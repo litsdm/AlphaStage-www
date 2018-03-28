@@ -70,12 +70,24 @@
 
     a {
       color: #ccc;
-      font-size: 2rem;
 
       &:hover {
         color: #fff;
       }
     }
+  }
+}
+
+.Join {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid #ccc;
+  border-radius: 24px;
+  font-size: 14px;
+  padding: 0.5em 1em;
+
+  &:hover {
+    background-color: #2091f3;
+    border-color: #2091f3;
   }
 }
 
@@ -144,7 +156,17 @@
 }
 
 .AppContainer {
+  align-items: center;
+  display: flex;
+  justify-content: center;
   margin-top: 42px;
+
+  p {
+    border: 1px solid #fff;
+    color: #ddd;
+    padding: 0.5em 1em;
+    border-radius: 4px;
+  }
 }
 
 .DownloadButton,
