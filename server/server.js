@@ -96,7 +96,7 @@ export const server = async () => {
         res.send({ error });
       } else {
         encryptPassword(user);
-        const nextLevelExp = BASE_EXP * (2 ** FACTOR);
+        const nextLevelExp = Math.round(BASE_EXP * (2 ** FACTOR));
         const userInsert = {
           ...user, nextLevelExp, level: 1, experience: 0
         };
@@ -139,11 +139,11 @@ export const server = async () => {
 
     const tokenFromUser = (user) => {
       const {
-        _id, username, email, profilePic
+        _id, username, email, profilePic, level, nextLevelExp, experience
       } = user;
 
       const token = jsonWebToken.sign({
-        _id, username, email, profilePic
+        _id, username, email, profilePic, level, nextLevelExp, experience
       }, JWT_SECRET);
       return token;
     };

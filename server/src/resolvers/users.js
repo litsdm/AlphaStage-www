@@ -25,7 +25,7 @@ const users = {
   },
   Mutation: {
     createUser: async (root, args) => {
-      const nextLevelExp = BASE_EXP * (2 ** FACTOR);
+      const nextLevelExp = Math.round(BASE_EXP * (2 ** FACTOR));
       const user = {
         ...args, nextLevelExp, level: 1, experience: 0
       };
