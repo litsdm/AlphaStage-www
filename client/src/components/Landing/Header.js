@@ -66,7 +66,7 @@ const Header = ({ submitUser }) => {
   );
 
   const buttonData = getDownloadButtonData();
-  const isAvailable = false;
+  const isAvailable = true;
 
   return (
     <div className={styles.Header}>

@@ -2,7 +2,9 @@ import { MongoClient } from 'mongodb';
 
 require('dotenv').config();
 
-const MONGO_URL = `mongodb://${process.env.DB_USER}:${process.env.DB_PWD}@ds151963.mlab.com:51963/alphastage-dev`;
+const dbName = process.env.AS_ENV === 'production' ? 'alphastage-prod' : 'alphastage-dev';
+
+const MONGO_URL = `mongodb://${process.env.DB_USER}:${process.env.DB_PWD}@ds151963.mlab.com:51963/${dbName}`;
 
 let _db;
 
