@@ -30,7 +30,7 @@ const withDefaults = (game) => {
     }
   };
 
-  return { ...game, playable };
+  return { ...game, playable: JSON.stringify(playable), invisible: false };
 };
 
 const games = {
