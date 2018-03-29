@@ -11,6 +11,8 @@ import medal from '../../resources/medal.png';
 import swords from '../../resources/swords.png';
 import triangle from '../../resources/triangle.svg';
 
+const { CURRENT_VERSION } = process.env;
+
 const Header = ({ submitUser }) => {
   const handleNotifyClick = () => {
     const email = document.getElementById('notifyInput').value;
@@ -30,10 +32,10 @@ const Header = ({ submitUser }) => {
 
     if (platform.startsWith('Mac')) {
       data.text = 'Download for MacOS';
-      data.url = 'https://github.com/cdiezmoran/AlphaStage-2.0/releases/download/v0.1.0/alpha-stage-0.1.0.dmg';
+      data.url = `https://github.com/cdiezmoran/AlphaStage-2.0/releases/download/v${CURRENT_VERSION}/alpha-stage-${CURRENT_VERSION}.dmg`;
     } else if (platform.startsWith('Win') && platform !== 'WinCE') {
       data.text = 'Download for Windows';
-      data.url = 'https://github.com/cdiezmoran/AlphaStage-2.0/releases/download/v0.1.0/alpha-stage-setup-0.1.0.exe';
+      data.url = `https://github.com/cdiezmoran/AlphaStage-2.0/releases/download/v${CURRENT_VERSION}/alpha-stage-setup-${CURRENT_VERSION}.exe`;
     } else {
       return null;
     }
