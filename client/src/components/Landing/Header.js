@@ -117,7 +117,7 @@ const Header = ({ submitUser }) => {
       <div className={styles.Content}>
         <p className={styles.TopText}>Take your game to the next level.</p>
         <p className={styles.Description}>
-          User testing platform created specifically for video game developers and gamers alike.
+          Play testing platform created specifically for video game developers and gamers alike.
         </p>
         <p className={styles.Description}>
           Get feedback that actually matters out of your game releases.
