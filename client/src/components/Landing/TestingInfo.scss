@@ -1,0 +1,30 @@
+.Wrapper {
+  display: flex;
+  margin-top: 72px;
+  padding: 24px;
+  padding-bottom: 0;
+}
+
+.Column {
+  align-items: center;
+  display: flex;
+  flex-basis: 50%;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.InfoTitle {
+  color: #2B2C31;
+  width: 55%;
+}
+
+.InfoText {
+  color: #36393E;
+  font-size: 14px;
+  width: 55%;
+}
+
+.TestImg {
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+  width: 500px;
+}
