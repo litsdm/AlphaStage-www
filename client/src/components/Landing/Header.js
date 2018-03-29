@@ -11,7 +11,7 @@ import medal from '../../resources/medal.png';
 import swords from '../../resources/swords.png';
 import triangle from '../../resources/triangle.svg';
 
-const { CURRENT_VERSION } = process.env;
+const CURRENT_VERSION = '0.1.1';
 
 const Header = ({ submitUser }) => {
   const handleNotifyClick = () => {
