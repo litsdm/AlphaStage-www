@@ -42,7 +42,7 @@ export const server = async () => {
         }
         return null;
       }
-    }).unless({ path: ['/signup', '/login', '/', '/landing'] }));
+    }).unless({ path: ['/signup', '/login', '/', '/landing', '/static/*'] }));
 
     app.use(cors());
     app.use(bodyParser.json({ limit: '20mb' }));
