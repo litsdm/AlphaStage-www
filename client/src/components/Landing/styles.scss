@@ -14,3 +14,20 @@
   right: -212px;
   top: 0;
 }
+
+.CurvedDivBottom {
+  overflow: hidden;
+  position: relative;
+  height: 80px;
+}
+
+.CurvedDivBottom::before {
+  background: #f4f4f4;
+  border-radius: 100%;
+  bottom: 0;
+  content: '';
+  left: -200px;
+  position: absolute;
+  right: -212px;
+  top: -200px;
+}

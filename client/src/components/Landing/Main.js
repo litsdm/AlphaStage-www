@@ -6,6 +6,7 @@ import Header from './Header';
 import TestingInfo from './TestingInfo';
 import SessionProcess from './SessionProcess';
 import DownloadSection from './DownloadSection';
+import Objectives from './Objectives';
 
 const CURRENT_VERSION = '0.1.1';
 
@@ -16,6 +17,8 @@ const Main = ({ submitUser }) => (
     <div className={styles.CurvedDiv} />
     <SessionProcess />
     <DownloadSection version={CURRENT_VERSION} />
+    <Objectives />
+    <div className={styles.CurvedDivBottom} />
   </div>
 );
 
