@@ -1,0 +1,44 @@
+.Container {
+  align-items: center;
+  background-color: #2b2c31;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 24px;
+}
+
+.Divider {
+  background: #2091f3;
+  border-radius: 4px;
+  height: 4px;
+  margin-bottom: 18px;
+  width: 72px;
+}
+
+.Buttons {
+  margin-bottom: 18px;
+
+  a {
+    background-color: #2b2c31;
+    border: 1px solid #20c2f3;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 1.5;
+    margin-right: 24px;
+    padding: 0.5em 1em;
+    outline: none;
+    transition: 0.2s all ease;
+
+    i {
+      margin-right: 12px;
+    }
+
+    &:hover {
+      background-color: #2091f3;
+      border-color: #2091f3;
+    }
+  }
+}
