@@ -1,0 +1,52 @@
+.Container {
+  align-items: center;
+  background-color: #2b2c31;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 24px;
+  padding-top: 79px;
+  margin-top: -55px;
+}
+
+.Brand {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+  img {
+    height: 30px;
+    margin-right: 12px;
+    width: 30px;
+  }
+
+  h1 {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.8rem;
+  }
+}
+
+.Divider {
+  background: #2091f3;
+  border-radius: 4px;
+  height: 4px;
+  margin-bottom: 18px;
+  width: 72px;
+}
+
+.Social {
+  align-items: center;
+  display: flex;
+
+  a {
+    color: #ddd;
+    font-size: 1.5rem;
+    margin-right: 12px;
+    transition: 0.2s all ease;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+}

@@ -7,6 +7,7 @@ import TestingInfo from './TestingInfo';
 import SessionProcess from './SessionProcess';
 import DownloadSection from './DownloadSection';
 import Objectives from './Objectives';
+import Footer from './Footer';
 
 const CURRENT_VERSION = '0.1.1';
 
@@ -19,6 +20,7 @@ const Main = ({ submitUser }) => (
     <DownloadSection version={CURRENT_VERSION} />
     <Objectives />
     <div className={styles.CurvedDivBottom} />
+    <Footer />
   </div>
 );
 
