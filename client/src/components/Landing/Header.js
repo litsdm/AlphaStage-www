@@ -106,9 +106,15 @@ const Header = ({ submitUser, version }) => {
         <div className={styles.Nav}>
           <div className={styles.Left} />
           <div className={styles.Right}>
-            <a className={styles.Join} href={buttonData.url} download>
-              Join the Beta now!
-            </a>
+            {
+              buttonData
+                ? (
+                  <a className={styles.Join} href={buttonData.url} download>
+                    Join the Beta now!
+                  </a>
+                )
+                : null
+            }
           </div>
         </div>
       </div>
