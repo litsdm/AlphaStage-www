@@ -5,6 +5,17 @@
   margin-top: 102px;
   padding: 24px;
   padding-bottom: 0;
+
+  @include media($small) {
+    margin-top: 72px;
+  }
+
+  @include media($mobile) {
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 48px;
+  }
 }
 
 .Column {
@@ -13,6 +24,10 @@
   flex-basis: 50%;
   flex-direction: column;
   justify-content: center;
+
+  @include media($mobile) {
+    min-width: 275px;
+  }
 }
 
 .InfoTitle {
@@ -25,6 +40,11 @@
 
   @include media($small) {
     font-size: 1.14rem;
+  }
+
+  @include media($mobile) {
+    text-align: center;
+    width: 100%;
   }
 }
 
@@ -39,6 +59,12 @@
 
   @include media($small) {
     font-size: 10px;
+  }
+
+  @include media($mobile) {
+    margin-bottom: 48px;
+    text-align: center;
+    width: 100%;
   }
 }
 

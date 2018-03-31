@@ -1,3 +1,5 @@
+@import '../../globals.scss';
+
 .Container {
   align-items: center;
   background-color: #2b2c31;
@@ -6,6 +8,12 @@
   flex-direction: column;
   justify-content: center;
   padding: 24px;
+
+  @include media($mobile) {
+    h1 {
+      font-size: 1.25rem;
+    }
+  }
 }
 
 .Divider {
@@ -39,6 +47,17 @@
     &:hover {
       background-color: #2091f3;
       border-color: #2091f3;
+    }
+  }
+
+  @include media($mobile) {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    a {
+      margin-bottom: 12px;
     }
   }
 }

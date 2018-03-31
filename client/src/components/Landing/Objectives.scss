@@ -1,0 +1,26 @@
+@import '../../globals.scss';
+
+.ObjWrapper {
+  margin-top: 72px;
+  margin-bottom: 48px;
+
+  @include media($mobile) {
+    margin-top: 48px;
+    margin-bottom: 0;
+  }
+}
+
+.Img {
+  box-shadow: none;
+  margin: 0;
+
+  @include media($mobile) {
+    margin-bottom: 48px;
+  }
+}
+
+.Text {
+  @include media($mobile) {
+    margin-bottom: 0;
+  }
+}

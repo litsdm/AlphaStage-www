@@ -1,3 +1,5 @@
+@import '../../globals.scss';
+
 .Content {
   align-items: center;
   background-color: #f4f4f4;
@@ -9,6 +11,11 @@
 
   h1 {
     font-size: 1.5rem;
+
+    @include media($mobile) {
+      font-size: 1.25rem;
+      text-align: center;
+    }
   }
 }
 

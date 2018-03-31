@@ -1,21 +1,21 @@
 import React from 'react';
-import styles from './TestingInfo.scss';
+import sharedStyles from './TestingInfo.scss';
+import styles from './Objectives.scss';
 
 import objectives from '../../resources/objectives.png';
 
 const Objectives = () => (
-  <div className={styles.Wrapper} style={{ marginTop: '72px', marginBottom: '48px' }}>
-    <div className={styles.Column}>
+  <div className={`${sharedStyles.Wrapper} ${styles.ObjWrapper}`}>
+    <div className={sharedStyles.Column}>
       <img
         src={objectives}
-        className={styles.TestImg}
+        className={`${sharedStyles.TestImg} ${styles.Img}`}
         alt="objectives highlighted from desktop app"
-        style={{ boxShadow: 'none', margin: '0' }}
       />
     </div>
-    <div className={styles.Column}>
-      <h1 className={styles.InfoTitle}>Set objectives for each session.</h1>
-      <p className={styles.InfoText}>
+    <div className={sharedStyles.Column}>
+      <h1 className={sharedStyles.InfoTitle}>Set objectives for each session.</h1>
+      <p className={`${sharedStyles.InfoText} ${styles.Text}`}>
         Objectives let the players know what you would like them to focus on or
         {' '}try out while they are playing. Defining good objectives for the player
         {' '}will get you way more valuable feedback. You can set as many objectives
