@@ -22,6 +22,10 @@
   @include media($medium) {
     font-size: 1.5rem;
   }
+
+  @include media($small) {
+    font-size: 1.14rem;
+  }
 }
 
 .InfoText {
@@ -32,6 +36,10 @@
   @include media($medium) {
     font-size: 12px;
   }
+
+  @include media($small) {
+    font-size: 10px;
+  }
 }
 
 .TestImg {
@@ -41,5 +49,10 @@
 
   @include media($medium) {
     width: 350px;
+  }
+
+  @include media($small) {
+    margin-bottom: -22px;
+    width: 275px;
   }
 }
