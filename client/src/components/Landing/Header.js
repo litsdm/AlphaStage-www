@@ -1,6 +1,6 @@
 import React from 'react';
 import toastr from 'toastr';
-import PropTypes from 'prop-types';
+import { func, string } from 'prop-types';
 import styles from './Header.scss';
 
 import logo from '../../resources/logo.png';
@@ -11,9 +11,7 @@ import medal from '../../resources/medal.png';
 import swords from '../../resources/swords.png';
 import triangle from '../../resources/triangle.svg';
 
-const CURRENT_VERSION = '0.1.1';
-
-const Header = ({ submitUser }) => {
+const Header = ({ submitUser, version }) => {
   const handleNotifyClick = () => {
     const email = document.getElementById('notifyInput').value;
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -32,10 +30,10 @@ const Header = ({ submitUser }) => {
 
     if (platform.startsWith('Mac')) {
       data.text = 'Download for MacOS';
-      data.url = `https://github.com/cdiezmoran/AlphaStage-2.0/releases/download/v${CURRENT_VERSION}/alpha-stage-${CURRENT_VERSION}.dmg`;
+      data.url = `https://github.com/cdiezmoran/AlphaStage-2.0/releases/download/v${version}/alpha-stage-${version}.dmg`;
     } else if (platform.startsWith('Win') && platform !== 'WinCE') {
       data.text = 'Download for Windows';
-      data.url = `https://github.com/cdiezmoran/AlphaStage-2.0/releases/download/v${CURRENT_VERSION}/alpha-stage-setup-${CURRENT_VERSION}.exe`;
+      data.url = `https://github.com/cdiezmoran/AlphaStage-2.0/releases/download/v${version}/alpha-stage-setup-${version}.exe`;
     } else {
       return null;
     }
@@ -117,7 +115,7 @@ const Header = ({ submitUser }) => {
       <div className={styles.Content}>
         <p className={styles.TopText}>Take your game to the next level.</p>
         <p className={styles.Description}>
-          User testing platform created specifically for video game developers and gamers alike.
+          Play testing platform created specifically for video game developers and gamers alike.
         </p>
         <p className={styles.Description}>
           Get feedback that actually matters out of your game releases.
@@ -147,7 +145,8 @@ const Header = ({ submitUser }) => {
 };
 
 Header.propTypes = {
-  submitUser: PropTypes.func.isRequired
+  submitUser: func.isRequired,
+  version: string.isRequired
 };
 
 export default Header;

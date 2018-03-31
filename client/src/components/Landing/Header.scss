@@ -1,3 +1,5 @@
+@import '../../globals.scss';
+
 .Header {
   background-color: rgb(43, 44, 49);
   background: radial-gradient(circle, rgb(54, 57, 62), rgb(47, 49, 54), rgb(43, 44, 49));
@@ -75,6 +77,10 @@
         color: #fff;
       }
     }
+
+    @include media($mobile) {
+      min-width: 107px;
+    }
   }
 }
 
@@ -88,6 +94,10 @@
   &:hover {
     background-color: #2091f3;
     border-color: #2091f3;
+  }
+
+  @include media($mobile) {
+    font-size: 10px;
   }
 }
 
@@ -166,6 +176,10 @@
     color: #ddd;
     padding: 0.5em 1em;
     border-radius: 4px;
+
+    @include media($mobile) {
+      font-size: 12px;
+    }
   }
 }
 
@@ -184,6 +198,10 @@
 
   &:hover {
     background: linear-gradient(#20c9f3, #2098f3);
+  }
+
+  @include media($mobile) {
+    font-size: 12px;
   }
 }
 
