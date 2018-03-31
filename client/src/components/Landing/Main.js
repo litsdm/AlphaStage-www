@@ -8,6 +8,7 @@ import SessionProcess from './SessionProcess';
 import DownloadSection from './DownloadSection';
 import Objectives from './Objectives';
 import Footer from './Footer';
+import Level from './Level';
 
 const CURRENT_VERSION = '0.1.1';
 
@@ -19,6 +20,10 @@ const Main = ({ submitUser }) => (
     <SessionProcess />
     <DownloadSection version={CURRENT_VERSION} />
     <Objectives />
+    <Level />
+    <h1 className={styles.Question}>
+      Are you ready to take your game to the next level?
+    </h1>
     <div className={styles.CurvedDivBottom} />
     <Footer />
   </div>

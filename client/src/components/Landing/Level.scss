@@ -1,0 +1,107 @@
+@import '../../globals.scss';
+
+.Wrapper {
+  display: flex;
+  margin-bottom: 174px;
+  margin-top: -52px;
+  padding: 24px;
+  padding-bottom: 0;
+
+  @include media($small) {
+    margin-top: 72px;
+  }
+
+  @include media($mobile) {
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 48px;
+  }
+}
+
+.Column {
+  align-items: center;
+  display: flex;
+  flex-basis: 50%;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+
+  @include media($mobile) {
+    min-width: 275px;
+  }
+}
+
+.InfoTitle {
+  color: #2B2C31;
+  width: 55%;
+
+  @include media($medium) {
+    font-size: 1.5rem;
+  }
+
+  @include media($small) {
+    font-size: 1.14rem;
+  }
+
+  @include media($mobile) {
+    text-align: center;
+    width: 100%;
+  }
+}
+
+.InfoText {
+  color: #36393E;
+  font-size: 14px;
+  width: 55%;
+
+  @include media($medium) {
+    font-size: 12px;
+  }
+
+  @include media($small) {
+    font-size: 10px;
+  }
+
+  @include media($mobile) {
+    margin-bottom: 48px;
+    text-align: center;
+    width: 100%;
+  }
+}
+
+.TestImg {
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+  margin-bottom: -53px;
+  width: 550px;
+  z-index: 2;
+
+  @include media($medium) {
+    width: 350px;
+  }
+
+  @include media($small) {
+    margin-bottom: -22px;
+    width: 275px;
+  }
+}
+
+.CurvedDiv {
+  width: 120%;
+}
+
+.CurvedDiv::before {
+  background: #fff;
+}
+
+.CurvedDivBottom {
+  left: 24px;
+  position: absolute;
+  top: -27px;
+  width: 100%;
+  z-index: -1;
+}
+
+.CurvedDivBottom::before {
+  background: #f4f4f4;
+}
