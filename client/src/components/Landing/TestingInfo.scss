@@ -1,3 +1,5 @@
+@import '../../globals.scss';
+
 .Wrapper {
   display: flex;
   margin-top: 102px;
@@ -16,16 +18,28 @@
 .InfoTitle {
   color: #2B2C31;
   width: 55%;
+
+  @include media($medium) {
+    font-size: 1.5rem;
+  }
 }
 
 .InfoText {
   color: #36393E;
   font-size: 14px;
   width: 55%;
+
+  @include media($medium) {
+    font-size: 12px;
+  }
 }
 
 .TestImg {
   box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
   margin-bottom: -34px;
   width: 500px;
+
+  @include media($medium) {
+    width: 350px;
+  }
 }
