@@ -1,10 +1,30 @@
-.CurvedDiv {
+.Wave {
+  display: inline-block;
+  margin-top: -185px;
+  overflow: hidden;
+  position: relative;
+  vertical-align: middle;
+  width: 100%;
+}
+
+.CurvedDivInv {
+  flex-basis: 50%;
+}
+
+.CurvedDivBottomInv {
+  flex-basis: 50%;
+  margin-top: -22px;
+}
+
+.CurvedDiv,
+.CurvedDivInv {
   overflow: hidden;
   position: relative;
   height: 80px;
 }
 
-.CurvedDiv::before {
+.CurvedDiv::before,
+.CurvedDivInv::before {
   background: #f4f4f4;
   border-radius: 100%;
   bottom: -200px;
@@ -15,13 +35,19 @@
   top: 0;
 }
 
-.CurvedDivBottom {
+.CurvedDivInv::before {
+  background: #fff;
+}
+
+.CurvedDivBottom,
+.CurvedDivBottomInv {
   overflow: hidden;
   position: relative;
   height: 80px;
 }
 
-.CurvedDivBottom::before {
+.CurvedDivBottom::before,
+.CurvedDivBottomInv::before {
   background: #fff;
   border-radius: 100%;
   bottom: 0;
@@ -30,6 +56,10 @@
   position: absolute;
   right: -212px;
   top: -200px;
+}
+
+.CurvedDivBottomInv::before {
+  background: #f4f4f4;
 }
 
 .Question {

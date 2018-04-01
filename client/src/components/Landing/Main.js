@@ -20,6 +20,12 @@ const Main = ({ submitUser }) => (
     <SessionProcess />
     <DownloadSection version={CURRENT_VERSION} />
     <Objectives />
+    <div className={styles.Wave}>
+      <svg viewBox="0 0 100 25">
+        <path fill="#fff" opacity="0.5" d="M0 30 V15 Q30 3 60 15 V30z" />
+        <path fill="#fff" d="M0 30 V12 Q30 17 55 12 T100 11 V30z" />
+      </svg>
+    </div>
     <Level />
     <h1 className={styles.Question}>
       Are you ready to take your game to the next level?
