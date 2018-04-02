@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './Level.scss';
 
 import feedbackSent from '../../resources/feedbackSent.png';
+import level from '../../resources/level.png';
 
 const Level = () => (
   <div className={styles.Wrapper}>
@@ -16,7 +17,10 @@ const Level = () => (
       </p>
     </div>
     <div className={styles.Column}>
-      <img src={feedbackSent} className={styles.TestImg} alt="Test display modal from desktop app" />
+      <div className={styles.ImgWrapper}>
+        <img src={feedbackSent} className={styles.TestImg} alt="Test display modal from desktop app" />
+        <img className={styles.LevelImg} src={level} alt="popout of level section from app" />
+      </div>
     </div>
   </div>
 );

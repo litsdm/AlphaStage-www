@@ -70,10 +70,14 @@
   }
 }
 
+.ImgWrapper {
+  position: relative;
+  z-index: 2;
+}
+
 .TestImg {
   box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
   width: 550px;
-  z-index: 2;
 
   @include media($medium) {
     width: 350px;
@@ -82,6 +86,27 @@
   @include media($small) {
     margin-bottom: -22px;
     width: 275px;
+  }
+}
+
+.LevelImg {
+  border-radius: 4px;
+  bottom: -10px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  left: -15px;
+  position: absolute;
+  width: 150px;
+
+  @include media($medium) {
+    bottom: -5px;
+    left: -10px;
+    width: 110px;
+  }
+
+  @include media($small) {
+    bottom: -25px;
+    left: -5px;
+    width: 85px;
   }
 }
 
