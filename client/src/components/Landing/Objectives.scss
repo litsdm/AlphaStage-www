@@ -6,8 +6,11 @@
   padding-top: 72px;
   padding-bottom: 150px;
 
+  @include media($small) {
+    padding-bottom: 102px;
+  }
+
   @include media($mobile) {
-    margin-top: 48px;
     margin-bottom: 0;
   }
 }

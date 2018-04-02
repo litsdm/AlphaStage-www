@@ -8,14 +8,14 @@
   padding-bottom: 0;
 
   @include media($small) {
-    margin-top: 72px;
+    margin-top: 24px;
   }
 
   @include media($mobile) {
     align-items: center;
     flex-wrap: wrap;
     justify-content: center;
-    margin-top: 48px;
+    margin-top: -12px;
   }
 }
 
