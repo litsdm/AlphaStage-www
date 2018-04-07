@@ -6,7 +6,7 @@ import test from '../../resources/test.png';
 const TestingInfo = () => (
   <div className={styles.Wrapper}>
     <div className={styles.Column}>
-      <h1 className={styles.InfoTitle}>Get valuable feedback out of every player.</h1>
+      <h1 className={styles.InfoTitle}>Get valuable feedback out of every player</h1>
       <p className={styles.InfoText}>
         During Testing Sessions we record the player{'\''}s gameplay, and if he
         {' '}allows it, his commentary over it for you to review at your convenience.

@@ -119,7 +119,7 @@ const Header = ({ submitUser, version }) => {
         </div>
       </div>
       <div className={styles.Content}>
-        <p className={styles.TopText}>Take your game to the next level.</p>
+        <p className={styles.TopText}>Take your game to the next level</p>
         <p className={styles.Description}>
           Play testing platform created specifically for video game developers and gamers alike.
         </p>

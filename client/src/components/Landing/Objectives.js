@@ -14,7 +14,7 @@ const Objectives = () => (
       />
     </div>
     <div className={sharedStyles.Column}>
-      <h1 className={sharedStyles.InfoTitle}>Set objectives for each session.</h1>
+      <h1 className={sharedStyles.InfoTitle}>Set objectives for each session</h1>
       <p className={`${sharedStyles.InfoText} ${styles.Text}`}>
         Objectives let the players know what you would like them to focus on or
         {' '}try out while they are playing. Defining good objectives for the player

@@ -7,7 +7,7 @@ import level from '../../resources/level.png';
 const Level = () => (
   <div className={styles.Wrapper}>
     <div className={styles.Column}>
-      <h1 className={styles.InfoTitle}>Level up your Alpha Stage account.</h1>
+      <h1 className={styles.InfoTitle}>Level up your Alpha Stage account</h1>
       <p className={styles.InfoText}>
         Why would you care? Well you get exp by giving good feedback and completing
         {' '}objectives so a higher level means your feedback is more valuable.

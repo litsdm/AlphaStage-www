@@ -32,14 +32,16 @@
 
 .InfoTitle {
   color: #2B2C31;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 2.15rem;
   width: 55%;
 
   @include media($medium) {
-    font-size: 1.5rem;
+    font-size: 1.65rem;
   }
 
   @include media($small) {
-    font-size: 1.14rem;
+    font-size: 1.2rem;
   }
 
   @include media($mobile) {
