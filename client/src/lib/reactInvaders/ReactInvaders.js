@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { bool, number, shape } from 'prop-types';
 
+import Sounds from './Sounds';
+
 class SpaceInvaders extends Component {
   constructor(props) {
     super(props);
@@ -19,6 +21,8 @@ class SpaceInvaders extends Component {
       top: (this.height / 2) - (props.config.gameHeight / 2),
       bottom: (this.height / 2) + (props.config.gameHeight / 2),
     };
+
+    this.loadSounds();
 
     this.state = {
       gameState: this.welcomeState,
@@ -39,6 +43,13 @@ class SpaceInvaders extends Component {
     this.interval = setInterval(() => this.gameLoop(), 1000 / config.fps);
   }
 
+  loadSounds = () => {
+    this.sounds = new Sounds();
+    this.sounds.loadSound('shoot', 'sounds/shoot.wav');
+    this.sounds.loadSound('bang', 'sounds/bang.wav');
+    this.sounds.loadSound('explosion', 'sounds/explosion.wav');
+  }
+
   gameLoop = () => {
     const { gameState } = this.state;
     const { draw, update } = gameState;
@@ -54,6 +65,11 @@ class SpaceInvaders extends Component {
   }
 
   stop = () => clearInterval(this.interval);
+
+  setGameState = (state) => {
+    if (state.enter) state.enter();
+    this.setState({ gameState: state });
+  }
 
   welcomeDraw = (dt, ctx) => {
     ctx.clearRect(0, 0, this.width, this.height);
