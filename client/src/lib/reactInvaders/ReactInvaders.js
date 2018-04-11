@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
 import { bool, number, shape } from 'prop-types';
 
+import { WelcomeState } from './states';
+
 import Sounds from './Sounds';
 
 class SpaceInvaders extends Component {
   constructor(props) {
     super(props);
-
-    this.welcomeState = {
-      name: 'Welcome',
-      draw: this.welcomeDraw,
-      update: null
-    };
 
     this.width = 800;
     this.height = 600;
@@ -21,11 +17,12 @@ class SpaceInvaders extends Component {
       top: (this.height / 2) - (props.config.gameHeight / 2),
       bottom: (this.height / 2) + (props.config.gameHeight / 2),
     };
+    this.pressedKeys = {};
 
     this.loadSounds();
 
     this.state = {
-      gameState: this.welcomeState,
+      gameState: new WelcomeState(),
       level: 1,
       lives: 3,
       score: 0
@@ -60,28 +57,22 @@ class SpaceInvaders extends Component {
       const ctx = this.gameCanvas.getContext('2d');
 
       if (update) update(dt);
-      if (draw) draw(dt, ctx);
+      if (draw) draw(this, dt, ctx);
     }
   }
 
   stop = () => clearInterval(this.interval);
 
+  handleKeyDown = (keyCode) => {
+    const { gameState } = this.state;
+    this.pressedKeys[keyCode] = true;
+
+    if (gameState && gameState.keyDown) gameState.keyDown(this, keyCode);
+  }
+
   setGameState = (state) => {
     if (state.enter) state.enter();
     this.setState({ gameState: state });
-  }
-
-  welcomeDraw = (dt, ctx) => {
-    ctx.clearRect(0, 0, this.width, this.height);
-
-    ctx.font = '30px Arial';
-    ctx.fillStyle = '#ffffff';
-    ctx.textBaseline = 'center';
-    ctx.textAlign = 'center';
-    ctx.fillText('Space Invaders', this.width / 2, (this.height / 2) - 40);
-    ctx.font = '16px Arial';
-
-    ctx.fillText('Press \'Space\' to start.', this.width / 2, this.height / 2);
   }
 
   render() {
