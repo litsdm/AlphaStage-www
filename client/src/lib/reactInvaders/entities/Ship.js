@@ -1,9 +1,8 @@
 class Ship {
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
-    this.width = 20;
-    this.height = 16;
+  constructor(sprite, dHeight, dWidth) {
+    this.sprite = sprite;
+    this.x = (dWidth - sprite.w) / 2;
+    this.y = dHeight - (30 + sprite.h);
   }
 }
 
