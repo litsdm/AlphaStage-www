@@ -11,6 +11,10 @@ import Sprite from './entities/Sprite';
 import Ship from './entities/Ship';
 
 class SpaceInvaders extends Component {
+  state = {
+    score: 0
+  }
+
   componentDidMount() {
     const canvas = document.getElementById('gameCanvas');
 
@@ -52,14 +56,16 @@ class SpaceInvaders extends Component {
     this.invaders = [];
     const rows = [1, 0, 0, 2, 2];
     const arr = [0, 4, 0];
+    const types = ['crab', 'squid', 'octopus'];
     rows.forEach((row, i) => {
       for (let j = 0; j < 11; j += 1) {
         const sprite = this.invSprites[row];
         const x = 30 + (j * 30) + arr[row];
         const y = 30 + (i * 30);
         const { w, h } = sprite[0];
+        const type = types[row];
 
-        const invader = new Invader(sprite, x, y, w, h);
+        const invader = new Invader(sprite, x, y, w, h, type);
 
         this.invaders.push(invader);
       }
@@ -178,6 +184,12 @@ class SpaceInvaders extends Component {
       if (collision) {
         invaders.splice(j, 1);
         bullets.splice(i, 1);
+
+        let score;
+        if (invader.type === 'octopus') score = 10;
+        else if (invader.type === 'crab') score = 20;
+        else score = 30;
+        this.setState({ score: this.state.score + score });
         // increase the movement frequence of the invaders
         // when there are less of them
         switch (invaders.length) {
@@ -224,7 +236,13 @@ class SpaceInvaders extends Component {
   }
 
   render() {
-    return <canvas id="gameCanvas" style={{ backgroundColor: '#000' }} />;
+    const { score } = this.state;
+    return (
+      <div>
+        <p>Score: {score}</p>
+        <canvas id="gameCanvas" style={{ backgroundColor: '#000' }} />
+      </div>
+    );
   }
 }
 
