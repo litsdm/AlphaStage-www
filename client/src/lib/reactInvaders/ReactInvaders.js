@@ -50,6 +50,7 @@ class SpaceInvaders extends Component {
     this.ship = new Ship(shipSprite, display.width, display.height);
 
     this.bullets = [];
+    this.rocket = null;
 
     this.bases = new Bases(baseSprite, display.width, this.ship.y);
 
@@ -93,7 +94,9 @@ class SpaceInvaders extends Component {
 
     ship.x = Math.max(Math.min(ship.x, display.width - (30 + shipSprite.w)), 30);
 
-    if (input.isPressed(32)) this.bullets.push(new Bullet(ship.x + 10, ship.y, -8, 2, 6, '#8DFA00'));
+    if (input.isPressed(32) && !this.rocket) this.rocket = new Bullet(ship.x + 10, ship.y, -8, 2, 6, '#8DFA00');
+
+    if (this.rocket) this.updateRocket();
 
     this.updateBullets();
 
@@ -101,11 +104,22 @@ class SpaceInvaders extends Component {
     this.invadersMove();
   }
 
+  updateRocket = () => {
+    const { display, rocket } = this;
+    rocket.update();
+    if (rocket.y + rocket.height < 0 || rocket.y > display.height) {
+      this.rocket = null;
+      return;
+    }
+
+    this.checkBaseCollision(rocket);
+    this.checkRocketCollision();
+  }
+
   updateBullets = () => {
-    const { display, bases, bullets } = this;
+    const { display, bullets } = this;
     bullets.forEach((bullet, i) => {
       bullet.update();
-      const halfHeight = bullet.height * 0.5; // half hight is used for
 
       // remove bullets outside of the canvas
       if (bullet.y + bullet.height < 0 || bullet.y > display.height) {
@@ -113,16 +127,20 @@ class SpaceInvaders extends Component {
         return;
       }
 
-      if (bases.y < bullet.y + halfHeight && bullet.y + halfHeight < bases.y + bases.h) {
-        if (bases.hits(bullet.x, bullet.y + halfHeight)) {
-          bullets.splice(i, 1);
-          return;
-        }
-      }
-
-      // check if bullet hit any invaders
-      this.checkBulletCollision(bullet, i);
+      this.checkBaseCollision(bullet, i);
     });
+  }
+
+  checkBaseCollision = (bullet, i = null) => {
+    const { bases, bullets } = this;
+    const halfHeight = bullet.height * 0.5; // half hight is used for
+
+    if (bases.y < bullet.y + halfHeight && bullet.y + halfHeight < bases.y + bases.h) {
+      if (bases.hits(bullet.x, bullet.y + halfHeight)) {
+        if (i !== null) bullets.splice(i, 1);
+        else this.rocket = null;
+      }
+    }
   }
 
   invadersMove = () => {
@@ -166,15 +184,15 @@ class SpaceInvaders extends Component {
     }
   }
 
-  checkBulletCollision = (bullet, i) => {
-    const { invaders, bullets } = this;
+  checkRocketCollision = () => {
+    const { invaders, rocket } = this;
 
     invaders.forEach((invader, j) => {
       const collision = AABBIntersect(
-        bullet.x,
-        bullet.y,
-        bullet.width,
-        bullet.height,
+        rocket.x,
+        rocket.y,
+        rocket.width,
+        rocket.height,
         invader.x,
         invader.y,
         invader.w,
@@ -183,7 +201,7 @@ class SpaceInvaders extends Component {
 
       if (collision) {
         invaders.splice(j, 1);
-        bullets.splice(i, 1);
+        this.rocket = null;
 
         let score;
         if (invader.type === 'octopus') score = 10;
@@ -210,7 +228,6 @@ class SpaceInvaders extends Component {
             break;
           }
           default: {
-            this.lvFrame = 60;
             break;
           }
         }
@@ -219,12 +236,14 @@ class SpaceInvaders extends Component {
   }
 
   renderOnCanvas = () => {
-    const { display, invaders, bases, ship, spFrame, bullets } = this;
+    const { display, invaders, bases, ship, spFrame, bullets, rocket } = this;
     display.clear(); // clear the game canvas
     // draw all invaders
     invaders.forEach(invader => {
       display.drawSprite(invader.sprite[spFrame], invader.x, invader.y);
     });
+
+    if (rocket) display.drawBullet(rocket);
 
     bullets.forEach(bullet => {
       display.drawBullet(bullet);
