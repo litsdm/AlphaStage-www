@@ -1,0 +1,11 @@
+.Container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+canvas {
+  background-color: #000;
+  max-width: 475px;
+}

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styles from './scss/styles.scss';
 
 import AABBIntersect from './helpers/intersect';
 import InputHandler from './helpers/inputHandler';
@@ -18,7 +19,7 @@ class SpaceInvaders extends Component {
   componentDidMount() {
     const canvas = document.getElementById('gameCanvas');
 
-    this.display = new Screen(canvas, 504, 600);
+    this.display = new Screen(canvas, 500, 475);
     this.input = new InputHandler();
 
     const self = this;
@@ -94,7 +95,7 @@ class SpaceInvaders extends Component {
 
     ship.x = Math.max(Math.min(ship.x, display.width - (30 + shipSprite.w)), 30);
 
-    if (input.isPressed(32) && !this.rocket) this.rocket = new Bullet(ship.x + 10, ship.y, -8, 2, 6, '#8DFA00');
+    if (input.isPressed(32) && !this.rocket) this.rocket = new Bullet(ship.x + 10, ship.y, -8, 2, 6, '#fff');
 
     if (this.rocket) this.updateRocket();
 
@@ -152,16 +153,16 @@ class SpaceInvaders extends Component {
 
       // iterate through invaders and update postition
       invaders.forEach((inv, i) => {
-        invaders[i].x += 30 * this.dir;
+        invaders[i].x += 10 * this.dir;
         _max = Math.max(_max, inv.x + inv.w);
         _min = Math.min(_min, inv.x);
       });
       // check if invaders should move down and change direction
-      if (_max > display.width - 30 || _min < 30) {
+      if (_max > display.width - 10 || _min < 10) {
         // mirror direction and update position
         this.dir *= -1;
         for (let i = 0, len = invaders.length; i < len; i += 1) {
-          invaders[i].x += 30 * this.dir;
+          invaders[i].x += 10 * this.dir;
           invaders[i].y += 30;
         }
       }
@@ -257,9 +258,9 @@ class SpaceInvaders extends Component {
   render() {
     const { score } = this.state;
     return (
-      <div>
+      <div className={styles.Container}>
         <p>Score: {score}</p>
-        <canvas id="gameCanvas" style={{ backgroundColor: '#000' }} />
+        <canvas id="gameCanvas" />
       </div>
     );
   }
