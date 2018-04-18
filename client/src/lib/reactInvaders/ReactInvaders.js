@@ -136,12 +136,14 @@ class SpaceInvaders extends Component {
   updateRocket = () => {
     const { display, rocket } = this;
     rocket.update();
-    if (rocket.y + rocket.height < 0 || rocket.y > display.height) {
+    if (
+      (rocket.y + rocket.height < 0 || rocket.y > display.height) ||
+      this.checkBaseCollision(rocket)
+    ) {
       this.rocket = null;
       return;
     }
 
-    this.checkBaseCollision(rocket);
     this.checkRocketCollision();
   }
 
@@ -164,12 +166,14 @@ class SpaceInvaders extends Component {
     const { bases, bullets } = this;
     const halfHeight = bullet.height * 0.5; // half hight is used for
 
-    if (bases.y < bullet.y + halfHeight && bullet.y + halfHeight < bases.y + bases.h) {
-      if (bases.hits(bullet.x, bullet.y + halfHeight)) {
+    if (bases.y < bullet.y + halfHeight && (bullet.y + halfHeight) < (bases.y + bases.h)) {
+      if (this.bases.hits(bullet.x, bullet.y + halfHeight)) {
         if (i !== null) bullets.splice(i, 1);
-        else this.rocket = null;
+        else return true;
       }
     }
+
+    return false;
   }
 
   invadersMove = () => {

@@ -1,6 +1,7 @@
 class Base {
   constructor(sprite, dWidth, shipY) {
     this.y = shipY - (30 + sprite.h);
+    this.h = sprite.h;
     this.sprite = sprite;
 
     this.canvas = document.createElement('canvas');
