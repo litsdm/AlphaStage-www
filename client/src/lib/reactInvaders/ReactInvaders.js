@@ -14,7 +14,8 @@ import Ship from './entities/Ship';
 class SpaceInvaders extends Component {
   state = {
     score: 0,
-    level: 1
+    level: 1,
+    lives: 3
   }
 
   componentDidMount() {
@@ -103,16 +104,14 @@ class SpaceInvaders extends Component {
     const { display, input, invaders, ship, shipSprite } = this;
     this.frames += 1;
 
-    if (input.isDown(37)) ship.x -= 4;
-    if (input.isDown(39)) ship.x += 4;
+    if (input.isDown(37) && ship) ship.x -= 4;
+    if (input.isDown(39) && ship) ship.x += 4;
 
-    ship.x = Math.max(Math.min(ship.x, display.width - (10 + shipSprite.w)), 10);
+    if (ship) ship.x = Math.max(Math.min(ship.x, display.width - (10 + shipSprite.w)), 10);
 
-    if (input.isPressed(32) && !this.rocket) this.rocket = new Bullet(ship.x + 10, ship.y, -8, 3, 9, '#fff');
+    if (input.isPressed(32) && !this.rocket && ship) this.rocket = new Bullet(ship.x + 10, ship.y, -8, 3, 9, '#fff');
 
-    if (invaders.length === 0) {
-      this.setState({ level: this.state.level + 1 }, () => this.nextLevel());
-    }
+    if (invaders.length === 0) this.nextLevel();
 
     if (this.rocket) this.updateRocket();
 
@@ -123,14 +122,18 @@ class SpaceInvaders extends Component {
   }
 
   nextLevel = () => {
-    this.frames = 0;
-    this.spFrame = 0;
-    this.lvFrame = 60;
-    this.dir = 1;
+    const { level, lives } = this.state;
 
-    this.bullets = [];
+    this.setState({ level: level + 1, lives: lives + 1 }, () => {
+      this.frames = 0;
+      this.spFrame = 0;
+      this.lvFrame = 60;
+      this.dir = 1;
 
-    this.createInvaders();
+      this.bullets = [];
+
+      this.createInvaders();
+    });
   }
 
   updateRocket = () => {
@@ -148,28 +151,30 @@ class SpaceInvaders extends Component {
   }
 
   updateBullets = () => {
-    const { display, bullets } = this;
+    const { display, bullets, ship } = this;
     bullets.forEach((bullet, i) => {
       bullet.update();
 
       // remove bullets outside of the canvas
-      if (bullet.y + bullet.height < 0 || bullet.y > display.height) {
+      if (
+        (bullet.y + bullet.height < 0 || bullet.y > display.height) ||
+        this.checkBaseCollision(bullet)
+      ) {
         bullets.splice(i, 1);
         return;
       }
 
-      this.checkBaseCollision(bullet, i);
+      if (ship) this.checkShipCollision(bullet, i);
     });
   }
 
-  checkBaseCollision = (bullet, i = null) => {
-    const { bases, bullets } = this;
+  checkBaseCollision = (bullet) => {
+    const { bases } = this;
     const halfHeight = bullet.height * 0.5; // half hight is used for
 
     if (bases.y < bullet.y + halfHeight && (bullet.y + halfHeight) < (bases.y + bases.h)) {
       if (this.bases.hits(bullet.x, bullet.y + halfHeight)) {
-        if (i !== null) bullets.splice(i, 1);
-        else return true;
+        return true;
       }
     }
 
@@ -268,6 +273,30 @@ class SpaceInvaders extends Component {
     });
   }
 
+  checkShipCollision = (bullet, i) => {
+    const { bullets, display, ship, shipSprite } = this;
+    console.log(bullet, ship);
+
+    const collision = AABBIntersect(
+      bullet.x,
+      bullet.y,
+      bullet.width,
+      bullet.height,
+      ship.x,
+      ship.y,
+      ship.w,
+      ship.h
+    );
+
+    if (collision) {
+      this.ship = null;
+      bullets.splice(i, 1);
+      this.setState({ lives: this.state.lives - 1 });
+
+      setTimeout(() => { this.ship = new Ship(shipSprite, display.width, display.height); }, 1000);
+    }
+  }
+
   renderOnCanvas = () => {
     const { display, invaders, bases, ship, spFrame, bullets, rocket } = this;
     display.clear(); // clear the game canvas
@@ -284,14 +313,24 @@ class SpaceInvaders extends Component {
 
     display.ctx.restore();
     display.ctx.drawImage(bases.canvas, 0, bases.y);
-    display.drawSprite(ship.sprite, ship.x, ship.y);
+    if (ship) display.drawSprite(ship.sprite, ship.x, ship.y);
   }
 
   render() {
-    const { score } = this.state;
+    const { score, lives } = this.state;
+
     return (
       <div className={styles.Container}>
-        <p>Score: {score}</p>
+        <div className={styles.Info}>
+          <div className={styles.InfoItem}>
+            <p>SCORE</p>
+            <p>{score}</p>
+          </div>
+          <div className={styles.InfoItem}>
+            <p>LIVES</p>
+            <p>{lives}</p>
+          </div>
+        </div>
         <canvas id="gameCanvas" />
       </div>
     );
