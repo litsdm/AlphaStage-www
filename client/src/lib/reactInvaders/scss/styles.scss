@@ -34,7 +34,8 @@ canvas {
   }
 }
 
-.Welcome {
+.Welcome,
+.GameOver {
   align-items: center;
   background-color: #111;
   display: flex;
@@ -93,5 +94,29 @@ canvas {
     height: 40px;
     width: 40px;
     margin-right: 12px;
+  }
+}
+
+.GOTitle {
+  font-size: 24px;
+  margin: 24px;
+}
+
+.Scores {
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+  margin: 48px 0;
+  width: 100%;
+}
+
+.ScoreItem {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  p {
+    margin: 12px 0;
   }
 }

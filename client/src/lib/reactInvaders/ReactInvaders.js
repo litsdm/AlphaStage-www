@@ -291,10 +291,16 @@ class SpaceInvaders extends Component {
     if (collision) {
       this.ship = null;
       bullets.splice(i, 1);
-      this.setState({ lives: this.state.lives - 1 });
+      this.setState({ lives: this.state.lives - 1 }, () => this.checkGameOver());
 
       setTimeout(() => { this.ship = new Ship(shipSprite, display.width, display.height); }, 1000);
     }
+  }
+
+  checkGameOver = () => {
+    const { lives } = this.state;
+
+    if (lives === 0) this.setState({ gameState: 'GameOver' });
   }
 
   renderOnCanvas = () => {
@@ -359,9 +365,22 @@ class SpaceInvaders extends Component {
         </div>
       );
     } else if (gameState === 'GameOver') {
-      <div className={styles.GameOver}>
-
-      </div>
+      return (
+        <div className={styles.GameOver}>
+          <p className={styles.GOTitle}>Game Over</p>
+          <div className={styles.Scores}>
+            <div className={styles.ScoreItem}>
+              <p>Your Score</p>
+              <p>{score}</p>
+            </div>
+            <div className={styles.ScoreItem}>
+              <p>Dev{'\''}s Score</p>
+              <p>50,000</p>
+            </div>
+          </div>
+          <button onClick={() => this.initialize()}>Play Again</button>
+        </div>
+      );
     }
   }
 
