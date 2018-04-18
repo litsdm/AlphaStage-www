@@ -107,16 +107,7 @@ const Header = ({ submitUser, version }) => {
         <div className={styles.Nav}>
           <div className={styles.Left} />
           <div className={styles.Right}>
-            {
-              buttonData
-                ? (
-                  <a className={styles.Join} href={buttonData.url} download>
-                    Join the Beta now!
-                  </a>
-                )
-                : null
-            }
-            <Link to="/challenge">Go to challenge</Link>
+            <Link className={styles.Join} href="#challenge" to="/challenge">Challenge the Dev</Link>
           </div>
         </div>
       </div>
