@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import toastr from 'toastr';
 import { func, string } from 'prop-types';
 import styles from './Header.scss';
@@ -115,6 +116,7 @@ const Header = ({ submitUser, version }) => {
                 )
                 : null
             }
+            <Link to="/challenge">Go to challenge</Link>
           </div>
         </div>
       </div>
