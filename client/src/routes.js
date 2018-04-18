@@ -5,12 +5,12 @@ import PropTypes from 'prop-types';
 
 import App from './containers/App';
 import Landing from './containers/Landing';
-import Contest from './containers/Contest';
+import Challenge from './containers/Challenge';
 
 const Routes = ({ history }) => (
   <App history={history}>
     <Switch>
-      <Route path="/contest" component={Contest} />
+      <Route path="/challenge" component={Challenge} />
       <Route path="/" component={Landing} />
     </Switch>
   </App>
