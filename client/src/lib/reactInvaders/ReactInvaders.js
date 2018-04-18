@@ -13,7 +13,8 @@ import Ship from './entities/Ship';
 
 class SpaceInvaders extends Component {
   state = {
-    score: 0
+    score: 0,
+    level: 1
   }
 
   componentDidMount() {
@@ -55,6 +56,20 @@ class SpaceInvaders extends Component {
 
     this.bases = new Bases(baseSprite, display.width, this.ship.y);
 
+    this.createInvaders();
+
+    this.start();
+  }
+
+  createInvaders = () => {
+    const { level } = this.state;
+    let lvlMultiplier = level;
+
+    if (level > 9) {
+      lvlMultiplier = 1;
+      this.setState({ level: 1 });
+    }
+
     this.invaders = [];
     const rows = [1, 0, 0, 2, 2];
     const arr = [0, 4, 0];
@@ -63,7 +78,7 @@ class SpaceInvaders extends Component {
       for (let j = 0; j < 11; j += 1) {
         const sprite = this.invSprites[row];
         const x = 30 + (j * 30) + arr[row];
-        const y = 30 + (i * 30);
+        const y = (30 * lvlMultiplier) + (i * 30);
         const { w, h } = sprite[0];
         const type = types[row];
 
@@ -72,8 +87,6 @@ class SpaceInvaders extends Component {
         this.invaders.push(invader);
       }
     });
-
-    this.start();
   }
 
   start = () => {
@@ -87,7 +100,7 @@ class SpaceInvaders extends Component {
   };
 
   update = () => {
-    const { display, input, ship, shipSprite } = this;
+    const { display, input, invaders, ship, shipSprite } = this;
     this.frames += 1;
 
     if (input.isDown(37)) ship.x -= 4;
@@ -95,7 +108,11 @@ class SpaceInvaders extends Component {
 
     ship.x = Math.max(Math.min(ship.x, display.width - (30 + shipSprite.w)), 30);
 
-    if (input.isPressed(32) && !this.rocket) this.rocket = new Bullet(ship.x + 10, ship.y, -8, 2, 6, '#fff');
+    if (input.isPressed(32) && !this.rocket) this.rocket = new Bullet(ship.x + 10, ship.y, -8, 3, 9, '#fff');
+
+    if (invaders.length === 0) {
+      this.setState({ level: this.state.level + 1 }, () => this.nextLevel());
+    }
 
     if (this.rocket) this.updateRocket();
 
@@ -103,6 +120,17 @@ class SpaceInvaders extends Component {
 
     this.invadersShoot();
     this.invadersMove();
+  }
+
+  nextLevel = () => {
+    this.frames = 0;
+    this.spFrame = 0;
+    this.lvFrame = 60;
+    this.dir = 1;
+
+    this.bullets = [];
+
+    this.createInvaders();
   }
 
   updateRocket = () => {
