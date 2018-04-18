@@ -15,7 +15,8 @@ class SpaceInvaders extends Component {
   state = {
     score: 0,
     level: 1,
-    lives: 3
+    lives: 3,
+    gameState: 'Welcome',
   }
 
   componentDidMount() {
@@ -35,15 +36,15 @@ class SpaceInvaders extends Component {
 
       self.shipSprite = new Sprite(this, 62, 0, 22, 16);
       self.baseSprite = new Sprite(this, 84, 8, 36, 24);
-
-      self.initialize();
     });
 
-    img.src = 'invaders.png';
+    img.src = 'img/invaders.png';
   }
 
   initialize = () => {
     const { display, shipSprite, baseSprite } = this;
+
+    this.setState({ gameState: 'Play' });
 
     this.frames = 0;
     this.spFrame = 0;
@@ -275,7 +276,6 @@ class SpaceInvaders extends Component {
 
   checkShipCollision = (bullet, i) => {
     const { bullets, display, ship, shipSprite } = this;
-    console.log(bullet, ship);
 
     const collision = AABBIntersect(
       bullet.x,
@@ -316,11 +316,37 @@ class SpaceInvaders extends Component {
     if (ship) display.drawSprite(ship.sprite, ship.x, ship.y);
   }
 
-  render() {
-    const { score, lives } = this.state;
+  renderContent = () => {
+    const { gameState, score, lives } = this.state;
 
-    return (
-      <div className={styles.Container}>
+    if (gameState === 'Welcome') {
+      return (
+        <div className={styles.Welcome}>
+          <p className={styles.Title}>Alpha Stage Challenge</p>
+          <p className={styles.Description}>
+            If you can beat the developer{'\''}s high score on a game of Space Invaders
+            {' '} you{'\''}ll get instant access to the Alpha Stage Beta and a place
+            {' '} on the scoreboard. GLHF!
+          </p>
+          <div className={styles.Invaders}>
+            <span>
+              <img src="img/squid.png" alt="squid invader 30 points" /> = 30 Pts
+            </span>
+            <span>
+              <img src="img/crab.png" alt="crab invader 20 points" /> = 20 Pts
+            </span>
+            <span>
+              <img src="img/octopus.png" alt="octopus invader 10 points" /> = 10 Pts
+            </span>
+            <span>
+              <img src="img/spaceShip.png" alt="space ship unknown points" /> = ???
+            </span>
+          </div>
+          <button onClick={() => this.initialize()}>Start Game</button>
+        </div>
+      );
+    } else if (gameState === 'Play') {
+      return (
         <div className={styles.Info}>
           <div className={styles.InfoItem}>
             <p>SCORE</p>
@@ -331,7 +357,20 @@ class SpaceInvaders extends Component {
             <p>{lives}</p>
           </div>
         </div>
-        <canvas id="gameCanvas" />
+      );
+    } else if (gameState === 'GameOver') {
+      <div className={styles.GameOver}>
+
+      </div>
+    }
+  }
+
+  render() {
+    const { gameState } = this.state;
+    return (
+      <div className={styles.Container}>
+        {this.renderContent()}
+        <canvas id="gameCanvas" style={gameState !== 'Play' ? { display: 'none' } : {}} />
       </div>
     );
   }
