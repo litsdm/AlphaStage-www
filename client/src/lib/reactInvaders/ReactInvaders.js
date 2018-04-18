@@ -106,7 +106,7 @@ class SpaceInvaders extends Component {
     if (input.isDown(37)) ship.x -= 4;
     if (input.isDown(39)) ship.x += 4;
 
-    ship.x = Math.max(Math.min(ship.x, display.width - (30 + shipSprite.w)), 30);
+    ship.x = Math.max(Math.min(ship.x, display.width - (10 + shipSprite.w)), 10);
 
     if (input.isPressed(32) && !this.rocket) this.rocket = new Bullet(ship.x + 10, ship.y, -8, 3, 9, '#fff');
 
@@ -199,7 +199,7 @@ class SpaceInvaders extends Component {
 
   invadersShoot = () => {
     const { invaders, bullets } = this;
-    if (Math.random() < 0.03 && invaders.length > 0) {
+    if (Math.random() < 0.0075 && invaders.length > 0 && this.bullets.length < 3) {
       let inv = invaders[Math.round(Math.random() * (invaders.length - 1))];
       // iterate through invaders and check collision to make
       // sure only shoot from front line
