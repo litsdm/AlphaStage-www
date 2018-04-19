@@ -123,9 +123,9 @@ class SpaceInvaders extends Component {
   }
 
   nextLevel = () => {
-    const { level, lives } = this.state;
+    const { level } = this.state;
 
-    this.setState({ level: level + 1, lives: lives + 1 }, () => {
+    this.setState({ level: level + 1 }, () => {
       this.frames = 0;
       this.spFrame = 0;
       this.lvFrame = 60;
