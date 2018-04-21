@@ -1,0 +1,6 @@
+query ScoreboardUsers {
+  scoreboardUsers {
+    highScore,
+    username
+  }
+}

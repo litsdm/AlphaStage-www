@@ -1,0 +1,5 @@
+query UserHighScore($id: String) {
+  user(_id: $id) {
+    highScore
+  }
+}

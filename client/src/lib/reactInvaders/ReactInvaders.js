@@ -44,7 +44,7 @@ class SpaceInvaders extends Component {
   initialize = () => {
     const { display, shipSprite, baseSprite } = this;
 
-    this.setState({ gameState: 'Play' });
+    this.setState({ gameState: 'Play', level: 0, score: 0, lives: 3 });
 
     this.frames = 0;
     this.spFrame = 0;
