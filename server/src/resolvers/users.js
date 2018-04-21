@@ -22,6 +22,13 @@ const users = {
     user: async (root, { _id }) => prepare(await Users.findOne(ObjectId(_id))),
     users: async () =>
       (await Users.find({}).toArray()).map(prepare),
+    scoreboardUsers: async () =>
+      (
+        await Users
+          .find({ $query: { highScore: { $exists: true } }, $orderby: { highScore: 1 } })
+          .toArray()
+      )
+        .map(prepare),
   },
   Mutation: {
     createUser: async (root, args) => {
@@ -66,6 +73,16 @@ const users = {
         { $set: { level: newLevel, experience, nextLevelExp: newLevelExp } },
         { upsert: false, new: true }
       );
+      return prepare(user.value);
+    },
+    setHighScore: async (root, { _id, highScore }) => {
+      const user = await Users.findAndModify(
+        { _id: getObjectId(_id) },
+        { _id: 1 },
+        { $set: { highScore } },
+        { upsert: false, new: true }
+      );
+
       return prepare(user.value);
     }
   }
