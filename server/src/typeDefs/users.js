@@ -3,6 +3,7 @@ const users = {
     potentialUsers: [PotentialUser]
     user(_id: String): User
     users: [User]
+    scoreboardUsers: [User]
   `,
   types: `
     type User {
