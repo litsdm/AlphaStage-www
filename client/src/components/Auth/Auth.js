@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { func, object } from 'prop-types';
 import jwtDecode from 'jwt-decode';
+import { parse } from 'min-qs';
 import styles from './styles.scss';
 
 import Login from './Login';
@@ -17,6 +18,16 @@ const mapDispatchToProps = dispatch => ({
 class Auth extends Component {
   state = {
     isNewUser: false
+  }
+
+  componentDidMount() {
+    this.setNewUser();
+  }
+
+  setNewUser = () => {
+    const { location } = this.props;
+    const query = parse(location.search.substr(1));
+    this.setState({ isNewUser: query.type !== 'login' });
   }
 
   toggleNewUser = () => {
@@ -54,7 +65,8 @@ class Auth extends Component {
 
 Auth.propTypes = {
   addUserFromToken: func.isRequired,
-  history: object.isRequired
+  history: object.isRequired,
+  location: object.isRequired
 };
 
 export default connect(null, mapDispatchToProps)(Auth);

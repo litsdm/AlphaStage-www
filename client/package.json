@@ -24,6 +24,7 @@
     "graphql-tag": "^2.6.1",
     "graphql-tools": "^1.1.0",
     "jwt-decode": "^2.2.0",
+    "min-qs": "^1.3.0",
     "node-sass": "^4.7.2",
     "proxyquire": "^1.8.0",
     "react": "^15.6.1",

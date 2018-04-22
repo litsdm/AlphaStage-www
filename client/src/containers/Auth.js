@@ -3,10 +3,11 @@ import { object } from 'prop-types';
 
 import AuthView from '../components/Auth/Auth';
 
-const Auth = ({ history }) => <AuthView history={history} />;
+const Auth = ({ history, location }) => <AuthView history={history} location={location} />;
 
 Auth.propTypes = {
-  history: object.isRequired
+  history: object.isRequired,
+  location: object.isRequired
 };
 
 export default Auth;
