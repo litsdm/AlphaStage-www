@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { func, number } from 'prop-types';
 import styles from './scss/styles.scss';
 
 import AABBIntersect from './helpers/intersect';
@@ -96,9 +97,9 @@ class SpaceInvaders extends Component {
     const loop = () => {
       this.update();
       this.renderOnCanvas();
-      window.requestAnimationFrame(loop, display.canvas);
+      this.loopAnimation = window.requestAnimationFrame(loop, display.canvas);
     };
-    window.requestAnimationFrame(loop, display.canvas);
+    this.loopAnimation = window.requestAnimationFrame(loop, display.canvas);
   };
 
   update = () => {
@@ -300,7 +301,23 @@ class SpaceInvaders extends Component {
   checkGameOver = () => {
     const { lives } = this.state;
 
-    if (lives === 0) this.setState({ gameState: 'GameOver' });
+    if (lives === 0) this.endGame();
+  }
+
+  endGame = () => {
+    this.setState({ gameState: 'GameOver' });
+    this.checkHighScore();
+
+    window.cancelAnimationFrame(this.loopAnimation);
+  }
+
+  checkHighScore = () => {
+    const { highScore, setHighScore } = this.props;
+    const { score } = this.state;
+
+    if (score > highScore) {
+      setHighScore(score);
+    }
   }
 
   renderOnCanvas = () => {
@@ -324,6 +341,7 @@ class SpaceInvaders extends Component {
 
   renderContent = () => {
     const { gameState, score, lives } = this.state;
+    const { highScore } = this.props;
 
     if (gameState === 'Welcome') {
       return (
@@ -357,6 +375,10 @@ class SpaceInvaders extends Component {
           <div className={styles.InfoItem}>
             <p>SCORE</p>
             <p>{score}</p>
+          </div>
+          <div className={styles.InfoItem}>
+            <p>HI-SCORE</p>
+            <p>{highScore}</p>
           </div>
           <div className={styles.InfoItem}>
             <p>LIVES</p>
@@ -394,5 +416,14 @@ class SpaceInvaders extends Component {
     );
   }
 }
+
+SpaceInvaders.propTypes = {
+  highScore: number,
+  setHighScore: func.isRequired
+};
+
+SpaceInvaders.defaultProps = {
+  highScore: 0
+};
 
 export default SpaceInvaders;

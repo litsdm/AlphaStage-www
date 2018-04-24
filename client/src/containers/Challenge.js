@@ -1,11 +1,19 @@
 import React from 'react';
 import { graphql, compose } from 'react-apollo';
+import { connect } from 'react-redux';
+import { array, func, object, number } from 'prop-types';
 
 import scoreboardUsers from '../graphql/scoreboardUsers.graphql';
 import setHighScore from '../graphql/setHighScore.graphql';
 import userHighScore from '../graphql/userHighScore.graphql';
 
-import Game from '../lib/reactInvaders/ReactInvaders';
+import Challenge from '../components/Challenge/Challenge';
+
+const mapStateToProps = ({ user }) => (
+  {
+    user
+  }
+);
 
 const queriesToRefetch = (id) => (
   [
@@ -31,7 +39,7 @@ const withData = compose(
       if (!data.scoreboardUsers) return { loading: data.loading };
       if (data.error) return { hasErrors: true };
       return {
-        scoreboardUsers: data.scoreboardUsers,
+        scoreUsers: data.scoreboardUsers,
       };
     }
   }),
@@ -47,10 +55,29 @@ const withData = compose(
   })
 );
 
-const Contest = () => (
-  <div>
-    <Game />
-  </div>
+const Contest = ({ highScore, setScore, scoreUsers, user }) => (
+  <Challenge
+    highScore={highScore}
+    setHighScore={setScore}
+    scoreboardUsers={scoreUsers}
+    user={user}
+  />
 );
 
-export default withData(Contest);
+
+Contest.propTypes = {
+  highScore: number,
+  setScore: func.isRequired,
+  scoreUsers: array,
+  user: object
+};
+
+Contest.defaultProps = {
+  highScore: 0,
+  scoreUsers: [],
+  user: {}
+};
+
+const ContestWithData = withData(Contest);
+
+export default connect(mapStateToProps, null)(ContestWithData);
