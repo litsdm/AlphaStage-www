@@ -25,7 +25,8 @@ const users = {
     scoreboardUsers: async () =>
       (
         await Users
-          .find({ $query: { highScore: { $exists: true } }, $orderby: { highScore: 1 } })
+          .find({ highScore: { $exists: true } })
+          .sort({ highScore: -1 })
           .toArray()
       )
         .map(prepare),

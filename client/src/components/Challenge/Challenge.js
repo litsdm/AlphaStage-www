@@ -5,6 +5,8 @@ import styles from './Challenge.scss';
 
 import Game from '../../lib/reactInvaders/ReactInvaders';
 
+const DEFAULT_IMAGE = 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png';
+
 const Challenge = ({ highScore, setHighScore, scoreboardUsers, user, devHighScore }) => {
   const handleNewHighScore = (score) => {
     setHighScore(user._id, score);
@@ -14,11 +16,11 @@ const Challenge = ({ highScore, setHighScore, scoreboardUsers, user, devHighScor
     x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
   const renderScoreBoardRows = () => (
-    scoreboardUsers.map(({ profilePic, username, highScore: rowHighScore }) => (
+    scoreboardUsers.map(({ profilePic, username, highScore: rowHighScore }, index) => (
       <div className={styles.Row} key={uuid()}>
         <div>
-          <span className={styles.Rank}>1</span>
-          <img className={styles.ProfilePic} src={profilePic} alt="High score user profile pic" />
+          <span className={styles.Rank}>{index + 1}</span>
+          <img className={styles.ProfilePic} src={profilePic || DEFAULT_IMAGE} alt="High score user profile pic" />
           <p>{username}</p>
         </div>
         <p className={styles.Score}>{numberWithCommas(rowHighScore)}</p>
