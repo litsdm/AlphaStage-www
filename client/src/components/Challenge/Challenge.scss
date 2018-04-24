@@ -1,0 +1,47 @@
+.Challenge {
+  display: flex;
+  background-color: #36393E;
+  height: 100vh;
+  justify-content: flex-end;
+}
+
+.ScoreBoardWrapper {
+  flex-basis: 30%;
+  width: 100%;
+}
+
+.ScoreBoard {
+  color: white;
+  padding: 24px;
+}
+
+.Title {
+  background-color: #2B2C31;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  padding: 12px;
+}
+
+.Row {
+  align-items: center;
+  background-color: #2F3136;
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+
+  div {
+    display: flex;
+  }
+}
+
+.Rank {
+  margin-left: 12px;
+  margin-right: 24px;
+}
+
+.ProfilePic {
+  border-radius: 50%;
+  height: 25px;
+  margin-right: 12px;
+  width: 25px;
+}

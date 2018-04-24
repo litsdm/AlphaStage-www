@@ -1,6 +1,7 @@
 query ScoreboardUsers {
   scoreboardUsers {
     highScore,
+    profilePic,
     username
   }
 }

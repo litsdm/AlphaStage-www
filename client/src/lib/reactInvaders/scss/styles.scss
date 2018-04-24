@@ -1,7 +1,8 @@
 .Container {
-  align-items: center;
+  align-items: flex-end;
   color: white;
   display: flex;
+  flex-basis: 66%;
   flex-direction: column;
   font-family: 'Press Start 2P', cursive;
   justify-content: center;

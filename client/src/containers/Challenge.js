@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql, compose } from 'react-apollo';
 import { connect } from 'react-redux';
-import { array, func, object, number } from 'prop-types';
+import { array, bool, func, object, number } from 'prop-types';
 
 import scoreboardUsers from '../graphql/scoreboardUsers.graphql';
 import setHighScore from '../graphql/setHighScore.graphql';
@@ -67,20 +67,25 @@ const withData = compose(
   })
 );
 
-const Contest = ({ highScore, setScore, scoreUsers, user, devHighScore }) => (
-  <Challenge
-    highScore={highScore}
-    setHighScore={setScore}
-    scoreboardUsers={scoreUsers}
-    user={user}
-    devHighScore={devHighScore}
-  />
+const Contest = ({ highScore, setScore, scoreUsers, user, devHighScore, loading }) => (
+  loading
+    ? null
+    : (
+      <Challenge
+        highScore={highScore}
+        setHighScore={setScore}
+        scoreboardUsers={scoreUsers}
+        user={user}
+        devHighScore={devHighScore}
+      />
+    )
 );
 
 
 Contest.propTypes = {
   devHighScore: number,
   highScore: number,
+  loading: bool,
   setScore: func.isRequired,
   scoreUsers: array,
   user: object
@@ -89,6 +94,7 @@ Contest.propTypes = {
 Contest.defaultProps = {
   devHighScore: 0,
   highScore: 0,
+  loading: false,
   scoreUsers: [],
   user: {}
 };
