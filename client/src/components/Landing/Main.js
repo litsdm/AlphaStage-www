@@ -12,9 +12,9 @@ import Level from './Level';
 
 const CURRENT_VERSION = '0.1.1';
 
-const Main = ({ submitUser, user }) => (
+const Main = ({ submitUser, user, logout }) => (
   <div>
-    <Header submitUser={submitUser} version={CURRENT_VERSION} user={user} />
+    <Header submitUser={submitUser} version={CURRENT_VERSION} user={user} logout={logout} />
     <TestingInfo />
     <div className={styles.CurvedDiv} />
     <SessionProcess />
@@ -36,6 +36,7 @@ const Main = ({ submitUser, user }) => (
 );
 
 Main.propTypes = {
+  logout: func.isRequired,
   submitUser: func.isRequired,
   user: object
 };

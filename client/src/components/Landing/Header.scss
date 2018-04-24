@@ -107,6 +107,15 @@
   padding: 0 24px;
 }
 
+.Logout {
+  color: #ccc;
+  font-size: 16px;
+
+  &:hover {
+    color: #fff;
+  }
+}
+
 .VerticalDivider {
   background-color: #fff;
   height: 50%;

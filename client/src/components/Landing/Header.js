@@ -12,7 +12,7 @@ import medal from '../../resources/medal.png';
 import swords from '../../resources/swords.png';
 import triangle from '../../resources/triangle.svg';
 
-const Header = ({ submitUser, version, user }) => {
+const Header = ({ submitUser, version, user, logout }) => {
   const handleNotifyClick = () => {
     const email = document.getElementById('notifyInput').value;
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -117,7 +117,7 @@ const Header = ({ submitUser, version, user }) => {
                     <Link href="#signup" to="/auth?type=signup">Sign Up</Link>
                   </div>
                 )
-                : null
+                : <button className={styles.Logout} onClick={logout}>Log Out</button>
             }
           </div>
         </div>
@@ -155,6 +155,7 @@ const Header = ({ submitUser, version, user }) => {
 };
 
 Header.propTypes = {
+  logout: func.isRequired,
   submitUser: func.isRequired,
   version: string.isRequired,
   user: object

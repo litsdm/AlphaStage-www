@@ -9,7 +9,7 @@ const users = (state = initialState, { type, user, profilePic }) => {
       return { ...user };
 
     case 'REMOVE_USER':
-      return {};
+      return null;
 
     case 'UPDATE_PROFILE_PIC':
       return { ...state, profilePic };
