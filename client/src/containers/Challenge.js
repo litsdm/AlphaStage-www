@@ -9,6 +9,8 @@ import userHighScore from '../graphql/userHighScore.graphql';
 
 import Challenge from '../components/Challenge/Challenge';
 
+const DEV_ID = process.env.NODE_ENV === 'development' ? '59d48fbd4bd6e1246309af67' : '5abb0ae8b5c4580030f1902f';
+
 const mapStateToProps = ({ user }) => (
   {
     user
@@ -52,20 +54,32 @@ const withData = compose(
       };
     },
     options: ({ user }) => ({ variables: { id: user._id } })
+  }),
+  graphql(userHighScore, {
+    props: ({ data }) => {
+      if (!data.user) return { loading: data.loading };
+      if (data.error) return { hasErrors: true };
+      return {
+        devHighScore: data.user.highScore || 0,
+      };
+    },
+    options: () => ({ variables: { id: DEV_ID } })
   })
 );
 
-const Contest = ({ highScore, setScore, scoreUsers, user }) => (
+const Contest = ({ highScore, setScore, scoreUsers, user, devHighScore }) => (
   <Challenge
     highScore={highScore}
     setHighScore={setScore}
     scoreboardUsers={scoreUsers}
     user={user}
+    devHighScore={devHighScore}
   />
 );
 
 
 Contest.propTypes = {
+  devHighScore: number,
   highScore: number,
   setScore: func.isRequired,
   scoreUsers: array,
@@ -73,6 +87,7 @@ Contest.propTypes = {
 };
 
 Contest.defaultProps = {
+  devHighScore: 0,
   highScore: 0,
   scoreUsers: [],
   user: {}

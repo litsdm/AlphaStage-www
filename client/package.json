@@ -44,7 +44,7 @@
     "toastr": "^2.1.2"
   },
   "scripts": {
-    "start": "node scripts/customized-config start",
+    "start": "NODE_ENV=development node scripts/customized-config start",
     "build": "node scripts/customized-config build",
     "test": "node scripts/customized-config test --env=jsdom",
     "eject": "react-scripts eject"

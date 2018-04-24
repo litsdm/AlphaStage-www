@@ -341,7 +341,7 @@ class SpaceInvaders extends Component {
 
   renderContent = () => {
     const { gameState, score, lives } = this.state;
-    const { highScore } = this.props;
+    const { highScore, devHighScore } = this.props;
 
     if (gameState === 'Welcome') {
       return (
@@ -397,7 +397,7 @@ class SpaceInvaders extends Component {
             </div>
             <div className={styles.ScoreItem}>
               <p>Dev{'\''}s Score</p>
-              <p>50,000</p>
+              <p>{devHighScore}</p>
             </div>
           </div>
           <button onClick={() => this.initialize()}>Play Again</button>
@@ -418,11 +418,13 @@ class SpaceInvaders extends Component {
 }
 
 SpaceInvaders.propTypes = {
+  devHighScore: number,
   highScore: number,
   setHighScore: func.isRequired
 };
 
 SpaceInvaders.defaultProps = {
+  devHighScore: 0,
   highScore: 0
 };
 
