@@ -1,10 +1,17 @@
 import React from 'react';
 import { graphql } from 'react-apollo';
-import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { func, object } from 'prop-types';
 
 import addPotentialUser from '../graphql/addPotentialUser.graphql';
 
 import Main from '../components/Landing/Main';
+
+const mapStateToProps = ({ user }) => (
+  {
+    user
+  }
+);
 
 const withMutation = graphql(addPotentialUser, {
   props: ({ mutate }) => ({
@@ -12,10 +19,17 @@ const withMutation = graphql(addPotentialUser, {
   })
 });
 
-const Landing = ({ submitUser }) => <Main submitUser={submitUser} />;
+const Landing = ({ submitUser, user }) => <Main submitUser={submitUser} user={user} />;
 
 Landing.propTypes = {
-  submitUser: PropTypes.func.isRequired
+  submitUser: func.isRequired,
+  user: object
 };
 
-export default withMutation(Landing);
+Landing.defaultProps = {
+  user: null
+};
+
+const LandingWithData = withMutation(Landing);
+
+export default connect(mapStateToProps, null)(LandingWithData);

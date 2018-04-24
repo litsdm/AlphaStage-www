@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import toastr from 'toastr';
-import { func, string } from 'prop-types';
+import { func, string, object } from 'prop-types';
 import styles from './Header.scss';
 
 import logo from '../../resources/logo.png';
@@ -12,7 +12,7 @@ import medal from '../../resources/medal.png';
 import swords from '../../resources/swords.png';
 import triangle from '../../resources/triangle.svg';
 
-const Header = ({ submitUser, version }) => {
+const Header = ({ submitUser, version, user }) => {
   const handleNotifyClick = () => {
     const email = document.getElementById('notifyInput').value;
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -108,6 +108,17 @@ const Header = ({ submitUser, version }) => {
           <div className={styles.Left} />
           <div className={styles.Right}>
             <Link className={styles.Join} href="#challenge" to="/challenge">Challenge the Dev</Link>
+            {
+              !user
+                ? (
+                  <div className={styles.AuthOptions}>
+                    <Link href="#login" to="/auth?type=login">Log In</Link>
+                    <div className={styles.VerticalDivider} />
+                    <Link href="#signup" to="/auth?type=signup">Sign Up</Link>
+                  </div>
+                )
+                : null
+            }
           </div>
         </div>
       </div>
@@ -145,7 +156,12 @@ const Header = ({ submitUser, version }) => {
 
 Header.propTypes = {
   submitUser: func.isRequired,
-  version: string.isRequired
+  version: string.isRequired,
+  user: object
+};
+
+Header.defaultProps = {
+  user: null
 };
 
 export default Header;

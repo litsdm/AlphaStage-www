@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { func, object } from 'prop-types';
 import styles from './styles.scss';
 
 import Header from './Header';
@@ -12,9 +12,9 @@ import Level from './Level';
 
 const CURRENT_VERSION = '0.1.1';
 
-const Main = ({ submitUser }) => (
+const Main = ({ submitUser, user }) => (
   <div>
-    <Header submitUser={submitUser} version={CURRENT_VERSION} />
+    <Header submitUser={submitUser} version={CURRENT_VERSION} user={user} />
     <TestingInfo />
     <div className={styles.CurvedDiv} />
     <SessionProcess />
@@ -36,7 +36,12 @@ const Main = ({ submitUser }) => (
 );
 
 Main.propTypes = {
-  submitUser: PropTypes.func.isRequired
+  submitUser: func.isRequired,
+  user: object
+};
+
+Main.defaultProps = {
+  user: null
 };
 
 export default Main;

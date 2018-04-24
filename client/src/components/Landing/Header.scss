@@ -101,6 +101,19 @@
   }
 }
 
+.AuthOptions {
+  align-items: center;
+  display: flex;
+  padding: 0 24px;
+}
+
+.VerticalDivider {
+  background-color: #fff;
+  height: 50%;
+  margin: 0 12px;
+  width: 1px;
+}
+
 .Content {
   left: 50%;
   position: absolute;
