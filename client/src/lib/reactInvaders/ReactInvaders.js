@@ -128,9 +128,12 @@ class SpaceInvaders extends Component {
     const { level } = this.state;
 
     this.setState({ level: level + 1, lane: level + 1 }, () => {
+      const { lane } = this.state;
+      const laneMulti = 0.9 - (lane * 0.01);
+
       this.frames = 0;
       this.spFrame = 0;
-      this.lvFrame = 60;
+      this.lvFrame = Math.ceil(60 * laneMulti);
       this.dir = 1;
 
       this.bullets = [];
@@ -203,7 +206,7 @@ class SpaceInvaders extends Component {
       // check if invaders should move down and change direction
       if (_max > display.width - 10 || _min < 10) {
         // mirror direction and update position
-        this.setState({ lane: lane + 1 });
+        this.setState({ lane: lane + 1 }, this.onLaneChange);
         this.dir *= -1;
         for (let i = 0, len = invaders.length; i < len; i += 1) {
           invaders[i].x += 10 * this.dir;
@@ -227,6 +230,13 @@ class SpaceInvaders extends Component {
       // create and append new bullet
       bullets.push(new Bullet(inv.x + (inv.w * 0.5), inv.y + inv.h, 4, 2, 4, '#fff'));
     }
+  }
+
+  onLaneChange = () => {
+    const { lane } = this.state;
+    const laneMulti = 0.9 - (lane * 0.01);
+
+    this.lvFrame = Math.ceil(this.lvFrame * laneMulti);
   }
 
   checkRocketCollision = () => {
@@ -253,31 +263,34 @@ class SpaceInvaders extends Component {
         else if (invader.type === 'crab') score = 20;
         else score = 30;
         this.setState({ score: this.state.score + score });
-        // increase the movement frequence of the invaders
-        // when there are less of them
-        switch (invaders.length) {
-          case 30: {
-            this.lvFrame = 40;
-            break;
-          }
-          case 10: {
-            this.lvFrame = 20;
-            break;
-          }
-          case 5: {
-            this.lvFrame = 15;
-            break;
-          }
-          case 1: {
-            this.lvFrame = 6;
-            break;
-          }
-          default: {
-            break;
-          }
-        }
+
+        this.setInvaderSpeed(invaders.length);
       }
     });
+  }
+
+  setInvaderSpeed = (invadersLen) => {
+    switch (invadersLen) {
+      case 30: {
+        this.lvFrame = 40;
+        break;
+      }
+      case 10: {
+        this.lvFrame = 20;
+        break;
+      }
+      case 5: {
+        this.lvFrame = 15;
+        break;
+      }
+      case 1: {
+        this.lvFrame = 6;
+        break;
+      }
+      default: {
+        break;
+      }
+    }
   }
 
   checkShipCollision = (bullet, i) => {
