@@ -185,7 +185,7 @@ class SpaceInvaders extends Component {
   }
 
   invadersMove = () => {
-    const { display, invaders, frames, lvFrame } = this;
+    const { display, invaders, frames, lvFrame, ship } = this;
     const { lane } = this.state;
     if (frames % lvFrame === 0) {
       this.spFrame = (this.spFrame + 1) % 2;
@@ -197,6 +197,8 @@ class SpaceInvaders extends Component {
         invaders[i].x += 10 * this.dir;
         _max = Math.max(_max, inv.x + inv.w);
         _min = Math.min(_min, inv.x);
+
+        if (ship && lane >= 11) this.checkInvaderShipCollision(invaders[i], ship);
       });
       // check if invaders should move down and change direction
       if (_max > display.width - 10 || _min < 10) {
@@ -299,6 +301,21 @@ class SpaceInvaders extends Component {
 
       setTimeout(() => { this.ship = new Ship(shipSprite, display.width, display.height); }, 1000);
     }
+  }
+
+  checkInvaderShipCollision = (invader, ship) => {
+    const collision = AABBIntersect(
+      invader.x,
+      invader.y,
+      invader.w,
+      invader.h,
+      ship.x,
+      ship.y,
+      ship.w,
+      ship.h
+    );
+
+    if (collision) this.endGame();
   }
 
   checkGameOver = () => {
