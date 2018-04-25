@@ -51,6 +51,7 @@ class SpaceInvaders extends Component {
     this.frames = 0;
     this.spFrame = 0;
     this.lvFrame = 60;
+    this.shootMulti = 0.0085;
     this.dir = 1;
 
     this.ship = new Ship(shipSprite, display.width, display.height);
@@ -134,6 +135,7 @@ class SpaceInvaders extends Component {
       this.frames = 0;
       this.spFrame = 0;
       this.lvFrame = Math.ceil(60 * laneMulti);
+      this.shootMulti = 0.0095;
       this.dir = 1;
 
       this.bullets = [];
@@ -218,7 +220,7 @@ class SpaceInvaders extends Component {
 
   invadersShoot = () => {
     const { invaders, bullets } = this;
-    if (Math.random() < 0.0075 && invaders.length > 0 && this.bullets.length < 3) {
+    if (Math.random() < this.shootMulti && invaders.length > 0 && this.bullets.length < 3) {
       let inv = invaders[Math.round(Math.random() * (invaders.length - 1))];
       // iterate through invaders and check collision to make
       // sure only shoot from front line
@@ -236,7 +238,7 @@ class SpaceInvaders extends Component {
     const { lane } = this.state;
     const laneMulti = 0.9 - (lane * 0.01);
 
-    this.lvFrame = Math.ceil(this.lvFrame * laneMulti);
+    setTimeout(() => { this.lvFrame = Math.ceil(this.lvFrame * laneMulti); }, 100);
   }
 
   checkRocketCollision = () => {
@@ -273,18 +275,22 @@ class SpaceInvaders extends Component {
     switch (invadersLen) {
       case 30: {
         this.lvFrame = 40;
+        this.shootMulti = 0.0115;
         break;
       }
       case 10: {
         this.lvFrame = 20;
+        this.shootMulti = 0.0135;
         break;
       }
       case 5: {
         this.lvFrame = 15;
+        this.shootMulti = 0.0145;
         break;
       }
       case 1: {
         this.lvFrame = 6;
+        this.shootMulti = 0.0150;
         break;
       }
       default: {
