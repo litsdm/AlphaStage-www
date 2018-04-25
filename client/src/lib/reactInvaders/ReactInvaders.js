@@ -18,6 +18,7 @@ class SpaceInvaders extends Component {
     level: 1,
     lives: 3,
     gameState: 'Welcome',
+    lane: 1
   }
 
   componentDidMount() {
@@ -45,7 +46,7 @@ class SpaceInvaders extends Component {
   initialize = () => {
     const { display, shipSprite, baseSprite } = this;
 
-    this.setState({ gameState: 'Play', level: 0, score: 0, lives: 3 });
+    this.setState({ gameState: 'Play', level: 1, score: 0, lives: 3, lane: 1 });
 
     this.frames = 0;
     this.spFrame = 0;
@@ -126,7 +127,7 @@ class SpaceInvaders extends Component {
   nextLevel = () => {
     const { level } = this.state;
 
-    this.setState({ level: level + 1 }, () => {
+    this.setState({ level: level + 1, lane: level + 1 }, () => {
       this.frames = 0;
       this.spFrame = 0;
       this.lvFrame = 60;
@@ -185,6 +186,7 @@ class SpaceInvaders extends Component {
 
   invadersMove = () => {
     const { display, invaders, frames, lvFrame } = this;
+    const { lane } = this.state;
     if (frames % lvFrame === 0) {
       this.spFrame = (this.spFrame + 1) % 2;
       let _max = 0;
@@ -199,6 +201,7 @@ class SpaceInvaders extends Component {
       // check if invaders should move down and change direction
       if (_max > display.width - 10 || _min < 10) {
         // mirror direction and update position
+        this.setState({ lane: lane + 1 });
         this.dir *= -1;
         for (let i = 0, len = invaders.length; i < len; i += 1) {
           invaders[i].x += 10 * this.dir;
@@ -409,7 +412,7 @@ class SpaceInvaders extends Component {
   render() {
     const { gameState } = this.state;
     return (
-      <div className={styles.Container}>
+      <div className={styles.Container} id="SIContainer">
         {this.renderContent()}
         <canvas id="gameCanvas" style={gameState !== 'Play' ? { display: 'none' } : {}} />
       </div>
