@@ -161,13 +161,14 @@ class SpaceInvaders extends Component {
     rocket.update();
     if (
       (rocket.y + rocket.height < 0 || rocket.y > display.height) ||
-      this.checkBaseCollision(rocket)
+      this.checkBaseCollision(rocket) ||
+      this.checkRocketMysteryCollision()
     ) {
       this.rocket = null;
       return;
     }
 
-    this.checkRocketCollision();
+    this.checkRocketInvaderCollision();
   }
 
   updateBullets = () => {
@@ -266,7 +267,35 @@ class SpaceInvaders extends Component {
     setTimeout(() => { this.lvFrame = Math.ceil(this.lvFrame * laneMulti); }, 100);
   }
 
-  checkRocketCollision = () => {
+  checkRocketMysteryCollision = () => {
+    const { score } = this.state;
+    const { mysteryShip, rocket } = this;
+    const possibleScores = [50, 100, 150];
+    const randomIndex = Math.floor(Math.random() * 3);
+    const randomScore = possibleScores[randomIndex];
+
+    if (!mysteryShip) return;
+
+    const collision = AABBIntersect(
+      rocket.x,
+      rocket.y,
+      rocket.width,
+      rocket.height,
+      mysteryShip.x,
+      mysteryShip.y,
+      mysteryShip.w,
+      mysteryShip.h
+    );
+
+    if (collision) {
+      this.setState({ score: score + randomScore });
+      this.mysteryShip = null;
+    }
+
+    return collision;
+  }
+
+  checkRocketInvaderCollision = () => {
     const { invaders, rocket } = this;
 
     invaders.forEach((invader, j) => {
