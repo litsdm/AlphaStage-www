@@ -8,6 +8,7 @@ import InputHandler from './helpers/inputHandler';
 import Bases from './entities/Bases';
 import Bullet from './entities/Bullet';
 import Invader from './entities/Invader';
+import MysteryShip from './entities/MysteryShip';
 import Screen from './entities/Screen';
 import Sprite from './entities/Sprite';
 import Ship from './entities/Ship';
@@ -41,6 +42,12 @@ class SpaceInvaders extends Component {
     });
 
     img.src = 'img/invaders.png';
+
+    const mysteryImg = new Image();
+    mysteryImg.addEventListener('load', function onLoad() {
+      self.mysterySprite = new Sprite(this, 0, 0, 40, 28);
+    });
+    mysteryImg.src = 'img/mysteryShip.png';
   }
 
   initialize = () => {
@@ -105,6 +112,7 @@ class SpaceInvaders extends Component {
   };
 
   update = () => {
+    const { lane } = this.state;
     const { display, input, invaders, ship, shipSprite } = this;
     this.frames += 1;
 
@@ -120,6 +128,10 @@ class SpaceInvaders extends Component {
     if (this.rocket) this.updateRocket();
 
     this.updateBullets();
+
+    if (!this.mysteryShip && lane > 1) setTimeout(this.spawnMysteryShip(), 800);
+
+    if (this.mysteryShip) this.mysteryShip.update();
 
     this.invadersShoot();
     this.invadersMove();
@@ -187,6 +199,19 @@ class SpaceInvaders extends Component {
     }
 
     return false;
+  }
+
+  spawnMysteryShip = () => {
+    const { display, mysterySprite } = this;
+
+    if (this.mysteryShip) return;
+
+    const randomCheck = Math.floor(Math.random() * 1000) + 1;
+
+    if (randomCheck <= 2.5) {
+      const dir = Math.round(Math.random());
+      this.mysteryShip = new MysteryShip(mysterySprite, dir, display.width, 2);
+    }
   }
 
   invadersMove = () => {
@@ -302,6 +327,8 @@ class SpaceInvaders extends Component {
   checkShipCollision = (bullet, i) => {
     const { bullets, display, ship, shipSprite } = this;
 
+    if (!bullet || !ship) return;
+
     const collision = AABBIntersect(
       bullet.x,
       bullet.y,
@@ -360,7 +387,16 @@ class SpaceInvaders extends Component {
   }
 
   renderOnCanvas = () => {
-    const { display, invaders, bases, ship, spFrame, bullets, rocket } = this;
+    const {
+      display,
+      invaders,
+      bases,
+      ship,
+      spFrame,
+      bullets,
+      rocket,
+      mysteryShip
+    } = this;
     display.clear(); // clear the game canvas
     // draw all invaders
     invaders.forEach(invader => {
@@ -372,6 +408,8 @@ class SpaceInvaders extends Component {
     bullets.forEach(bullet => {
       display.drawBullet(bullet);
     });
+
+    if (mysteryShip) display.drawSprite(mysteryShip.sprite, mysteryShip.x, mysteryShip.y);
 
     display.ctx.restore();
     display.ctx.drawImage(bases.canvas, 0, bases.y);
