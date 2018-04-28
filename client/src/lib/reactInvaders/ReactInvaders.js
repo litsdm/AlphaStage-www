@@ -19,7 +19,9 @@ class SpaceInvaders extends Component {
     level: 1,
     lives: 3,
     gameState: 'Welcome',
-    lane: 1
+    lane: 1,
+    shots: 0,
+    mysteryShotFlag: false
   }
 
   componentDidMount() {
@@ -112,7 +114,7 @@ class SpaceInvaders extends Component {
   };
 
   update = () => {
-    const { lane } = this.state;
+    const { lane, shots } = this.state;
     const { display, input, invaders, ship, shipSprite } = this;
     this.frames += 1;
 
@@ -121,7 +123,10 @@ class SpaceInvaders extends Component {
 
     if (ship) ship.x = Math.max(Math.min(ship.x, display.width - (10 + shipSprite.w)), 10);
 
-    if (input.isPressed(32) && !this.rocket && ship) this.rocket = new Bullet(ship.x + 10, ship.y, -8, 3, 9, '#fff');
+    if (input.isPressed(32) && !this.rocket && ship) {
+      this.rocket = new Bullet(ship.x + 10, ship.y, -8, 3, 9, '#fff');
+      this.setState({ shots: shots + 1 });
+    }
 
     if (invaders.length === 0) this.nextLevel();
 
@@ -129,7 +134,7 @@ class SpaceInvaders extends Component {
 
     this.updateBullets();
 
-    if (!this.mysteryShip && lane > 1) setTimeout(this.spawnMysteryShip(), 800);
+    if (!this.mysteryShip && lane > 1) setTimeout(this.spawnMysteryShip(), 1000);
 
     if (this.mysteryShip) this.mysteryShip.update();
 
@@ -268,7 +273,7 @@ class SpaceInvaders extends Component {
   }
 
   checkRocketMysteryCollision = () => {
-    const { score } = this.state;
+    const { score, shots, mysteryShotFlag } = this.state;
     const { mysteryShip, rocket } = this;
     const possibleScores = [50, 100, 150];
     const randomIndex = Math.floor(Math.random() * 3);
@@ -287,8 +292,14 @@ class SpaceInvaders extends Component {
       mysteryShip.h
     );
 
-    if (collision) {
+    if (collision && (shots !== 23 || (shots !== 15 && mysteryShotFlag))) {
       this.setState({ score: score + randomScore });
+      this.mysteryShip = null;
+    } else if (
+      collision &&
+      ((shots === 23 && !mysteryShotFlag) || (shots === 15 && mysteryShotFlag))
+    ) {
+      this.setState({ shots: 0, score: score + 300, mysteryShotFlag: true });
       this.mysteryShip = null;
     }
 
