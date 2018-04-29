@@ -339,22 +339,22 @@ class SpaceInvaders extends Component {
   setInvaderSpeed = (invadersLen) => {
     switch (invadersLen) {
       case 30: {
-        this.lvFrame = 40;
+        if (this.lvFrame > 40) this.lvFrame = 40;
         this.shootMulti = 0.0115;
         break;
       }
       case 10: {
-        this.lvFrame = 20;
+        if (this.lvFrame > 20) this.lvFrame = 20;
         this.shootMulti = 0.0135;
         break;
       }
       case 5: {
-        this.lvFrame = 15;
+        if (this.lvFrame > 15) this.lvFrame = 15;
         this.shootMulti = 0.0145;
         break;
       }
       case 1: {
-        this.lvFrame = 6;
+        if (this.lvFrame > 6) this.lvFrame = 6;
         this.shootMulti = 0.0150;
         break;
       }
