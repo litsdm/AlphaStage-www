@@ -136,7 +136,7 @@ class SpaceInvaders extends Component {
 
     if (!this.mysteryShip && lane > 1) setTimeout(this.spawnMysteryShip(), 1000);
 
-    if (this.mysteryShip) this.mysteryShip.update();
+    if (this.mysteryShip) this.updateMysteryShip();
 
     this.invadersShoot();
     this.invadersMove();
@@ -154,6 +154,8 @@ class SpaceInvaders extends Component {
       this.lvFrame = Math.ceil(60 * laneMulti);
       this.shootMulti = 0.0095;
       this.dir = 1;
+
+      this.mysteryShip = null;
 
       this.bullets = [];
 
@@ -192,6 +194,18 @@ class SpaceInvaders extends Component {
 
       if (ship) this.checkShipCollision(bullet, i);
     });
+  }
+
+  updateMysteryShip = () => {
+    const { display, mysteryShip } = this;
+    this.mysteryShip.update();
+
+    if (
+      (mysteryShip.dir === 0 && mysteryShip.x + mysteryShip.w < 0) ||
+      (mysteryShip.dir === 1 && mysteryShip.x > display.width)
+    ) {
+      this.mysteryShip = null;
+    }
   }
 
   checkBaseCollision = (bullet) => {
