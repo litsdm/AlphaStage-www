@@ -52,10 +52,19 @@ class SpaceInvaders extends Component {
     mysteryImg.src = 'img/mysteryShip.png';
   }
 
-  initialize = () => {
-    const { display, shipSprite, baseSprite } = this;
+  componentWillUnmount = () => {
+    if (this.loopAnimation) window.cancelAnimationFrame(this.loopAnimation);
+  }
 
+  initialize = () => {
     this.setState({ gameState: 'Play', level: 1, score: 0, lives: 3, lane: 1 });
+    this.setInitialValues();
+
+    this.start();
+  }
+
+  setInitialValues = () => {
+    const { display, shipSprite, baseSprite } = this;
 
     this.frames = 0;
     this.spFrame = 0;
@@ -71,8 +80,6 @@ class SpaceInvaders extends Component {
     this.bases = new Bases(baseSprite, display.width, this.ship.y);
 
     this.createInvaders();
-
-    this.start();
   }
 
   createInvaders = () => {
@@ -102,6 +109,11 @@ class SpaceInvaders extends Component {
       }
     });
   }
+
+  playAgain = () =>
+    this.setState({ gameState: 'Play', level: 1, score: 0, lives: 3, lane: 1 }, () => {
+      this.setInitialValues();
+    });
 
   start = () => {
     const { display } = this;
@@ -427,8 +439,6 @@ class SpaceInvaders extends Component {
   endGame = () => {
     this.setState({ gameState: 'GameOver' });
     this.checkHighScore();
-
-    window.cancelAnimationFrame(this.loopAnimation);
   }
 
   checkHighScore = () => {
@@ -531,7 +541,7 @@ class SpaceInvaders extends Component {
               <p>{devHighScore}</p>
             </div>
           </div>
-          <button onClick={() => this.initialize()}>Play Again</button>
+          <button onClick={() => this.playAgain()}>Play Again</button>
         </div>
       );
     }
