@@ -65,6 +65,7 @@
   }
 
   .Right {
+    align-items: center;
     display: flex;
     flex-basis: 50%;
     justify-content: flex-end;
@@ -80,15 +81,20 @@
 
     @include media($mobile) {
       min-width: 107px;
+      padding: 0;
     }
   }
 }
 
 .Join {
+  align-items: center;
   background-color: rgba(255, 255, 255, 0.05);
   border: 1px solid #ccc;
   border-radius: 24px;
+  display: flex;
   font-size: 14px;
+  height: 19px;
+  min-width: 118px;
   padding: 0.5em 1em;
 
   &:hover {
@@ -98,6 +104,7 @@
 
   @include media($mobile) {
     font-size: 10px;
+    min-width: 85px;
   }
 }
 
@@ -105,6 +112,30 @@
   align-items: center;
   display: flex;
   padding: 0 24px;
+
+  a {
+    text-align: center;
+  }
+
+  @include media($medium) {
+    a {
+      font-size: 14px;
+      min-width: 50px;
+    }
+  }
+
+  @include media($small) {
+    padding: 0 12px;
+
+    a {
+      font-size: 12px;
+      min-width: 43px;
+    }
+  }
+
+  @include media($mobile) {
+    padding: 0 6px;
+  }
 }
 
 .Logout {
@@ -114,6 +145,11 @@
   &:hover {
     color: #fff;
   }
+
+  @include media($medium) {
+    font-size: 14px;
+    min-width: 66px;
+  }
 }
 
 .VerticalDivider {
@@ -121,6 +157,10 @@
   height: 50%;
   margin: 0 12px;
   width: 1px;
+
+  @include media($small) {
+    margin: 0 6px;
+  }
 }
 
 .Content {
