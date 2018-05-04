@@ -5,7 +5,7 @@ import styles from './styles.scss';
 
 const Info = ({ message, isNewUser }) => (
   <div className={[styles.Info, isNewUser ? styles.NewUser : ''].join(' ')}>
-    <img src="img/icon.png" alt="logo" style={{ width: '100px' }} />
+    <img src="img/logo.png" alt="logo" style={{ width: '100px' }} />
     <h2>{message}</h2>
   </div>
 );
