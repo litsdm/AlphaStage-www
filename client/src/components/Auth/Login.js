@@ -55,30 +55,33 @@ class Login extends Component {
     return (
       <div className={styles.Login}>
         <div className={styles.InputGroup}>
-          <label htmlFor="loginEmail" className={styles.Tag}>EMAIL</label>
-          <input
-            id="loginEmail"
-            type="email"
-            name="email"
-            className={styles.Input}
-            value={email}
-            onChange={this.handleChange}
-            onKeyPress={this.handleKeyPress}
-          />
+          <label htmlFor="loginEmail" className={styles.Tag}>
+            EMAIL
+            <input
+              id="loginEmail"
+              type="email"
+              name="email"
+              className={styles.Input}
+              value={email}
+              onChange={this.handleChange}
+              onKeyPress={this.handleKeyPress}
+            />
+          </label>
         </div>
         <div className={styles.InputGroup}>
-          <label htmlFor="password" className={styles.Tag}>PASSWORD</label>
-          <input
-            id="password"
-            type="password"
-            name="password"
-            className={styles.Input}
-            value={password}
-            onChange={this.handleChange}
-            onKeyPress={this.handleKeyPress}
-          />
+          <label htmlFor="password" className={styles.Tag}>
+            PASSWORD
+            <input
+              id="password"
+              type="password"
+              name="password"
+              className={styles.Input}
+              value={password}
+              onChange={this.handleChange}
+              onKeyPress={this.handleKeyPress}
+            />
+          </label>
         </div>
-
         <button className={styles.SubmitButton} onClick={this.login}>
           Login
         </button>
