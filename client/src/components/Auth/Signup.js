@@ -47,7 +47,7 @@ class Signup extends Component {
     callApi('signup', payload, 'POST')
       .then(res => res.json())
       .then(({ token, message }) => {
-        if (message) return Promise.reject(message);
+        if (message) return Promise.reject(message); // eslint-disable-line compat/compat
 
         localStorage.setItem('token', token);
         addUser(token);
@@ -65,52 +65,60 @@ class Signup extends Component {
     return (
       <div className={styles.Signup}>
         <div className={styles.InputGroup}>
-          <label htmlFor="loginEmail" className={styles.Tag}>EMAIL</label>
-          <input
-            id="loginEmail"
-            type="email"
-            name="email"
-            className={styles.Input}
-            value={email}
-            onChange={this.handleChange}
-            onKeyPress={this.handleKeyPress}
-          />
+          <label htmlFor="loginEmail" className={styles.Tag}>
+            EMAIL
+            <input
+              id="loginEmail"
+              type="email"
+              name="email"
+              className={styles.Input}
+              value={email}
+              onChange={this.handleChange}
+              onKeyPress={this.handleKeyPress}
+            />
+          </label>
         </div>
         <div className={styles.InputGroup}>
-          <label htmlFor="username" className={styles.Tag}>USERNAME</label>
-          <input
-            id="username"
-            type="text"
-            name="username"
-            className={styles.Input}
-            value={username}
-            onChange={this.handleChange}
-            onKeyPress={this.handleKeyPress}
-          />
+          <label htmlFor="username" className={styles.Tag}>
+            USERNAME
+            <input
+              id="username"
+              type="text"
+              name="username"
+              className={styles.Input}
+              value={username}
+              onChange={this.handleChange}
+              onKeyPress={this.handleKeyPress}
+            />
+          </label>
         </div>
         <div className={styles.InputGroup}>
-          <label htmlFor="password" className={styles.Tag}>PASSWORD</label>
-          <input
-            id="password"
-            type="password"
-            name="password"
-            className={styles.Input}
-            value={password}
-            onChange={this.handleChange}
-            onKeyPress={this.handleKeyPress}
-          />
+          <label htmlFor="password" className={styles.Tag}>
+            PASSWORD
+            <input
+              id="password"
+              type="password"
+              name="password"
+              className={styles.Input}
+              value={password}
+              onChange={this.handleChange}
+              onKeyPress={this.handleKeyPress}
+            />
+          </label>
         </div>
         <div className={styles.InputGroup}>
-          <label htmlFor="confirmPassword" className={styles.Tag}>CONFIRM PASSWORD</label>
-          <input
-            id="confirmPassword"
-            type="password"
-            name="confirmPassword"
-            className={styles.Input}
-            value={confirmPassword}
-            onChange={this.handleChange}
-            onKeyPress={this.handleKeyPress}
-          />
+          <label htmlFor="confirmPassword" className={styles.Tag}>
+            CONFIRM PASSWORD
+            <input
+              id="confirmPassword"
+              type="password"
+              name="confirmPassword"
+              className={styles.Input}
+              value={confirmPassword}
+              onChange={this.handleChange}
+              onKeyPress={this.handleKeyPress}
+            />
+          </label>
         </div>
 
         <button className={styles.SubmitButton} onClick={this.signup}>
