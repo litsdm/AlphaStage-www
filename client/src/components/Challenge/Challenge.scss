@@ -12,7 +12,13 @@
 
 .ScoreBoard {
   color: white;
+  max-height: 523px;
   padding: 24px;
+}
+
+.Scores {
+  height: 500px;
+  overflow: scroll;
 }
 
 .Title {

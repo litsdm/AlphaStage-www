@@ -34,11 +34,13 @@ const Challenge = ({ highScore, setHighScore, scoreboardUsers, user, devHighScor
       <div className={styles.ScoreBoardWrapper}>
         <div className={styles.ScoreBoard}>
           <p className={styles.Title}>Score Board</p>
-          {
-            scoreboardUsers.length > 0
-              ? renderScoreBoardRows()
-              : null
-          }
+          <div className={styles.Scores}>
+            {
+              scoreboardUsers.length > 0
+                ? renderScoreBoardRows()
+                : null
+            }
+          </div>
         </div>
       </div>
     </div>
