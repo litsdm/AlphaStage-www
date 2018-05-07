@@ -1,3 +1,5 @@
+@import '../../globals.scss';
+
 .Auth {
   align-items: center;
   background: url(https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-245438.jpg) no-repeat center;
@@ -17,6 +19,11 @@
   &.OldUser {
     max-width: 605px;
   }
+
+  @include media($medium) {
+    box-shadow: none;
+    flex-direction: column-reverse;
+  }
 }
 
 .Login, .Signup {
@@ -29,6 +36,20 @@
   justify-content: center;
   padding: 15px 2.5%;
   width: 300px;
+
+  @include media($medium) {
+    width: 100%;
+  }
+
+  @include media($mobile) {
+    width: 350px !important;
+  }
+}
+
+.Login {
+  @include media($medium) {
+    min-width: 350px;
+  }
 }
 
 .Signup {
@@ -79,6 +100,25 @@
 
   &.NewUser {
     width: 300px;
+  }
+
+  @include media($medium) {
+    background: transparent;
+    width: 100% !important;
+
+    img {
+      width: 75px !important;
+    }
+
+    h2 {
+      font-size: 1.5rem !important;
+    }
+  }
+
+  @include media($medium) {
+    h2 {
+      font-size: 1.25rem !important;
+    }
   }
 }
 
