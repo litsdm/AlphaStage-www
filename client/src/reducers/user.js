@@ -1,7 +1,7 @@
 import jwtDecode from 'jwt-decode';
 
 const token = localStorage.getItem('token');
-const initialState = token ? jwtDecode(token) : {};
+const initialState = token ? jwtDecode(token) : null;
 
 const users = (state = initialState, { type, user, profilePic }) => {
   switch (type) {
