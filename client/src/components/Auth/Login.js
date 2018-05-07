@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { func, object } from 'prop-types';
+import { func, object, string } from 'prop-types';
 import toastr from 'toastr';
 import styles from './styles.scss';
 
@@ -22,7 +22,7 @@ class Login extends Component {
   }
 
   login = () => {
-    const { addUser, history } = this.props;
+    const { addUser, history, redirect } = this.props;
     const { email, password } = this.state;
 
     let errorMessage = '';
@@ -37,12 +37,12 @@ class Login extends Component {
     callApi('login', this.state, 'POST')
       .then(res => res.json())
       .then(({ token, message }) => {
-        if (message) return Promise.reject(message);
+        if (message) return Promise.reject(message); // eslint-disable-line compat/compat
 
         localStorage.setItem('token', token);
         addUser(token);
 
-        history.push('/');
+        history.push(`/${redirect}`);
 
         return token;
       })
@@ -97,7 +97,12 @@ class Login extends Component {
 Login.propTypes = {
   switchForm: func.isRequired,
   addUser: func.isRequired,
-  history: object.isRequired
+  history: object.isRequired,
+  redirect: string
+};
+
+Login.defaultProps = {
+  redirect: string
 };
 
 export default Login;

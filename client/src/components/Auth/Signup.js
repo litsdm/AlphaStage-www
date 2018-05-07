@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { func, object } from 'prop-types';
+import { func, object, string } from 'prop-types';
 import toastr from 'toastr';
 import styles from './styles.scss';
 
@@ -24,7 +24,7 @@ class Signup extends Component {
   };
 
   signup = () => {
-    const { addUser, history } = this.props;
+    const { addUser, history, redirect } = this.props;
     const { email, username, password, confirmPassword } = this.state;
 
     const payload = {
@@ -52,7 +52,7 @@ class Signup extends Component {
         localStorage.setItem('token', token);
         addUser(token);
 
-        history.push('/');
+        history.push(`/${redirect}`);
 
         return token;
       })
@@ -136,7 +136,12 @@ class Signup extends Component {
 Signup.propTypes = {
   switchForm: func.isRequired,
   addUser: func.isRequired,
-  history: object.isRequired
+  history: object.isRequired,
+  redirect: string
+};
+
+Signup.defaultProps = {
+  redirect: ''
 };
 
 export default Signup;

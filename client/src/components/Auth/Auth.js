@@ -25,8 +25,7 @@ class Auth extends Component {
   }
 
   setNewUser = () => {
-    const { location } = this.props;
-    const query = parse(location.search.substr(1));
+    const query = this.getQuery();
     this.setState({ isNewUser: query.type !== 'login' });
   }
 
@@ -34,9 +33,16 @@ class Auth extends Component {
     this.setState({ isNewUser: !this.state.isNewUser });
   }
 
+  getQuery = () => {
+    const { location } = this.props;
+    return parse(location.search.substr(1));
+  }
+
   render() {
     const { addUserFromToken, history } = this.props;
     const { isNewUser } = this.state;
+
+    const { redirect } = this.getQuery();
 
     return (
       <div className={styles.Auth}>
@@ -49,9 +55,15 @@ class Auth extends Component {
                 switchForm={this.toggleNewUser}
                 addUser={addUserFromToken}
                 history={history}
+                redirect={redirect || ''}
               />
             )
-            : <Login switchForm={this.toggleNewUser} addUser={addUserFromToken} history={history} />
+            : <Login
+              switchForm={this.toggleNewUser}
+              addUser={addUserFromToken}
+              history={history}
+              redirect={redirect || ''}
+            />
           }
           <Info
             message={isNewUser ? 'Take your game to the next level!' : 'Welcome back!'}
