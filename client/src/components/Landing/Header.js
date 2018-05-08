@@ -62,6 +62,22 @@ const Header = ({ submitUser, version, user, logout }) => {
     </div>
   );
 
+  const renderClosedBetaActions = () => (
+    <div className={styles.DevActions}>
+      <p>Alpha Stage is on closed beta for developers only.</p>
+      {
+        !user
+          ? <Link href="#signup" to="/auth?type=signup&redirect=devOptions" className={styles.DownloadButton}>Developer Sign Up</Link>
+          : (
+            <div className={styles.AccessOptions}>
+              <Link href="#upload" to="/" className={styles.DownloadButton}>Upload a Game</Link>
+              <Link href="#devForm" to="/" className={styles.SecondaryButton}>Can{'\''}t Upload a game but would love to try Alpha Stage</Link>
+            </div>
+          )
+      }
+    </div>
+  );
+
   const renderNotify = () => (
     <div className={styles.NotifyContainer}>
       <input id="notifyInput" placeholder="Enter your email" />
@@ -69,8 +85,22 @@ const Header = ({ submitUser, version, user, logout }) => {
     </div>
   );
 
+  const status = 'closedBeta'; // closedBeta, available, development
+
+  const renderActionSection = () => {
+    switch (status) {
+      case 'available':
+        return renderDownload();
+      case 'development':
+        return renderNotify();
+      case 'closedBeta':
+        return renderClosedBetaActions();
+      default:
+        break;
+    }
+  };
+
   const buttonData = getDownloadButtonData();
-  const isAvailable = true;
 
   return (
     <div className={styles.Header}>
@@ -130,13 +160,9 @@ const Header = ({ submitUser, version, user, logout }) => {
         <p className={styles.Description}>
           Get feedback that actually matters out of your game releases.
         </p>
-        {
-          isAvailable
-            ? renderDownload()
-            : renderNotify()
-        }
+        {renderActionSection()}
         <div className={styles.Available}>
-          <p>{isAvailable ? 'Available on:' : 'Coming soon for:'}</p>
+          <p>{status === 'available' ? 'Available on:' : 'Coming soon for:'}</p>
           <span>
             <div className={styles.Platform}>
               <i className="fa fa-windows" />
