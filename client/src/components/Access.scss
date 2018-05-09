@@ -1,0 +1,108 @@
+@import '../globals.scss';
+
+.AppContainer {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 42px;
+
+  p {
+    border: 1px solid #fff;
+    color: #ddd;
+    padding: 0.5em 1em;
+    border-radius: 4px;
+
+    @include media($mobile) {
+      font-size: 12px;
+    }
+  }
+}
+
+.NotifyContainer {
+  margin-top: 42px;
+
+  input,
+  button {
+    border: none;
+    color: white;
+    font-size: 16px;
+    line-height: 1.5;
+    padding: 0.5em 1em;
+    outline: none;
+  }
+
+  input {
+    background-color: rgba(255, 255,255, 0.2);
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    padding: 0.5em 1em;
+    text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+    width: 400px;
+  }
+
+  button {
+    background: linear-gradient(#20c2f3, #2091f3);
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+      background: linear-gradient(#20c9f3, #2098f3);
+    }
+  }
+
+  @include media($medium) {
+    input {
+      width: 250px;
+    }
+  }
+
+  @include media($small) {
+    input {
+      font-size: 12px;
+      width: 200px;
+    }
+
+    button {
+      font-size: 12px;
+    }
+  }
+
+  @include media($mobile) {
+    input {
+      width: 150px;
+    }
+  }
+}
+
+.PrimaryButton,
+.SecondaryButton {
+  background: linear-gradient(#20c2f3, #2091f3);
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1.5;
+  margin-right: 24px;
+  padding: 0.5em 1em;
+  outline: none;
+
+  &:hover {
+    background: linear-gradient(#20c9f3, #2098f3);
+  }
+
+  @include media($mobile) {
+    font-size: 12px;
+  }
+}
+
+.SecondaryButton {
+  background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(75, 75, 75, 0.1));
+  border: 1px solid #ccc;
+
+  &:hover {
+    background: linear-gradient(#fff, #ddd);
+    color: rgb(54, 57, 62);
+  }
+}
