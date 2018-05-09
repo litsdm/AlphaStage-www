@@ -25,7 +25,7 @@ const Main = ({ submitUser, user, logout }) => (
     <TestingInfo />
     <div className={styles.CurvedDiv} />
     <SessionProcess />
-    <DownloadSection version={CURRENT_VERSION} status={STATUS} />
+    <DownloadSection version={CURRENT_VERSION} status={STATUS} submitUser={submitUser} />
     <Objectives />
     <div className={styles.Wave}>
       <svg viewBox="0 0 100 25">

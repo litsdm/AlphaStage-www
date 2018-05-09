@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import toastr from 'toastr';
+import { func, string, object, bool } from 'prop-types';
 import styles from './Access.scss';
 
 const Access = ({ submitUser, version, status, user, downloadSection }) => {
@@ -120,6 +121,20 @@ const Access = ({ submitUser, version, status, user, downloadSection }) => {
   };
 
   return renderAccess();
+};
+
+Access.propTypes = {
+  submitUser: func.isRequired,
+  version: string,
+  status: string.isRequired,
+  user: object,
+  downloadSection: bool
+};
+
+Access.defaultProps = {
+  version: '0.1.1',
+  user: null,
+  downloadSection: false
 };
 
 export default Access;
