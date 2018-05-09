@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import toastr from 'toastr';
 import styles from './Access.scss';
 
-const Access = ({ submitUser, version, status, user }) => {
+const Access = ({ submitUser, version, status, user, downloadSection }) => {
   const handleNotifyClick = () => {
     const email = document.getElementById('notifyInput').value;
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -55,6 +55,32 @@ const Access = ({ submitUser, version, status, user }) => {
     </div>
   );
 
+  const renderDownloadNow = () => (
+    <div className={styles.Buttons}>
+      <a
+        href={`https://github.com/cdiezmoran/AlphaStage-2.0/releases/download/v${version}/alpha-stage-setup-${version}.exe`}
+        download
+      >
+        <i className="fa fa-windows" />
+        Download for Windows
+      </a>
+      <a
+        href={`https://github.com/cdiezmoran/AlphaStage-2.0/releases/download/v${version}/alpha-stage-${version}.dmg`}
+        download
+      >
+        <i className="fa fa-apple" />
+        Download for MacOS
+      </a>
+    </div>
+  );
+
+  const renderDownloadClosed = () => (
+    <div className={styles.ClosedMessage}>
+      Alpha Stage is currently on closed beta for developers only
+      {' '}<a href="#header">Sign up above</a> to gain access.
+    </div>
+  );
+
   const renderClosedBetaActions = () => (
     <div className={styles.DevActions}>
       <p>Alpha Stage is on closed beta for developers only.</p>
@@ -72,7 +98,7 @@ const Access = ({ submitUser, version, status, user }) => {
   );
 
   const renderNotify = () => (
-    <div className={styles.NotifyContainer}>
+    <div className={downloadSection ? styles.NotifyDownloadContainer : styles.NotifyContainer}>
       <input id="notifyInput" placeholder="Enter your email" />
       <button onClick={handleNotifyClick}>Notify me</button>
     </div>
@@ -81,10 +107,12 @@ const Access = ({ submitUser, version, status, user }) => {
   const renderAccess = () => {
     switch (status) {
       case 'available':
+        if (downloadSection) return renderDownloadNow();
         return renderDownload();
       case 'development':
         return renderNotify();
       case 'closedBeta':
+        if (downloadSection) return renderDownloadClosed();
         return renderClosedBetaActions();
       default:
         break;

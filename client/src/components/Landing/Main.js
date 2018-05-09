@@ -11,14 +11,21 @@ import Footer from './Footer';
 import Level from './Level';
 
 const CURRENT_VERSION = '0.1.1';
+const STATUS = 'closedBeta'; // available, development, closedBeta
 
 const Main = ({ submitUser, user, logout }) => (
   <div>
-    <Header submitUser={submitUser} version={CURRENT_VERSION} user={user} logout={logout} />
+    <Header
+      submitUser={submitUser}
+      version={CURRENT_VERSION}
+      user={user}
+      logout={logout}
+      status={STATUS}
+    />
     <TestingInfo />
     <div className={styles.CurvedDiv} />
     <SessionProcess />
-    <DownloadSection version={CURRENT_VERSION} />
+    <DownloadSection version={CURRENT_VERSION} status={STATUS} />
     <Objectives />
     <div className={styles.Wave}>
       <svg viewBox="0 0 100 25">
