@@ -1,0 +1,8 @@
+query AllGames($checkInvisible: Boolean) {
+  games(checkInvisible: $checkInvisible) {
+    _id
+    title
+    shortDescription
+    thumbnail
+  }
+}

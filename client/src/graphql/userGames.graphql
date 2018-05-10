@@ -1,0 +1,40 @@
+query UserGames($id: String) {
+  user(_id: $id) {
+    games {
+      _id,
+      coverImage,
+      developerIds,
+      downloads,
+      isPrivate,
+      pageViews,
+      playable,
+      plays,
+      releaseStatus,
+      testingSessions {
+        startDate,
+        endDate,
+        name,
+        plan,
+        testers {
+          _id,
+          username,
+          profilePic
+        },
+        tests {
+          _id,
+          comments,
+          completedObjectives,
+          createdAt,
+          duration,
+          objectives,
+          s3Url,
+          mark,
+          testerId
+        }
+      },
+      title,
+      thumbnail,
+      uninstalls
+    }
+  }
+}

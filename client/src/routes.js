@@ -7,10 +7,12 @@ import App from './containers/App';
 import Auth from './containers/Auth';
 import Landing from './containers/Landing';
 import Challenge from './containers/Challenge';
+import CreateGame from './containers/CreateGame';
 
 const Routes = ({ history }) => (
   <App history={history}>
     <Switch>
+      <Route path="/create" component={CreateGame} />
       <Route path="/auth" component={Auth} />
       <Route path="/challenge" component={Challenge} />
       <Route path="/" component={Landing} />
