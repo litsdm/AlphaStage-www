@@ -12,6 +12,7 @@ const users = {
       experience: Int
       gameIds: [String]
       games: [Game]
+      hasAccess: Boolean
       highScore: Int
       level: Int
       nextLevelExp: Int
@@ -38,6 +39,7 @@ const users = {
     createUser(email: String, username: String, password: String): User
     setProfilePicture(userId: String, url: String): User
     setHighScore(_id: String, highScore: Int): User
+    setProperty(_id: String, property: String): User
   `
 };
 

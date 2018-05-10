@@ -139,11 +139,11 @@ export const server = async () => {
 
     const tokenFromUser = (user) => {
       const {
-        _id, username, email, profilePic, level, nextLevelExp, experience
+        _id, username, email, profilePic, level, nextLevelExp, experience, games
       } = user;
 
       const token = jsonWebToken.sign({
-        _id, username, email, profilePic, level, nextLevelExp, experience
+        _id, username, email, profilePic, level, nextLevelExp, experience, gameCount: games.length
       }, JWT_SECRET);
       return token;
     };

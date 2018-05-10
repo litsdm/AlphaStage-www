@@ -85,6 +85,11 @@ const users = {
       );
 
       return prepare(user.value);
+    },
+    setProperty: async (root, { _id, property }) => {
+      const { name, value } = JSON.parse(property);
+      await Users.update({ _id: getObjectId(_id) }, { $set: { [name]: value } });
+      return prepare(await Users.findOne({ _id }));
     }
   }
 };
