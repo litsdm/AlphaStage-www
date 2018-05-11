@@ -1,7 +1,0 @@
-mutation SetHighScore($id: String, $score: Int) {
-  setHighScore(_id: $id, highScore: $score) {
-    _id,
-    highScore,
-    username
-  }
-}

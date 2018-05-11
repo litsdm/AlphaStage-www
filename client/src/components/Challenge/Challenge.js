@@ -7,9 +7,10 @@ import Game from '../../lib/reactInvaders/ReactInvaders';
 
 const DEFAULT_IMAGE = 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png';
 
-const Challenge = ({ highScore, setHighScore, scoreboardUsers, user, devHighScore }) => {
+const Challenge = ({ highScore, setProperty, scoreboardUsers, user, devHighScore }) => {
   const handleNewHighScore = (score) => {
-    setHighScore(user._id, score);
+    const property = JSON.stringify({ name: 'highScore', value: score });
+    setProperty(user._id, property);
   };
 
   const numberWithCommas = (x) =>
@@ -50,7 +51,7 @@ const Challenge = ({ highScore, setHighScore, scoreboardUsers, user, devHighScor
 Challenge.propTypes = {
   devHighScore: number,
   highScore: number,
-  setHighScore: func.isRequired,
+  setProperty: func.isRequired,
   scoreboardUsers: array,
   user: object
 };

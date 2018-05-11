@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { array, bool, func, object, number } from 'prop-types';
 
 import scoreboardUsers from '../graphql/scoreboardUsers.graphql';
-import setHighScore from '../graphql/setHighScore.graphql';
+import setProperty from '../graphql/setProperty.graphql';
 import userHighScore from '../graphql/userHighScore.graphql';
 
 import Challenge from '../components/Challenge/Challenge';
@@ -30,10 +30,10 @@ const queriesToRefetch = (id) => (
 );
 
 const withData = compose(
-  graphql(setHighScore, {
+  graphql(setProperty, {
     props: ({ mutate }) => ({
-      setScore: (id, score) =>
-        mutate({ variables: { id, score }, refetchQueries: queriesToRefetch(id) }),
+      setScore: (id, property) =>
+        mutate({ variables: { id, property }, refetchQueries: queriesToRefetch(id) }),
     }),
   }),
   graphql(scoreboardUsers, {
@@ -73,7 +73,7 @@ const Contest = ({ highScore, setScore, scoreUsers, user, devHighScore, loading 
     : (
       <Challenge
         highScore={highScore}
-        setHighScore={setScore}
+        setProperty={setScore}
         scoreboardUsers={scoreUsers}
         user={user}
         devHighScore={devHighScore}

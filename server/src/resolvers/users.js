@@ -76,20 +76,15 @@ const users = {
       );
       return prepare(user.value);
     },
-    setHighScore: async (root, { _id, highScore }) => {
+    setProperty: async (root, { _id, property }) => {
+      const { name, value } = JSON.parse(property);
       const user = await Users.findAndModify(
         { _id: getObjectId(_id) },
         { _id: 1 },
-        { $set: { highScore } },
+        { $set: { [name]: value } },
         { upsert: false, new: true }
       );
-
       return prepare(user.value);
-    },
-    setProperty: async (root, { _id, property }) => {
-      const { name, value } = JSON.parse(property);
-      await Users.update({ _id: getObjectId(_id) }, { $set: { [name]: value } });
-      return prepare(await Users.findOne({ _id }));
     }
   }
 };

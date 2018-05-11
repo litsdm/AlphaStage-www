@@ -1,0 +1,9 @@
+mutation SetProperty($id: String, $property: String) {
+  setProperty(_id: $id, property: $property) {
+    _id,
+    hasAccess,
+    highScore,
+    profilePic,
+    username
+  }
+}
