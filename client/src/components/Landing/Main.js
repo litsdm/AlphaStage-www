@@ -11,7 +11,7 @@ import Footer from './Footer';
 import Level from './Level';
 
 const CURRENT_VERSION = '0.1.1';
-const STATUS = 'closedBeta'; // available, development, closedBeta
+const STATUS = 'closedBeta'; // available, development, closedBeta, preRelease
 
 const Main = ({ submitUser, user, logout }) => (
   <div>
