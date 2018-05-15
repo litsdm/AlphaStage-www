@@ -15,7 +15,7 @@ const withDefaults = (application) => {
 const applications = {
   Query: {
     application: async (root, { _id }) => prepare(await Applications.findOne(ObjectId(_id))),
-    applications: async () => (await Applications.find().toArray()).map(prepare),
+    applications: async () => (await Applications.find().toArray()).map(prepare)
   },
   Mutation: {
     createApplication: async (root, { application }) => {

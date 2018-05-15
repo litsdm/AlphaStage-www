@@ -1,7 +1,7 @@
 const tests = {
   query: `
     application(_id: String): Application
-    applications(): [Application]
+    applications: [Application]
   `,
   types: `
     type Application {
@@ -11,11 +11,13 @@ const tests = {
       links: [String]
       reasons: [String]
       status: String
+      userId: String
     }
 
     input ApplicationInput {
       additionalInfo: String
       links: [String]
+      userId: String
     }
   `,
   mutation: `
