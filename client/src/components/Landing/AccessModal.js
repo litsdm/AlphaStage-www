@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { string } from 'prop-types';
+import { func, string } from 'prop-types';
 import uuid from 'uuid/v4';
+import toastr from 'toastr';
 import styles from './AccessModal.scss';
 
 import Modal from '../Modal';
 
 class AccessModal extends Component {
   state = {
+    additionalInfo: '',
     links: [],
     linkFields: []
   };
@@ -41,9 +43,33 @@ class AccessModal extends Component {
     this.setState({ links });
   }
 
+  onChange = ({ target: { name, value } }) => this.setState({ [name]: value });
+
+  submit = () => {
+    const { submitApplication } = this.props;
+    const { additionalInfo, links } = this.state;
+    let hasLink = false;
+
+    const application = { additionalInfo, links };
+
+    links.forEach(link => {
+      if (link) hasLink = true;
+    });
+
+    if (!hasLink && !additionalInfo) {
+      toastr.error('Please add at least one link or fill the additional info section.');
+      return;
+    }
+
+    submitApplication(application);
+
+    toastr.success('Application sent!');
+    document.getElementById('accessModal').style.display = 'none';
+  }
+
   render() {
     const { id } = this.props;
-    const { linkFields } = this.state;
+    const { linkFields, additionalInfo } = this.state;
     return (
       <Modal id={id} title="Gain Access to Alpha Stage">
         <div className={styles.Row}>
@@ -70,17 +96,20 @@ class AccessModal extends Component {
         <div className={styles.Row}>
           <div className={styles.ColumnLeft}>
             <p className={styles.Title}>Additional Info</p>
-            <p className={styles.Description}>(Optional)</p>
+            <p className={styles.Description}>(Only required if no link is given)</p>
           </div>
           <div className={styles.ColumnRight}>
             <textarea
+              name="additionalInfo"
               className={styles.TextArea}
               placeholder="Anything else you would like to tell us."
+              value={additionalInfo}
+              onChange={this.onChange}
             />
           </div>
         </div>
         <div className={styles.Footer}>
-          <button className={styles.PrimaryButton}>Submit</button>
+          <button className={styles.PrimaryButton} onClick={this.submit}>Submit</button>
         </div>
       </Modal>
     );
@@ -88,7 +117,8 @@ class AccessModal extends Component {
 }
 
 AccessModal.propTypes = {
-  id: string.isRequired
+  id: string.isRequired,
+  submitApplication: func.isRequired
 };
 
 export default AccessModal;

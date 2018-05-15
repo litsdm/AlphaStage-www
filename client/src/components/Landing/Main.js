@@ -14,7 +14,7 @@ import AccessModal from './AccessModal';
 const CURRENT_VERSION = '0.1.1';
 const STATUS = 'closedBeta'; // available, development, closedBeta, preRelease
 
-const Main = ({ submitUser, user, logout }) => (
+const Main = ({ submitApplication, submitUser, user, logout }) => (
   <div>
     <Header
       submitUser={submitUser}
@@ -40,12 +40,13 @@ const Main = ({ submitUser, user, logout }) => (
     </h1>
     <div className={styles.CurvedDivBottom} />
     <Footer />
-    <AccessModal id="accessModal" />
+    <AccessModal id="accessModal" submitApplication={submitApplication} />
   </div>
 );
 
 Main.propTypes = {
   logout: func.isRequired,
+  submitApplication: func.isRequired,
   submitUser: func.isRequired,
   user: object
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { graphql } from 'react-apollo';
+import { graphql, compose } from 'react-apollo';
 import { connect } from 'react-redux';
 import { func, object } from 'prop-types';
 
@@ -7,6 +7,7 @@ import client from '../client';
 
 import { removeUser } from '../actions/user';
 import addPotentialUser from '../graphql/addPotentialUser.graphql';
+import createApplication from '../graphql/createApplication.graphql';
 
 import Main from '../components/Landing/Main';
 
@@ -24,17 +25,31 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-const withMutation = graphql(addPotentialUser, {
-  props: ({ mutate }) => ({
-    submitUser: (email) => mutate({ variables: { email } }),
+const withMutation = compose(
+  graphql(addPotentialUser, {
+    props: ({ mutate }) => ({
+      submitUser: (email) => mutate({ variables: { email } }),
+    })
+  }),
+  graphql(createApplication, {
+    props: ({ ownProps: { user }, mutate }) => ({
+      submitApplication: (input) => mutate({ variables: { input: { ...input, userId: user._id } } })
+    })
   })
-});
+);
 
-const Landing = ({ submitUser, user, logout }) =>
-  <Main submitUser={submitUser} user={user} logout={logout} />;
+const Landing = ({ submitUser, user, logout, submitApplication }) => (
+  <Main
+    submitUser={submitUser}
+    user={user}
+    logout={logout}
+    submitApplication={submitApplication}
+  />
+);
 
 Landing.propTypes = {
   logout: func.isRequired,
+  submitApplication: func.isRequired,
   submitUser: func.isRequired,
   user: object
 };
