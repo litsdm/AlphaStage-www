@@ -9,6 +9,7 @@ import DownloadSection from './DownloadSection';
 import Objectives from './Objectives';
 import Footer from './Footer';
 import Level from './Level';
+import AccessModal from './AccessModal';
 
 const CURRENT_VERSION = '0.1.1';
 const STATUS = 'closedBeta'; // available, development, closedBeta, preRelease
@@ -39,6 +40,7 @@ const Main = ({ submitUser, user, logout }) => (
     </h1>
     <div className={styles.CurvedDivBottom} />
     <Footer />
+    <AccessModal id="accessModal" />
   </div>
 );
 

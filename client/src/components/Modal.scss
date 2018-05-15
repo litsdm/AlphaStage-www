@@ -1,0 +1,82 @@
+.Modal {
+  background-color: transparent;
+  display: none;
+  height: 100%;
+  left: 0;
+  overflow: auto;
+  padding-left: 110px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 11;
+}
+
+.Content {
+  background-color: #eee;
+  color: black;
+  margin: 8.5% auto;
+  width: 60%;
+}
+
+.Header {
+  background-color: #fff;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  padding: 24px;
+
+  p {
+    font-weight: bold;
+  }
+}
+
+.SettingsHeader {
+  background-color: #eee;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  box-shadow: 0 1px 4px #ddd;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1;
+
+  button {
+    border-top-right-radius: 4px;
+    margin-right: 12px;
+  }
+}
+
+.SettingsTitle {
+  background-color: #fff;
+  border-top-left-radius: 4px;
+  font-size: 18px;
+  padding: 12px;
+  width: 204px;
+}
+
+.ButtonClose {
+  color: black;
+  float: right;
+  font-size: 1rem;
+}
+
+.GalleryClose {
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+  padding: 6px 0;
+
+  button {
+    font-size: 1rem;
+    padding: 3px;
+  }
+}
+
+.CloseOverlay {
+  background-color: rgba(0, 0, 0, 0.6);
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: -1;
+}

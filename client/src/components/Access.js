@@ -17,6 +17,10 @@ const Access = ({ submitUser, version, status, user, downloadSection }) => {
     } else toastr.error('Invalid Email');
   };
 
+  const openModal = () => {
+    document.getElementById('accessModal').style.display = 'block';
+  };
+
   const getDownloadButtonData = () => {
     const { platform } = window.navigator;
     const data = {};
@@ -91,7 +95,9 @@ const Access = ({ submitUser, version, status, user, downloadSection }) => {
           : (
             <div className={styles.AccessOptions}>
               <Link href="#upload" to="/" className={styles.PrimaryButton}>Upload a Game</Link>
-              <Link href="#devForm" to="/" className={styles.SecondaryButton}>Can{'\''}t Upload a game but would love to try Alpha Stage</Link>
+              <button className={styles.SecondaryButton} onClick={openModal}>
+                Let us know you are a developer
+              </button>
             </div>
           )
       }
