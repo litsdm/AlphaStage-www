@@ -119,6 +119,7 @@ const Access = ({ submitUser, version, status, user, downloadSection }) => {
       case 'development':
         return renderNotify();
       case 'closedBeta':
+        if (user && user.hasAccess) return renderDownload();
         if (downloadSection) return renderDownloadClosed();
         return renderClosedBetaActions();
       default:

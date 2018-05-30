@@ -1,0 +1,15 @@
+query UserHighScore($id: String) {
+  user(_id: $id) {
+    _id,
+    email,
+    experience,
+    games {
+      _id
+    },
+    hasAccess,
+    highScore,
+    level,
+    nextLevelExp,
+    username
+  }
+}
