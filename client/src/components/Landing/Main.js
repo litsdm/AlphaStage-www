@@ -12,7 +12,7 @@ import Level from './Level';
 import AccessModal from './AccessModal';
 
 const CURRENT_VERSION = '0.1.2';
-const STATUS = 'closedBeta'; // available, development, closedBeta, preRelease
+const STATUS = 'available'; // available, development, closedBeta, preRelease
 
 const Main = ({ submitApplication, submitUser, user, logout }) => (
   <div>

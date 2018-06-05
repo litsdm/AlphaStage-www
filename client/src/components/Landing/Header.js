@@ -49,7 +49,7 @@ const Header = ({ submitUser, version, user, logout, status }) => (
         <div className={styles.Left} />
         <div className={styles.Right}>
           {
-            status === 'preRelease'
+            status === 'available'
               ? <Link className={styles.Join} href="#challenge" to={user ? '/challenge' : '/auth?type=signup&redirect=challenge'}>Challenge the Dev</Link>
               : null
           }
