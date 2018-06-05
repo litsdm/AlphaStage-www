@@ -21,7 +21,7 @@ class SpaceInvaders extends Component {
     gameState: 'Welcome',
     lane: 1,
     shots: 0,
-    mysteryShotFlag: false
+    mysteryShotFlag: false,
   }
 
   componentDidMount() {
@@ -238,7 +238,7 @@ class SpaceInvaders extends Component {
 
     if (this.mysteryShip) return;
 
-    const randomCheck = Math.floor(Math.random() * 1000) + 1;
+    const randomCheck = Math.floor(Math.random() * 1500) + 1;
 
     if (randomCheck <= 2.5) {
       const dir = Math.round(Math.random());
@@ -304,6 +304,7 @@ class SpaceInvaders extends Component {
     const possibleScores = [50, 100, 150];
     const randomIndex = Math.floor(Math.random() * 3);
     const randomScore = possibleScores[randomIndex];
+    let givenScore = 0;
 
     if (!mysteryShip) return;
 
@@ -319,14 +320,25 @@ class SpaceInvaders extends Component {
     );
 
     if (collision && (shots !== 23 || (shots !== 15 && mysteryShotFlag))) {
+      givenScore = randomScore;
       this.setState({ score: score + randomScore });
       this.mysteryShip = null;
     } else if (
       collision &&
       ((shots === 23 && !mysteryShotFlag) || (shots === 15 && mysteryShotFlag))
     ) {
+      givenScore = 300;
       this.setState({ shots: 0, score: score + 300, mysteryShotFlag: true });
       this.mysteryShip = null;
+    }
+
+    if (collision) {
+      this.mysteryScore = {
+        score: givenScore,
+        x: mysteryShip.x,
+        y: mysteryShip.y + (mysteryShip.h / 2)
+      };
+      setTimeout(() => { this.mysteryScore = null; }, 1000);
     }
 
     return collision;
@@ -459,7 +471,8 @@ class SpaceInvaders extends Component {
       spFrame,
       bullets,
       rocket,
-      mysteryShip
+      mysteryShip,
+      mysteryScore
     } = this;
     display.clear(); // clear the game canvas
     // draw all invaders
@@ -468,6 +481,10 @@ class SpaceInvaders extends Component {
     });
 
     if (rocket) display.drawBullet(rocket);
+    if (mysteryScore) {
+      console.log(mysteryScore);
+      display.writeText(`${mysteryScore.score}`, mysteryScore.x, mysteryScore.y);
+    }
 
     bullets.forEach(bullet => {
       display.drawBullet(bullet);

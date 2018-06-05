@@ -18,6 +18,11 @@ class Screen {
     this.ctx.fillStyle = bullet.color;
     this.ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
   }
+
+  writeText = (text, x, y) => {
+    this.ctx.font = '15px Arial';
+    this.ctx.fillText(text, x, y);
+  }
 }
 
 export default Screen;
