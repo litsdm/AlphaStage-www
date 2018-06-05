@@ -5,6 +5,7 @@
 
 @import "~font-awesome/css/font-awesome.css";
 @import "~toastr/build/toastr.css";
+@import "~react-chat-widget/lib/styles.css";
 
 body {
   font-family: 'Open Sans', sans-serif;
@@ -54,4 +55,21 @@ a {
   cursor: pointer;
   filter: alpha(opacity=100);
   opacity: 1;
+}
+
+.widget-container > .launcher {
+  background-color: #2091f3;
+  box-shadow: 0px 2px 10px 1px #444;
+}
+
+.conversation-container {
+  box-shadow: 0px 2px 10px 1px #444 !important;
+}
+
+.conversation-container > .header {
+  background-color: #2091f3 !important;
+}
+
+.message > .client {
+  background-color: rgba(32,194,243, 0.3) !important;
 }
