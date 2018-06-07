@@ -23,7 +23,7 @@ export const server = async () => { // eslint-disable-line import/prefer-default
   try {
     const app = express();
     const Users = db.get().collection('users');
-    const staticFiles = express.static(path.join(__dirname, 'build'));
+    const staticFiles = express.static(path.join(__dirname, '../build'));
 
     aws.config.region = 'us-west-1';
 
@@ -231,7 +231,7 @@ export const server = async () => { // eslint-disable-line import/prefer-default
     app.post('/invite', inviteMail);
 
     app.get('/*', (req, res) => {
-      res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+      res.sendFile(path.resolve(__dirname, '../build', 'index.html'));
     });
 
     app.listen(PORT, () => {
