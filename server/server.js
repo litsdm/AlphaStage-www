@@ -1,48 +1,31 @@
 import express from 'express';
-import bodyParser from 'body-parser';
 import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
-// import jwt from 'express-jwt';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import path from 'path';
 import jsonWebToken from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
-import cors from 'cors';
 import { ObjectId } from 'mongodb';
 import aws from 'aws-sdk';
-import path from 'path';
 import mailer from 'express-mailer';
 import exphbs from 'express-handlebars';
 
-import db from './src/db';
-import schema from './src/schema';
+import db from './db';
+import schema from './schema';
 
-require('dotenv').config();
-
-const URL = 'http://localhost';
 const PORT = process.env.PORT || 3001;
 const { JWT_SECRET } = process.env;
 const { S3_BUCKET } = process.env;
 const BASE_EXP = 100;
 const FACTOR = 1.32;
 
-export const server = async () => {
+export const server = async () => { // eslint-disable-line import/prefer-default-export
   try {
-    const Users = db.get().collection('users');
-    const staticFiles = express.static(path.join(__dirname, '../../client/build'));
-
     const app = express();
+    const Users = db.get().collection('users');
+    const staticFiles = express.static(path.join(__dirname, 'build'));
 
     aws.config.region = 'us-west-1';
-
-    /* app.use(jwt({
-      secret: JWT_SECRET,
-      getToken: function fromHeaderOrQuerystring({ headers, query }) {
-        if (headers.authorization && headers.authorization.split(' ')[0] === 'Bearer') {
-          return headers.authorization.split(' ')[1];
-        } else if (query && query.token) {
-          return query.token;
-        }
-        return null;
-      }
-    }).unless({ path: ['/signup', '/login', '/', '/landing'] })); */
 
     app.use(cors());
     app.use(bodyParser.json({ limit: '20mb' }));
@@ -71,7 +54,7 @@ export const server = async () => {
 
     const encryptPassword = (user) => {
       const salt = bcrypt.genSaltSync(10);
-      user.password = bcrypt.hashSync(user.password, salt);
+      user.password = bcrypt.hashSync(user.password, salt); // eslint-disable-line no-param-reassign
     };
 
     const comparePassword = (password, userPassword, done) => {
@@ -247,8 +230,12 @@ export const server = async () => {
     app.post('/support', supportMail);
     app.post('/invite', inviteMail);
 
+    app.get('/*', (req, res) => {
+      res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+    });
+
     app.listen(PORT, () => {
-      console.log(`Visit ${URL}:${PORT}`);
+      console.log(`Visit http://localhost:${PORT}`);
     });
   } catch (e) {
     console.log(e);

@@ -1,2 +1,2 @@
-client/src/registerServiceWorker.js
-client/scripts/customized-config.js
+src/registerServiceWorker.js
+scripts/customized-config.js

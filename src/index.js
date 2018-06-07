@@ -9,4 +9,5 @@ render(
   <Root store={store} history={history} />,
   document.getElementById('root')
 );
+
 registerServiceWorker();
