@@ -53,7 +53,7 @@
   "scripts": {
     "dev": "NODE_ENV=development concurrently \"nodemon -r babel-register server/\" \"node scripts/customized-config start\"",
     "start": "NODE_ENV=development node scripts/customized-config start",
-    "build": "node scripts/customized-config build && babel server --ignore node_modules,build --out-dir build/server",
+    "build": "node scripts/customized-config build && babel server --ignore node_modules,build --out-dir build",
     "test": "node scripts/customized-config test --env=jsdom",
     "eject": "react-scripts eject"
   },
