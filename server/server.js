@@ -14,8 +14,7 @@ import db from './db';
 import schema from './schema';
 
 const PORT = process.env.PORT || 3001;
-const { JWT_SECRET } = process.env;
-const { S3_BUCKET } = process.env;
+const { JWT_SECRET, S3_BUCKET } = process.env;
 const BASE_EXP = 100;
 const FACTOR = 1.32;
 
